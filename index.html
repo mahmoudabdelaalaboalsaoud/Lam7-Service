@@ -4,6 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>لمح - تسويق سيارتك باحترافية</title>
+<meta name="description" content="خدمة تسويق سيارتك للبيع بسرعة واحترافية — من كتابة الإعلان لحد النشر في كل مكان">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="لمح">
+<meta property="og:title" content="لمح - تسويق سيارتك باحترافية">
+<meta property="og:description" content="اختار باقة التسويق المناسبة لسيارتك، وإحنا ننشرها في كل مكان">
+<meta property="og:url" content="https://lam7-service2.pages.dev/">
+<meta property="og:image" content="https://lam7-service2.pages.dev/images/og-logo.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lam7-service2.pages.dev/images/og-logo.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -302,6 +314,16 @@
   .card ul li.is-sp{color:#fff;font-weight:700;}
   .card ul li.is-sp:before{content:"🚀";}
   .card ul li.is-sp .tbadge{border-color:rgba(226,32,31,.5);color:#ff8b86;}
+  .mchip.alert{border-color:#fbbf24;color:#fbbf24;}
+  .mchip.alert.active{background:#fbbf24;color:#2a2110;}
+  .rtag{font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:12px;white-space:nowrap;}
+  .rtag.late{background:#3a1418;color:#ff8b86;border:1px solid rgba(226,32,31,.45);}
+  .rtag.sent{background:#0f2419;color:#7be8a4;border:1px solid #1f4d33;}
+  .remind-box{display:flex;align-items:center;justify-content:space-between;gap:10px;border-radius:12px;padding:12px;margin-bottom:12px;font-size:13px;line-height:1.7;}
+  .remind-box small{color:var(--muted);}
+  .remind-box.late{background:#2a1215;border:1px solid rgba(226,32,31,.45);}
+  .remind-box.sent{background:#0f2419;border:1px solid #1f4d33;color:#7be8a4;}
+  .remind-box.wait{background:#141017;border:1px dashed var(--border);}
 
   /* addon showcase on main page */
   .addon-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
@@ -1108,6 +1130,7 @@ $('admPkgs').addEventListener('click', e=>{
 const ST_LIST = ['بانتظار الدفع','جاري التنفيذ','مكتمل','تم البيع','ملغي'];
 const ST_CLASS = {'بانتظار الدفع':'st-wait','جاري التنفيذ':'st-run','مكتمل':'st-done','تم البيع':'st-done','ملغي':'st-bad'};
 let MEMBERS = [], memFilter = 'الكل', memOpen = null;
+const REMIND_CHIP = '⏰ تحتاج تذكير';
 
 function mStatus(o){
   const s = o.status;
@@ -1125,6 +1148,23 @@ function fmtDate(ts){
     if(typeof ts === 'number') return new Date(ts).toLocaleString('ar-EG');
   }catch(e){}
   return '';
+}
+const REMIND_AFTER_H = 48;
+function tsMs(ts){
+  try{
+    if(ts && ts.toDate) return ts.toDate().getTime();
+    if(typeof ts === 'number') return ts;
+  }catch(e){}
+  return 0;
+}
+function hoursSince(o){ const t = tsMs(o.createdAt); return t ? (Date.now()-t)/36e5 : 0; }
+function isOpenUnpaid(o){ const s = mStatus(o); return !o.paid && s !== 'ملغي' && s !== 'تم البيع'; }
+function isOverdue(o){ return isOpenUnpaid(o) && hoursSince(o) >= REMIND_AFTER_H; }
+function needsReminder(o){ return isOverdue(o) && !o.reminderSentAt; }
+function reminderMsg(o){
+  return `السلام عليكم ورحمة الله وبركاته
+ازي حضرتك استاذ ${o.name||''}
+حضرتك لسه عايز تبيع عربيتك ؟`;
 }
 function ensureTasks(o){
   if(o.tasks && o.tasks.length) return o.tasks;
@@ -1149,8 +1189,9 @@ function loadMembers(){
 
 function renderMembers(){
   const counts = {}; ST_LIST.forEach(s=>counts[s]=0);
-  let left = 0;
+  let left = 0, remindN = 0;
   MEMBERS.forEach(o=>{
+    if(needsReminder(o)) remindN++;
     const s = mStatus(o);
     counts[s] = (counts[s]||0) + 1;
     if(o.paid && s === 'جاري التنفيذ') left += prog(o).left;
@@ -1160,11 +1201,13 @@ function renderMembers(){
     <div class="stat warn"><b>${counts['بانتظار الدفع']}</b><span>بانتظار الدفع</span></div>
     <div class="stat run"><b>${counts['جاري التنفيذ']}</b><span>جاري التنفيذ</span></div>
     <div class="stat"><b>${left}</b><span>مهام متبقية عليك</span></div>`;
-  $('memChips').innerHTML = ['الكل', ...ST_LIST].map(s=>
-    `<button class="mchip ${memFilter===s?'active':''}" data-filter="${s}" type="button">${s}${s!=='الكل' ? ' ('+counts[s]+')' : ''}</button>`).join('');
+  $('memChips').innerHTML = ['الكل', REMIND_CHIP, ...ST_LIST].map(s=>{
+    const n = s === REMIND_CHIP ? remindN : counts[s];
+    return `<button class="mchip ${memFilter===s?'active':''} ${s===REMIND_CHIP&&remindN?'alert':''}" data-filter="${s}" type="button">${s}${s!=='الكل' ? ' ('+n+')' : ''}</button>`;
+  }).join('');
   const q = $('memSearch').value.trim().toLowerCase();
   const rows = MEMBERS.filter(o=>
-    (memFilter === 'الكل' || mStatus(o) === memFilter) &&
+    (memFilter === 'الكل' || (memFilter === REMIND_CHIP ? needsReminder(o) : mStatus(o) === memFilter)) &&
     (!q || [o.name, o.phone, o.car, o.packageName].join(' ').toLowerCase().includes(q)));
   $('memList').innerHTML = rows.length ? rows.map(memberHTML).join('') : '<div class="empty">لا يوجد أعضاء مطابقين.</div>';
 }
@@ -1179,7 +1222,7 @@ function memberHTML(o){
         <div class="mem-name">${esc(o.name||'بدون اسم')}</div>
         <div class="mem-sub">🚗 ${esc(o.car||'-')} • 📦 ${esc(o.packageName||'-')}</div>
       </div>
-      <div class="mem-side"><span class="st ${ST_CLASS[s]||''}">${esc(s)}</span>${o.paid && p.total ? `<span class="mem-prog">${p.done}/${p.total}</span>` : ''}</div>
+      <div class="mem-side"><span class="st ${ST_CLASS[s]||''}">${esc(s)}</span>${isOpenUnpaid(o) ? (o.reminderSentAt ? '<span class="rtag sent">📨 تم التنبيه</span>' : (isOverdue(o) ? '<span class="rtag late">⏰ متأخر عن الدفع</span>' : '')) : ''}${o.paid && p.total ? `<span class="mem-prog">${p.done}/${p.total}</span>` : ''}</div>
     </div>
     ${o.paid && p.total ? `<div class="bar"><i style="width:${pct}%"></i></div>` : ''}`;
   if(open){
@@ -1205,6 +1248,18 @@ function memberHTML(o){
     if(!o.paid){
       h += `<div class="pay-box wait"><div>💵 المطلوب: <b>${total} جنيه</b><br><small>بعد تأكيد الدفع تظهر المهام هنا للتنفيذ</small></div>
         <button class="big-btn" data-act="paid" data-mid="${id}" type="button">✅ تأكيد الدفع</button></div>`;
+      if(isOpenUnpaid(o)){
+        const hrs = hoursSince(o);
+        if(o.reminderSentAt){
+          h += `<div class="remind-box sent"><div>📨 تم إرسال رسالة التنبيه بالدفع<br><small>${esc(fmtDate(o.reminderSentAt))}${(o.reminderCount||1)>1 ? ' — '+o.reminderCount+' مرات' : ''}</small></div>
+            <button class="mini" data-act="remind" data-mid="${id}" type="button">🔁 إرسال مرة تانية</button></div>`;
+        } else if(isOverdue(o)){
+          h += `<div class="remind-box late"><div>⏰ عدّى ${Math.floor(hrs/24)>=1 ? Math.floor(hrs/24)+' يوم' : Math.floor(hrs)+' ساعة'} على الطلب من غير دفع<br><small>دوس الزر يفتح واتساب برسالة التذكير، ويتسجل إنك بعتها</small></div>
+            <button class="big-btn wa" data-act="remind" data-mid="${id}" type="button">📨 إرسال تنبيه الدفع</button></div>`;
+        } else if(tsMs(o.createdAt)){
+          h += `<div class="remind-box wait"><small>⏳ تنبيه الدفع بيتاح بعد ${REMIND_AFTER_H} ساعة من الطلب (باقي ${Math.max(1,Math.ceil(REMIND_AFTER_H-hrs))} ساعة تقريبًا)</small></div>`;
+        }
+      }
       if(tasks.length){
         h += `<div class="mt-title">📋 المهام اللي هتنفذها بعد الدفع</div>
           <div class="mt-preview">${tasks.map(t=>`• ${t.sponsored?'🚀 ':''}${esc(t.name)}${timesLabel(t.times)?' — '+timesLabel(t.times):''}`).join('<br>')}</div>`;
@@ -1258,6 +1313,12 @@ $('memList').addEventListener('click', e=>{
     const tasks = ensureTasks(o);
     updateMember(o, {paid:true, paidAt:Date.now(), status:'جاري التنفيذ', tasks});
     toast('تم تأكيد الدفع — المهام ظهرت ✅');
+  }
+  else if(act === 'remind'){
+    const url = `https://wa.me/${waPhone(o.phone)}?text=${encodeURIComponent(reminderMsg(o))}`;
+    window.open(url, '_blank');
+    updateMember(o, {reminderSentAt:Date.now(), reminderCount:(o.reminderCount||0)+1});
+    toast('اتسجل إن رسالة التنبيه اتبعتت 📨');
   }
   else if(act === 'unpaid'){
     if(confirm('تراجع عن تأكيد الدفع؟')) updateMember(o, {paid:false, status:'بانتظار الدفع'});
