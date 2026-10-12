@@ -15,6 +15,14 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://lam7-service2.pages.dev/images/og-logo.jpg">
+<meta name="theme-color" content="#08070a">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="images/icon-192.png">
+<link rel="apple-touch-icon" href="images/icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="لمح">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -324,6 +332,36 @@
   .remind-box.late{background:#2a1215;border:1px solid rgba(226,32,31,.45);}
   .remind-box.sent{background:#0f2419;border:1px solid #1f4d33;color:#7be8a4;}
   .remind-box.wait{background:#141017;border:1px dashed var(--border);}
+  /* account / google sign-in */
+  .account-box{margin-top:16px;display:flex;flex-direction:column;align-items:center;gap:10px;}
+  .g-btn{display:inline-flex;align-items:center;gap:10px;background:#fff;color:#1f1f1f;border:none;border-radius:30px;padding:11px 24px;font-family:inherit;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.4);transition:transform .2s;}
+  .g-btn:hover{transform:translateY(-2px);}
+  .g-btn svg{width:20px;height:20px;flex-shrink:0;}
+  .acc-user{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:30px;padding:6px 16px 6px 8px;font-size:13px;font-weight:700;color:var(--text);}
+  .acc-user img{width:30px;height:30px;border-radius:50%;object-fit:cover;}
+  .adm-open-btn{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:30px;padding:11px 24px;font-family:inherit;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 8px 22px rgba(226,32,31,.35);}
+  .acc-out{background:none;border:none;color:var(--muted);font-family:inherit;font-size:12px;cursor:pointer;text-decoration:underline;}
+  .inst-foot{background:transparent;border:1px solid rgba(226,32,31,.45);color:#ff8b86;border-radius:30px;padding:9px 18px;font-family:inherit;font-weight:800;font-size:13px;cursor:pointer;margin-top:12px;}
+  /* install sheet */
+  #installSheet{position:fixed;inset:0;z-index:80;display:flex;align-items:flex-end;justify-content:center;pointer-events:none;}
+  #installSheet.show{pointer-events:auto;}
+  .ins-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.62);opacity:0;transition:opacity .3s;}
+  #installSheet.show .ins-backdrop{opacity:1;}
+  .ins-card{position:relative;width:100%;max-width:480px;background:linear-gradient(180deg,#201519,#130f13);border:1px solid rgba(226,32,31,.38);border-bottom:none;
+    border-radius:28px 28px 0 0;padding:20px 22px calc(22px + env(safe-area-inset-bottom,0px));text-align:center;transform:translateY(105%);
+    transition:transform .38s cubic-bezier(.2,.8,.2,1);box-shadow:0 -18px 60px rgba(226,32,31,.22);}
+  #installSheet.show .ins-card{transform:translateY(0);}
+  .ins-x{position:absolute;top:12px;left:12px;width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:#241b21;color:var(--muted);cursor:pointer;font-size:13px;}
+  .ins-logo{width:84px;height:84px;object-fit:contain;display:block;margin:-62px auto 12px;border-radius:22px;background:#08070a;padding:6px;
+    border:1px solid rgba(226,32,31,.5);box-shadow:0 12px 30px rgba(226,32,31,.4);}
+  .ins-card h3{margin:0 0 8px;font-size:19px;font-weight:900;}
+  .ins-card p{margin:0 auto 14px;max-width:340px;color:var(--muted);font-size:13.5px;line-height:1.9;}
+  .ins-steps{list-style:none;counter-reset:s;margin:0 0 16px;padding:0;text-align:right;}
+  .ins-steps li{counter-increment:s;display:flex;align-items:center;gap:10px;background:#110d11;border:1px solid var(--border);border-radius:12px;padding:10px 12px;margin-bottom:8px;font-size:13px;line-height:1.7;}
+  .ins-steps li::before{content:counter(s);flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-weight:900;font-size:12px;display:flex;align-items:center;justify-content:center;}
+  .ins-go{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;font-family:inherit;font-weight:900;font-size:16px;cursor:pointer;box-shadow:0 10px 28px rgba(226,32,31,.4);}
+  .ins-later{display:block;margin:12px auto 0;background:none;border:none;color:var(--muted);font-family:inherit;font-size:13px;cursor:pointer;}
+  @media (prefers-reduced-motion:reduce){.ins-card,.ins-backdrop{transition:none;}}
 
   /* addon showcase on main page */
   .addon-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
@@ -473,7 +511,8 @@
   <footer>
     <div class="foot-brand"><img data-logo alt="لمح" class="foot-logo"></div>
     <p id="footText">لخدمات تسويق السيارات الاحترافية<br>تواصل معنا مباشرة على واتساب</p>
-    <div style="margin-top:10px;"><a id="adminLink">لوحة التحكم</a></div>
+    <div class="account-box" id="accountBox"></div>
+    <div id="installBox"></div>
   </footer>
 </div>
 
@@ -725,6 +764,7 @@ function openForm(id){
   currentPkg = STATE.packages.find(p=>String(p.id)===String(id));
   if(!currentPkg) return;
   selectedAddons = new Set();
+  if(currentUser && currentUser.displayName && !$('f_name').value) $('f_name').value = currentUser.displayName;
   $('selectedPkgLabel').textContent = `الباقة المختارة: ${currentPkg.name} - ${currentPkg.price} جنيه`;
   renderAddonsInForm();
   updateTotal();
@@ -839,6 +879,8 @@ ${addonsLine}
       traffic: traffic || null,
       location: location || null,
       notes: notes || null,
+      uid: currentUser ? currentUser.uid : null,
+      email: currentUser ? currentUser.email : null,
       packageId: currentPkg.id,
       packageName: currentPkg.name,
       packagePrice: currentPkg.price,
@@ -897,38 +939,59 @@ function saveDoc(name, data, okMsg){
 // لوحة التحكم — ثلاث لوحات: الموقع / الباقات / الأعضاء
 // مهم: اللوحة بتفتح فقط لما تدوس "لوحة التحكم" (أو تفتح الرابط بـ #admin) — مش تلقائيًا
 // =====================================================================
+// =====================================================================
+// تسجيل الدخول بجوجل: إيميل الأدمن يفتح لوحة التحكم، وأي عضو عادي يدخل للصفحة العادية
+// اللوحة ما بتفتحش تلقائيًا مع كل زيارة — فقط عند الدخول الآن أو الضغط على الزر
+// =====================================================================
 let wantOpenAdmin = false;
+let currentUser = null;
+const G_SVG = `<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>`;
 
-$('adminLink').addEventListener('click', ()=>{
-  if(!FIREBASE_READY){
-    alert('لوحة التحكم محتاجة ربط فايربيز الأول. راجع تعليمات الإعداد في أعلى الكود (firebaseConfig).');
+function updateAccountUI(){
+  const box = $('accountBox'), u = currentUser;
+  if(!u){
+    box.innerHTML = `<button class="g-btn" id="gLogin" type="button">${G_SVG}<span>تسجيل الدخول بجوجل</span></button>`;
     return;
   }
-  if(isAdmin){ openAdmin(); return; }
-  wantOpenAdmin = true;
+  const first = (u.displayName || u.email || '').split(' ')[0];
+  box.innerHTML = `
+    <div class="acc-user">${u.photoURL ? `<img src="${esc(u.photoURL)}" alt="" referrerpolicy="no-referrer">` : ''}<span>أهلاً، ${esc(first)}</span></div>
+    ${isAdmin ? '<button class="adm-open-btn" id="gAdmin" type="button">🔧 فتح لوحة التحكم</button>' : ''}
+    <button class="acc-out" id="gOut" type="button">تسجيل الخروج</button>`;
+  const nm = $('f_name');
+  if(nm && !nm.value && u.displayName) nm.value = u.displayName;
+}
+function googleLogin(){
+  if(!FIREBASE_READY){
+    alert('تسجيل الدخول محتاج ربط فايربيز الأول. راجع تعليمات الإعداد في أعلى الكود (firebaseConfig).');
+    return;
+  }
+  wantOpenAdmin = true;   // يفتح اللوحة فقط لو الحساب هو الأدمن
   auth.signInWithPopup(googleProvider).catch(err=>{
     wantOpenAdmin = false;
     console.warn(err);
+    if(err && err.code === 'auth/popup-closed-by-user') return;
     alert('حصل خطأ أثناء تسجيل الدخول بجوجل. تأكد إن الدومين مضاف في Firebase Authentication > Authorized domains.');
   });
+}
+$('accountBox').addEventListener('click', e=>{
+  const btn = e.target.closest('button'); if(!btn) return;
+  if(btn.id === 'gLogin') googleLogin();
+  else if(btn.id === 'gAdmin') openAdmin();
+  else if(btn.id === 'gOut' && FIREBASE_READY) auth.signOut();
 });
 
 if(FIREBASE_READY){
   auth.onAuthStateChanged(user=>{
-    if(user && user.email === ADMIN_EMAIL){
-      isAdmin = true;
-      $('adminEmailTag').textContent = user.email;
-      // يفتح فقط لو طلبت الدخول الآن أو الرابط فيه #admin — مش مع كل زيارة
-      if(wantOpenAdmin || location.hash === '#admin'){ wantOpenAdmin = false; openAdmin(); }
-    } else if(user){
-      isAdmin = false;
-      wantOpenAdmin = false;
-      alert('الحساب ده مش له صلاحية دخول لوحة التحكم.');
-      auth.signOut();
-    } else {
-      isAdmin = false;
-    }
+    currentUser = user;
+    isAdmin = !!(user && user.email && user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase());
+    if(isAdmin) $('adminEmailTag').textContent = user.email;
+    updateAccountUI();
+    if(isAdmin && (wantOpenAdmin || location.hash === '#admin')) openAdmin();
+    wantOpenAdmin = false;
   });
+} else {
+  updateAccountUI();
 }
 
 let DRAFT = null, SDRAFT = null;
@@ -1357,6 +1420,96 @@ $('memChips').addEventListener('click', e=>{
 });
 $('memSearch').addEventListener('input', renderMembers);
 $('memRefresh').addEventListener('click', loadMembers);
+
+// =====================================================================
+// تثبيت التطبيق على الشاشة الرئيسية (PWA) — النافذة تختفي بعد التثبيت
+// =====================================================================
+if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+  window.addEventListener('load', ()=>{ navigator.serviceWorker.register('sw.js').catch(()=>{}); });
+}
+const UA = navigator.userAgent || '';
+const isIOS = /iphone|ipad|ipod/i.test(UA) && !window.MSStream;
+const isIOSSafari = isIOS && /safari/i.test(UA) && !/crios|fxios|edgios|opios/i.test(UA);
+const isStandalone = () => (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+const lsGet = k => { try{ return localStorage.getItem(k); }catch(e){ return null; } };
+const lsSet = (k,v) => { try{ localStorage.setItem(k,v); }catch(e){} };
+let deferredInstall = null;
+
+function canPromptInstall(){
+  if(isStandalone()) return false;
+  const d = +lsGet('lam7_install_dismissed') || 0;
+  return Date.now() - d > 7*24*3600*1000;
+}
+function updateInstallFoot(){
+  const box = $('installBox');
+  if(isStandalone() || (!deferredInstall && !isIOSSafari)){ box.innerHTML = ''; return; }
+  box.innerHTML = '<button class="inst-foot" id="instFootBtn" type="button">📲 ثبّت التطبيق على موبايلك</button>';
+}
+function hideInstallSheet(remember){
+  const sh = $('installSheet'); if(!sh) return;
+  sh.classList.remove('show');
+  setTimeout(()=>{ sh.remove(); }, 350);
+  if(remember) lsSet('lam7_install_dismissed', String(Date.now()));
+}
+function showInstallSheet(force){
+  if($('installSheet') || isStandalone()) return;
+  if(!force && !canPromptInstall()) return;
+  if(!deferredInstall && !isIOSSafari) return;
+  if($('adminOverlay').style.display === 'flex') return;
+  const ios = !deferredInstall;
+  const sh = document.createElement('div');
+  sh.id = 'installSheet';
+  sh.innerHTML = `
+    <div class="ins-backdrop" data-ins="close"></div>
+    <div class="ins-card" role="dialog" aria-modal="true" aria-label="تثبيت تطبيق لمح">
+      <button class="ins-x" data-ins="close" type="button" aria-label="إغلاق">✕</button>
+      <img class="ins-logo" alt="لمح">
+      <h3>ثبّت تطبيق لمح على موبايلك</h3>
+      <p>أيقونة لمح على شاشتك الرئيسية تفتحلك الموقع بضغطة واحدة وبشاشة كاملة، من غير ما تدور عليه في المتصفح.</p>
+      ${ios ? `<ol class="ins-steps">
+        <li>دوس على زر المشاركة <span class="ins-ico">⬆️</span> في شريط سفاري</li>
+        <li>اختار <b>"إضافة إلى الشاشة الرئيسية"</b></li>
+        <li>دوس <b>"إضافة"</b> وخلاص</li></ol>` : ''}
+      <button class="ins-go" data-ins="go" type="button">${ios ? 'تمام، فهمت' : '📲 تثبيت الآن'}</button>
+      <button class="ins-later" data-ins="close" type="button">مش دلوقتي</button>
+    </div>`;
+  sh.querySelector('.ins-logo').src = LOGO_SRC;
+  document.body.appendChild(sh);
+  requestAnimationFrame(()=> requestAnimationFrame(()=> sh.classList.add('show')));
+  sh.addEventListener('click', async e=>{
+    const t = e.target.closest('[data-ins]'); if(!t) return;
+    if(t.dataset.ins === 'close'){ hideInstallSheet(true); return; }
+    if(!deferredInstall){ hideInstallSheet(true); return; }
+    const ev = deferredInstall; deferredInstall = null;
+    hideInstallSheet(false);
+    try{
+      ev.prompt();
+      const choice = await ev.userChoice;
+      if(choice && choice.outcome !== 'accepted') lsSet('lam7_install_dismissed', String(Date.now()));
+    }catch(err){ console.warn(err); }
+    updateInstallFoot();
+  });
+}
+document.addEventListener('keydown', e=>{ if(e.key === 'Escape') hideInstallSheet(true); });
+$('installBox').addEventListener('click', e=>{
+  if(e.target.closest('#instFootBtn')) showInstallSheet(true);
+});
+window.addEventListener('beforeinstallprompt', e=>{
+  e.preventDefault();
+  deferredInstall = e;
+  updateInstallFoot();
+  if(canPromptInstall()) setTimeout(()=> showInstallSheet(false), 6000);
+});
+window.addEventListener('appinstalled', ()=>{
+  deferredInstall = null;
+  hideInstallSheet(false);
+  updateInstallFoot();
+  toast('تم تثبيت التطبيق ✅');
+});
+if(isIOSSafari){
+  updateInstallFoot();
+  if(canPromptInstall()) setTimeout(()=> showInstallSheet(false), 8000);
+}
 
 // ---------- start ----------
 applySite();
