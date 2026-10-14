@@ -230,8 +230,8 @@
   .adm-title small{display:block;font-size:11px;color:var(--muted);font-weight:500;margin-top:2px;direction:ltr;text-align:right;}
   .adm-top-btns{display:flex;gap:8px;}
   .adm-top-btns button{background:#2a2229;color:var(--text);border:1px solid var(--border);border-radius:10px;padding:8px 12px;font-family:inherit;font-weight:700;font-size:12px;cursor:pointer;}
-  .adm-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:10px 12px;border-bottom:1px solid var(--border);background:#0e0b0f;}
-  .adm-tabs button{padding:11px 2px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--muted);font-family:inherit;font-weight:800;font-size:12px;cursor:pointer;transition:all .2s;}
+  .adm-tabs{display:flex;overflow-x:auto;gap:6px;padding:10px 12px;-webkit-overflow-scrolling:touch;scrollbar-width:none;border-bottom:1px solid var(--border);background:#0e0b0f;}
+  .adm-tabs button{flex:1 0 auto;padding:11px 14px;white-space:nowrap;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--muted);font-family:inherit;font-weight:800;font-size:12px;cursor:pointer;transition:all .2s;}
   .adm-tabs button.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(226,32,31,.3);}
   .adm-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 14px calc(30px + env(safe-area-inset-bottom,0px));}
   .adm-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px;margin-bottom:14px;}
@@ -387,8 +387,6 @@
   .ref-row input{flex:1;text-transform:uppercase;letter-spacing:1px;}
   .ref-msg{font-size:12.5px;margin-top:6px;min-height:0;line-height:1.7;}
   .ref-msg.ok{color:#7be8a4;} .ref-msg.bad{color:#ff8b86;}
-  #creditRow{display:none;align-items:center;gap:8px;margin-top:10px;font-size:13px;color:#7be8a4;cursor:pointer;}
-  #creditRow input{width:18px;height:18px;accent-color:var(--green);}
   .login-hint{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#141017;border:1px dashed rgba(226,32,31,.45);border-radius:12px;padding:10px 12px;margin-bottom:14px;font-size:12.5px;line-height:1.7;color:#c9cee0;}
   .my-btn{background:#2a2229;color:var(--text);border:1px solid var(--border);border-radius:30px;padding:10px 22px;font-family:inherit;font-weight:800;font-size:14px;cursor:pointer;}
   .ref-code{font-size:30px;font-weight:900;letter-spacing:4px;text-align:center;color:#ff8b86;background:#110d12;border:1px dashed rgba(226,32,31,.5);border-radius:14px;padding:14px;margin:6px 0 10px;direction:ltr;user-select:all;}
@@ -408,6 +406,16 @@
   .row-stat{margin-bottom:12px;} .rs-top{display:flex;justify-content:space-between;gap:8px;font-size:13px;align-items:baseline;flex-wrap:wrap;}
   .rs-top span{font-size:11.5px;color:var(--muted);}
   .rs-bar{height:6px;background:#241c22;border-radius:6px;margin-top:6px;overflow:hidden;} .rs-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));}
+  /* referral profile + payouts */
+  #myShell label{display:block;font-size:12px;color:var(--muted);margin:10px 0 4px;font-weight:600;}
+  #myShell input:not([type=checkbox]),#myShell select{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--border);background:#0e0b10;color:var(--text);font-size:14px;font-family:inherit;}
+  #myShell input:focus,#myShell select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(226,32,31,.16);}
+  .ref-link{font-size:12px;color:#7ab8ff;text-align:center;word-break:break-all;margin:-2px 0 10px;user-select:all;}
+  .ref-paydata{font-size:12.5px;color:#c9cee0;line-height:2;background:#110d12;border:1px solid var(--border);border-radius:12px;padding:10px 12px;}
+  .ref-paydata .mini{margin-inline-start:6px;}
+  #payModal{display:none;position:absolute;inset:0;z-index:5;background:rgba(0,0,0,.72);align-items:center;justify-content:center;padding:16px;}
+  #payModal .pm-card input{margin-bottom:2px;}
+  #payModal .pm-btns{flex-wrap:wrap;}
 
   /* addon showcase on main page */
   .addon-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
@@ -560,7 +568,6 @@
       <label>عندك كود إحالة؟ <small id="refHint" style="color:var(--muted);"></small></label>
       <div class="ref-row"><input id="f_ref" type="text" placeholder="مثال: LM4K9T2" dir="ltr" autocapitalize="characters" autocomplete="off"><button type="button" id="refApply" class="mini">تطبيق</button></div>
       <div class="ref-msg" id="refMsg"></div>
-      <label id="creditRow"><input type="checkbox" id="useCredit"> استخدم رصيد الإحالة بتاعي (<span id="creditN">0</span>)</label>
     </div>
     <div class="total-line" id="discLine" style="display:none;"><span>🎁 خصم الإحالة</span><span class="tval" id="discVal"></span></div>
     <div class="total-line"><span>💵 الإجمالي المتوقع</span><span class="tval" id="totalVal">0 جنيه</span></div>
@@ -628,6 +635,7 @@
       <button data-tab="packages" type="button">📦 الباقات</button>
       <button data-tab="members" type="button" class="active">👥 الأعضاء</button>
       <button data-tab="stats" type="button">📊 الأرقام</button>
+      <button data-tab="refs" type="button">🎁 المُحيلون</button>
     </div>
     <div class="adm-body" id="admBody">
       <section id="tab-site" style="display:none;"><div id="admSite"></div></section>
@@ -642,8 +650,18 @@
         <div id="memList"></div>
       </section>
       <section id="tab-stats" style="display:none;"><div id="statsBox"></div></section>
+      <section id="tab-refs" style="display:none;"><div id="refsBox"></div></section>
     </div>
   </div>
+  <div id="payModal"><div class="pm-card">
+    <h4 id="payTitle">تحويل مكافأة</h4>
+    <p class="adm-hint" id="payInfo" style="margin:4px 0 0;line-height:1.9;"></p>
+    <label>المبلغ المحوّل (جنيه)</label>
+    <input id="payAmount" type="number" inputmode="numeric" min="1">
+    <label>ملاحظة (اختياري — رقم العملية مثلًا)</label>
+    <input id="payNote" type="text" placeholder="مثال: رقم عملية التحويل">
+    <div class="pm-btns"><button class="big-btn" id="paySave" type="button">✅ تسجيل التحويل</button><button class="big-btn wa" id="paySaveWa" type="button" style="background:#25d366;">💬 تسجيل + إشعار</button><button class="mini" id="payCancel" type="button">إلغاء</button></div>
+  </div></div>
   <div id="proofModal"><div class="pm-card">
     <h4 id="pmTitle">تسجيل تنفيذ</h4>
     <label>رابط المنشور (اختياري — العميل هيشوفه)</label>
@@ -799,7 +817,8 @@ const DEFAULT_SITE = {
   showTestimonials: true,
   showAddons: true,
   refEnabled: true,
-  refDiscount: 10
+  refDiscount: 10,
+  refReward: 50
 };
 let STATE = DEFAULT_STATE();
 let SITE = deepCopy(DEFAULT_SITE);
@@ -897,6 +916,7 @@ function openForm(id){
   if(!currentPkg) return;
   selectedAddons = new Set();
   resetRef();
+  { const sr = storedRef(); if(sr && SITE.refEnabled){ $('f_ref').value = sr; applyRefCode(); } }
   if(currentUser && currentUser.displayName && !$('f_name').value) $('f_name').value = currentUser.displayName;
   $('selectedPkgLabel').textContent = `الباقة المختارة: ${currentPkg.name} - ${currentPkg.price} جنيه`;
   renderAddonsInForm();
@@ -938,51 +958,76 @@ function updateTotal(){
 }
 
 // ---------- referral (form side) ----------
-let appliedRef = null, useCredit = false, myReferral = null;
+let appliedRef = null, myReferral = null;
 function discountAmount(){
-  if(!currentPkg || !SITE.refEnabled) return 0;
+  if(!currentPkg || !SITE.refEnabled || !appliedRef) return 0;
   const pct = Math.min(50, Math.max(0, num(SITE.refDiscount)));
-  const creditOk = useCredit && myReferral && num(myReferral.credits) > 0;
-  if(pct <= 0 || !(appliedRef || creditOk)) return 0;
-  return Math.round(currentPkg.price * pct / 100);
+  return pct > 0 ? Math.round(currentPkg.price * pct / 100) : 0;
 }
 function resetRef(){
-  appliedRef = null; useCredit = false;
+  appliedRef = null;
   $('f_ref').value = '';
   $('refMsg').textContent = ''; $('refMsg').className = 'ref-msg';
-  $('useCredit').checked = false;
   $('refField').style.display = SITE.refEnabled ? '' : 'none';
   refreshCreditUI();
 }
 function refreshCreditUI(){
-  const n = myReferral ? num(myReferral.credits) : 0;
-  $('creditRow').style.display = (SITE.refEnabled && n > 0) ? 'flex' : 'none';
-  $('creditN').textContent = n;
   $('loginHint').style.display = (!currentUser && FIREBASE_READY) ? '' : 'none';
   $('refHint').textContent = SITE.refEnabled ? '(خصم ' + num(SITE.refDiscount) + '%)' : '';
   updateTotal();
+}
+// رابط الإحالة: ?ref=CODE بيتحفظ 30 يوم ويتطبق تلقائي في الفورم
+(function captureRef(){
+  try{
+    const r = (new URLSearchParams(location.search).get('ref') || '').trim().toUpperCase();
+    if(/^[A-Z0-9]{4,12}$/.test(r)){
+      localStorage.setItem('lam7_ref', JSON.stringify({code:r, at:Date.now()}));
+      if(!sessionStorage.getItem('lam7_ref_toast')){ sessionStorage.setItem('lam7_ref_toast', '1'); setTimeout(()=> toast('🎁 كود الإحالة اتحفظ — هيتطبق تلقائي عند اختيار الباقة'), 1200); }
+    }
+  }catch(e){}
+})();
+function storedRef(){
+  try{ const o = JSON.parse(localStorage.getItem('lam7_ref') || 'null'); if(o && Date.now() - o.at < 30*24*3600*1000) return o.code; }catch(e){}
+  return '';
 }
 function codeFromUid(uid, salt){
   let h = 5381; const t = String(uid) + (salt || '');
   for(let i = 0; i < t.length; i++) h = (((h << 5) + h) + t.charCodeAt(i)) >>> 0;
   return 'LM' + h.toString(36).toUpperCase().padStart(6, '0').slice(-6);
 }
-async function ensureReferral(){
-  if(!FIREBASE_READY || !db || !currentUser) return null;
-  const uid = currentUser.uid;
+const firstName = n => String(n || '').trim().split(/\s+/)[0] || '';
+// بيانات المُحيل الخاصة (محفظة/إنستا باي/واتساب/إيميل) في referrals/{uid} — مقروءة للعميل نفسه وللأدمن فقط
+async function loadMyReferral(){
+  if(!FIREBASE_READY || !db || !currentUser){ myReferral = null; return null; }
   try{
-    const q = await db.collection('referrals').where('uid', '==', uid).limit(1).get();
-    if(!q.empty){ myReferral = q.docs[0].data(); return myReferral; }
-    for(let i = 0; i < 4; i++){
-      const code = codeFromUid(uid, i ? String(i) : '');
-      const d = await db.collection('referrals').doc(code).get();
-      if(d.exists) continue;
-      const data = {uid, code, name: currentUser.displayName || '', credits: 0, paidCount: 0, createdAt: Date.now()};
-      await db.collection('referrals').doc(code).set(data);
-      myReferral = data; return data;
-    }
+    const d = await db.collection('referrals').doc(currentUser.uid).get();
+    myReferral = d.exists ? d.data() : null;
   }catch(err){ console.warn('referral:', err); }
-  return null;
+  return myReferral;
+}
+async function saveReferralProfile(p){
+  const uid = currentUser.uid, ref = db.collection('referrals').doc(uid);
+  const snap = await ref.get();
+  if(snap.exists){
+    const upd = Object.assign({}, p, {displayName: currentUser.displayName || '', profileAt: Date.now()});
+    await ref.update(upd);
+    myReferral = Object.assign({}, snap.data(), upd);
+    return myReferral;
+  }
+  let code = null;
+  for(let i = 0; i < 4 && !code; i++){
+    const c = codeFromUid(uid, i ? String(i) : '');
+    const d = await db.collection('referralCodes').doc(c).get();
+    if(d.exists && d.data().uid !== uid) continue;
+    if(!d.exists) await db.collection('referralCodes').doc(c).set({uid, code: c, name: firstName(currentUser.displayName)});
+    code = c;
+  }
+  if(!code) throw new Error('no code');
+  const data = Object.assign({uid, email: currentUser.email || '', displayName: currentUser.displayName || '', code,
+    paidCount: 0, earned: 0, paidOut: 0, payouts: [], createdAt: Date.now(), profileAt: Date.now()}, p);
+  await ref.set(data);
+  myReferral = data;
+  return data;
 }
 async function applyRefCode(){
   const msg = $('refMsg'), code = $('f_ref').value.trim().toUpperCase();
@@ -990,14 +1035,12 @@ async function applyRefCode(){
   if(!code){ appliedRef = null; msg.textContent = ''; msg.className = 'ref-msg'; updateTotal(); return; }
   if(!FIREBASE_READY || !db){ bad('الخدمة غير متاحة الآن'); return; }
   try{
-    const d = await db.collection('referrals').doc(code).get();
+    const d = await db.collection('referralCodes').doc(code).get();
     if(!d.exists){ bad('الكود غير صحيح'); return; }
     const r = d.data();
     if(currentUser && r.uid === currentUser.uid){ bad('مينفعش تستخدم كودك الشخصي'); return; }
     appliedRef = {code, name: r.name || ''};
-    useCredit = false; $('useCredit').checked = false;
-    const first = (r.name || '').split(' ')[0];
-    msg.textContent = '✅ تم تطبيق الكود' + (first ? ' (من ' + first + ')' : '') + ' — خصم ' + num(SITE.refDiscount) + '% على الباقة';
+    msg.textContent = '✅ تم تطبيق الكود' + (r.name ? ' (من ' + r.name + ')' : '') + ' — خصم ' + num(SITE.refDiscount) + '% على الباقة';
     msg.className = 'ref-msg ok';
     updateTotal();
   }catch(err){ console.warn(err); bad('تعذر التحقق من الكود، حاول مرة تانية'); }
@@ -1008,11 +1051,6 @@ $('f_ref').addEventListener('input', e=>{
   if(appliedRef && e.target.value.trim().toUpperCase() !== appliedRef.code){
     appliedRef = null; $('refMsg').textContent = ''; $('refMsg').className = 'ref-msg'; updateTotal();
   }
-});
-$('useCredit').addEventListener('change', e=>{
-  useCredit = e.target.checked;
-  if(useCredit){ appliedRef = null; $('f_ref').value = ''; $('refMsg').textContent = ''; $('refMsg').className = 'ref-msg'; }
-  updateTotal();
 });
 $('gLogin2').addEventListener('click', ()=> googleLogin(false));
 
@@ -1065,9 +1103,8 @@ $('sendBtn').addEventListener('click', ()=>{
   const chosenAddons = STATE.addons.filter(a=>selectedAddons.has(a.id));
   const addonsLine = chosenAddons.length ? chosenAddons.map(a=>`• ${a.name} (+${a.price} جنيه)`).join('\n') : 'لا يوجد';
   const disc = discountAmount();
-  const creditUsed = !!(disc && !appliedRef && useCredit);
   const total = currentPkg.price - disc + chosenAddons.reduce((s,a)=>s+a.price,0);
-  const discLine = disc ? `🎁 خصم إحالة: -${disc} جنيه (${appliedRef ? 'كود ' + appliedRef.code : 'رصيد إحالة'})\n` : '';
+  const discLine = disc ? `🎁 خصم إحالة: -${disc} جنيه (كود ${appliedRef.code})\n` : '';
   const spLine = hasSponsored(currentPkg) ? '\n🚀 الباقة تشمل إعلانًا ممولًا' : '';
   const msg = `مرحباً لمح 👋
 أريد الاشتراك في: *${currentPkg.name}* (${currentPkg.price} جنيه)${spLine}
@@ -1110,16 +1147,10 @@ ${discLine}💵 الإجمالي: ${total} جنيه
       discount: disc,
       refCode: appliedRef ? appliedRef.code : null,
       refName: appliedRef ? (appliedRef.name || null) : null,
-      creditUsed,
       paid: false,
       status: 'بانتظار الدفع',
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     }).catch(err=> console.warn('تعذر حفظ الطلب على فايربيز:', err));
-    if(creditUsed && myReferral){
-      db.collection('referrals').doc(myReferral.code).update({credits: firebase.firestore.FieldValue.increment(-1)})
-        .then(()=>{ myReferral.credits = Math.max(0, num(myReferral.credits) - 1); refreshCreditUI(); })
-        .catch(err=> console.warn('تعذر خصم الرصيد:', err));
-    }
   }
   window.open(url, '_blank');
 });
@@ -1222,7 +1253,7 @@ if(FIREBASE_READY){
     if(isAdmin) $('adminEmailTag').textContent = user.email;
     if(!user){ myReferral = null; closeMy(); }
     updateAccountUI();
-    if(user) ensureReferral().then(refreshCreditUI);
+    if(user) loadMyReferral().then(()=>{ refreshCreditUI(); });
     if(isAdmin && (wantOpenAdmin || location.hash === '#admin')) openAdmin();
     wantOpenAdmin = false;
   });
@@ -1249,7 +1280,7 @@ async function loadMy(){
   body.innerHTML = '<div class="empty">جارِ التحميل...</div>';
   if(!FIREBASE_READY || !db){ body.innerHTML = '<div class="empty">الخدمة غير متاحة الآن.</div>'; return; }
   try{
-    const res = await Promise.all([db.collection('orders').where('uid', '==', currentUser.uid).get(), ensureReferral()]);
+    const res = await Promise.all([db.collection('orders').where('uid', '==', currentUser.uid).get(), loadMyReferral()]);
     MY_ORDERS = res[0].docs.map(d=>Object.assign({id:d.id}, d.data())).sort((x,y)=> tsMs(y.createdAt) - tsMs(x.createdAt));
     refreshCreditUI();
     renderMy();
@@ -1258,22 +1289,61 @@ async function loadMy(){
     body.innerHTML = '<div class="empty">تعذر تحميل طلباتك. حاول مرة تانية بعد شوية.</div>';
   }
 }
+let refEditing = false;
+const PAY_METHODS = ['فودافون كاش', 'اتصالات كاش', 'أورنج كاش', 'وي باي', 'إنستا باي'];
+function refFormHTML(r){
+  r = r || {};
+  const email = currentUser ? currentUser.email : '';
+  return `<div class="ref-form">
+    <label>اسم صاحب المحفظة / الحساب</label>
+    <input id="rf_name" type="text" value="${esc(r.payName || currentUser.displayName || '')}" placeholder="الاسم زي ما هو على المحفظة">
+    <label>طريقة استلام المكافأة</label>
+    <select id="rf_method">${PAY_METHODS.map(m=>`<option ${m === (r.payMethod || PAY_METHODS[0]) ? 'selected' : ''}>${m}</option>`).join('')}</select>
+    <label>رقم المحفظة أو عنوان إنستا باي</label>
+    <input id="rf_number" type="text" dir="ltr" value="${esc(r.payNumber || '')}" placeholder="01xxxxxxxxx أو name@instapay">
+    <label>رقم واتساب للتواصل</label>
+    <input id="rf_wa" type="tel" inputmode="numeric" dir="ltr" value="${esc(r.whatsapp ? '0' + String(r.whatsapp).replace(/^20/, '') : '')}" placeholder="01xxxxxxxxx">
+    <p class="adm-hint" style="margin:10px 0 0;">📧 بريدك (${esc(email)}) بيتسجل تلقائي. بياناتك دي سرية ومش بتظهر غير لإدارة لمح عشان نحوّلك مكافأتك.</p>
+    <button class="big-btn" id="refSave" type="button" style="width:100%;margin-top:12px;">✅ ${r.code ? 'حفظ التعديلات' : 'حفظ وتفعيل الكود'}</button>
+    ${r.code ? '<button class="ins-later" id="refCancelEdit" type="button">إلغاء</button>' : ''}
+  </div>`;
+}
+function refLink(code){ return SITE_URL + '?ref=' + code; }
 function refCardHTML(){
-  if(!SITE.refEnabled || !myReferral) return '';
-  const pct = num(SITE.refDiscount), code = myReferral.code;
-  const share = 'جرّب خدمة لمح لتسويق السيارات 🚗\nاستخدم كودي ' + code + ' واحصل على خصم ' + pct + '% على باقتك\n' + SITE_URL;
+  if(!SITE.refEnabled) return '';
+  const pct = num(SITE.refDiscount), reward = num(SITE.refReward), r = myReferral;
+  if(!r){
+    return `<div class="adm-card ref-card">
+      <div class="adm-sub">🎁 اكسب من إحالة أصحابك</div>
+      <p class="adm-hint">اكتب بياناتك مرة واحدة وهتاخد <b>كود ورابط إحالة</b> خاص بيك. أي حد يطلب باقة بكودك ياخد خصم ${pct}%، وأنت تاخد <b>${reward} جنيه</b> تحويل على محفظتك أو إنستا باي بعد ما يدفع.</p>
+      ${refFormHTML(null)}</div>`;
+  }
+  if(refEditing){
+    return `<div class="adm-card ref-card"><div class="adm-sub">✏️ تعديل بياناتي</div>${refFormHTML(r)}</div>`;
+  }
+  const link = refLink(r.code);
+  const share = 'جرّب خدمة لمح لتسويق السيارات 🚗\nاستخدم كودي ' + r.code + ' واحصل على خصم ' + pct + '% على باقتك\n' + link;
+  const balance = Math.max(0, num(r.earned) - num(r.paidOut));
   return `<div class="adm-card ref-card">
-    <div class="adm-sub">🎁 كود الإحالة الخاص بك</div>
-    <div class="ref-code" id="refCodeBox">${esc(code)}</div>
-    <p class="adm-hint">أي حد يستخدم كودك في طلبه ياخد خصم ${pct}% على الباقة، وأنت بتاخد رصيد خصم ${pct}% على طلبك القادم بعد ما يدفع.</p>
-    <div class="mem-stats" style="grid-template-columns:1fr 1fr;margin-bottom:12px;">
-      <div class="stat"><b>${num(myReferral.paidCount)}</b><span>انضموا بكودك</span></div>
-      <div class="stat run"><b>${num(myReferral.credits)}</b><span>رصيد خصم متاح</span></div>
+    <div class="adm-sub">🎁 كود ورابط الإحالة الخاص بك</div>
+    <div class="ref-code" id="refCodeBox">${esc(r.code)}</div>
+    <div class="ref-link" dir="ltr">${esc(link)}</div>
+    <p class="adm-hint">أي حد يطلب باقة بكودك أو برابطك ياخد خصم ${pct}%، وأنت بتاخد ${reward} جنيه على كل عميل يدفع، وإدارة لمح هتتواصل معاك على واتساب وتحوّلك على بياناتك.</p>
+    <div class="mem-stats" style="grid-template-columns:repeat(2,1fr);margin-bottom:12px;">
+      <div class="stat"><b>${num(r.paidCount)}</b><span>انضموا ودفعوا</span></div>
+      <div class="stat run"><b>${fmtN(balance)}</b><span>مستحق ليك (جنيه)</span></div>
+      <div class="stat"><b>${fmtN(r.earned)}</b><span>إجمالي أرباحك</span></div>
+      <div class="stat"><b>${fmtN(r.paidOut)}</b><span>تم تحويله</span></div>
     </div>
-    <div class="mem-actions" style="margin-bottom:0;">
-      <button class="act-btn" id="copyRef" type="button" data-code="${esc(code)}">📋 نسخ الكود</button>
+    <div class="mem-actions">
+      <button class="act-btn" id="copyRefCode" type="button" data-v="${esc(r.code)}">📋 نسخ الكود</button>
+      <button class="act-btn" id="copyRefLink" type="button" data-v="${esc(link)}">🔗 نسخ الرابط</button>
+    </div>
+    <div class="mem-actions" style="margin-bottom:8px;">
       <a class="act-btn wa" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(share)}">💬 مشاركة على واتساب</a>
-    </div></div>`;
+    </div>
+    <div class="ref-paydata">💳 ${esc(r.payMethod)}: <b dir="ltr">${esc(r.payNumber)}</b> — باسم ${esc(r.payName)} <button class="mini" id="refEdit" type="button">✏️ تعديل</button></div>
+  </div>`;
 }
 function myOrderHTML(o){
   const s = mStatus(o), p = prog(o), pct = p.total ? Math.round(p.done / p.total * 100) : 0;
@@ -1304,16 +1374,27 @@ function renderMy(){
   $('myBody').innerHTML = h;
 }
 $('myClose').addEventListener('click', closeMy);
+function copyText(text){
+  const done = ()=> toast('تم النسخ ✅');
+  if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done).catch(done);
+  else { const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); }catch(x){} ta.remove(); done(); }
+}
+async function submitRefProfile(btn){
+  const p = {payName: $('rf_name').value.trim(), payMethod: $('rf_method').value, payNumber: $('rf_number').value.trim(), whatsapp: waPhone($('rf_wa').value)};
+  if(p.payName.length < 3){ toast('اكتب اسم صاحب المحفظة', false); return; }
+  if(p.payNumber.length < 6){ toast('اكتب رقم المحفظة أو عنوان إنستا باي', false); return; }
+  if(p.whatsapp.length < 10){ toast('اكتب رقم واتساب صحيح', false); return; }
+  btn.disabled = true;
+  try{ await saveReferralProfile(p); refEditing = false; toast('تم حفظ بياناتك ✅'); renderMy(); }
+  catch(err){ console.warn(err); btn.disabled = false; toast('تعذر الحفظ — حاول مرة تانية', false); }
+}
 $('myBody').addEventListener('click', e=>{
   const b = e.target.closest('button'); if(!b) return;
-  if(b.id === 'copyRef'){
-    const code = b.dataset.code;
-    const done = ()=> toast('تم نسخ الكود ✅');
-    if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(code).then(done).catch(done);
-    else { const r = document.createRange(); r.selectNodeContents($('refCodeBox')); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); try{ document.execCommand('copy'); }catch(x){} done(); }
-  } else if(b.id === 'myToPk'){
-    closeMy(); $('packages').scrollIntoView({behavior:'smooth'});
-  }
+  if(b.id === 'copyRefCode' || b.id === 'copyRefLink') copyText(b.dataset.v);
+  else if(b.id === 'refSave') submitRefProfile(b);
+  else if(b.id === 'refEdit'){ refEditing = true; renderMy(); }
+  else if(b.id === 'refCancelEdit'){ refEditing = false; renderMy(); }
+  else if(b.id === 'myToPk'){ closeMy(); $('packages').scrollIntoView({behavior:'smooth'}); }
 });
 document.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeMy(); });
 
@@ -1336,8 +1417,10 @@ function closeAdmin(){
 }
 function switchTab(t){
   document.querySelectorAll('.adm-tabs button').forEach(b=> b.classList.toggle('active', b.dataset.tab === t));
-  ['site','packages','members','stats'].forEach(k=>{ $('tab-'+k).style.display = (k === t) ? 'block' : 'none'; });
+  { const ab = document.querySelector('.adm-tabs button.active'); if(ab && ab.scrollIntoView) ab.scrollIntoView({inline:'center', block:'nearest'}); }
+  ['site','packages','members','stats','refs'].forEach(k=>{ $('tab-'+k).style.display = (k === t) ? 'block' : 'none'; });
   if(t === 'stats') renderStats();
+  if(t === 'refs') loadRefs();
   $('admBody').scrollTop = 0;
 }
 document.querySelector('.adm-tabs').addEventListener('click', e=>{
@@ -1395,8 +1478,10 @@ function renderSiteAdmin(){
     <div class="adm-card">
       <div class="adm-sub">🎁 نظام الإحالة</div>
       <label class="chk"><input type="checkbox" data-s="refEnabled" ${s.refEnabled?'checked':''}> تفعيل كود الإحالة</label>
-      <label>نسبة الخصم % (للعميل الجديد وللمُحيل، حد أقصى 50)</label>
+      <label>نسبة خصم العميل الجديد % (حد أقصى 50)</label>
       <input type="number" inputmode="numeric" min="0" max="50" data-s="refDiscount" value="${esc(s.refDiscount)}">
+      <label>مكافأة المُحيل (جنيه) عن كل عميل يدفع</label>
+      <input type="number" inputmode="numeric" min="0" data-s="refReward" value="${esc(s.refReward)}">
     </div>
     <div class="save-bar"><button class="save-btn" id="saveSite">💾 حفظ إعدادات الموقع</button></div>`;
 }
@@ -1415,6 +1500,7 @@ $('admSite').addEventListener('click', e=>{
   if(e.target.id !== 'saveSite') return;
   SDRAFT.whatsapp = waPhone(SDRAFT.whatsapp) || DEFAULT_SITE.whatsapp;
   SDRAFT.refDiscount = Math.min(50, Math.max(0, num(SDRAFT.refDiscount)));
+  SDRAFT.refReward = Math.max(0, num(SDRAFT.refReward));
   SITE = deepCopy(SDRAFT);
   applySite();
   saveDoc('site', SITE, 'تم حفظ إعدادات الموقع ✅');
@@ -1646,8 +1732,7 @@ function memberHTML(o){
         <div class="full">📍 المعاينة: ${esc(o.location||'-')}</div>
         ${o.notes ? `<div class="full">📝 ملاحظات العميل: ${esc(o.notes)}</div>` : ''}
         ${(o.addons||[]).length ? `<div class="full">🧩 إضافات: ${esc(o.addons.map(a=>a.name).join('، '))}</div>` : ''}
-        ${o.refCode ? `<div class="full">🎁 كود إحالة: ${esc(o.refCode)}${o.refName ? ' (من ' + esc(o.refName) + ')' : ''}${num(o.discount) ? ' — خصم ' + num(o.discount) + ' جنيه' : ''}${o.refRewarded ? ' ✅ اتحسب للمُحيل' : ''}</div>` : ''}
-        ${o.creditUsed ? `<div class="full">🎁 استخدم رصيد إحالة — خصم ${num(o.discount)} جنيه</div>` : ''}
+        ${o.refCode ? `<div class="full">🎁 كود إحالة: ${esc(o.refCode)}${o.refName ? ' (من ' + esc(o.refName) + ')' : ''}${num(o.discount) ? ' — خصم ' + num(o.discount) + ' جنيه' : ''}${o.refRewarded ? ' ✅ اتحسب للمُحيل' + (num(o.refRewardAmount) ? ' (' + num(o.refRewardAmount) + ' جنيه)' : '') : ''}</div>` : ''}
         ${o.uid ? '<div class="full">🔐 مرتبط بحساب جوجل — يشوف طلبه في "طلباتي"</div>' : ''}
       </div>`;
     if(!o.paid){
@@ -1719,11 +1804,8 @@ $('memList').addEventListener('click', e=>{
     const tasks = ensureTasks(o);
     const fields = {paid:true, paidAt:Date.now(), status:'جاري التنفيذ', tasks};
     if(o.refCode && !o.refRewarded){
-      fields.refRewarded = true;   // يضيف رصيد خصم للمُحيل مرة واحدة فقط
-      db.collection('referrals').doc(o.refCode).update({
-        credits: firebase.firestore.FieldValue.increment(1),
-        paidCount: firebase.firestore.FieldValue.increment(1)
-      }).catch(err=>{ console.warn(err); toast('تعذر إضافة رصيد المُحيل — راجع قواعد Firestore', false); });
+      fields.refRewarded = true;   // مكافأة المُحيل مرة واحدة فقط
+      rewardReferrer(o);
     }
     updateMember(o, fields);
     toast('تم تأكيد الدفع — المهام ظهرت ✅');
@@ -1997,6 +2079,109 @@ function renderStats(){
 $('statsBox').addEventListener('click', e=>{
   if(e.target.id === 'goLate'){ memFilter = REMIND_CHIP; switchTab('members'); renderMembers(); }
 });
+
+// =====================================================================
+// لوحة المُحيلين: بياناتهم + مستحقاتهم + تسجيل التحويلات
+// =====================================================================
+let REFS = [], payCtx = null;
+function rewardReferrer(o){
+  (async ()=>{
+    try{
+      const cd = await db.collection('referralCodes').doc(o.refCode).get();
+      if(!cd.exists) throw new Error('code not found');
+      const ruid = cd.data().uid, reward = num(SITE.refReward);
+      if(o.uid && o.uid === ruid){ toast('الطلب ده من صاحب الكود نفسه — مفيش مكافأة', false); updateMember(o, {refRewardAmount: 0}, false); return; }
+      await db.collection('referrals').doc(ruid).update({
+        paidCount: firebase.firestore.FieldValue.increment(1),
+        earned: firebase.firestore.FieldValue.increment(reward)
+      });
+      updateMember(o, {refRewardAmount: reward}, false);
+      toast('اتحسبت مكافأة المُحيل: ' + reward + ' جنيه ✅');
+      if($('tab-refs').style.display === 'block') loadRefs();
+    }catch(err){ console.warn(err); toast('تعذر حساب مكافأة المُحيل — راجع الكود والقواعد', false); }
+  })();
+}
+function loadRefs(){
+  const box = $('refsBox');
+  if(!FIREBASE_READY || !db){ box.innerHTML = '<div class="empty">فايربيز مش متصل.</div>'; return; }
+  box.innerHTML = '<div class="empty">جارِ التحميل...</div>';
+  db.collection('referrals').get().then(snap=>{
+    REFS = snap.docs.map(d=>Object.assign({id:d.id}, d.data()));
+    renderRefs();
+  }).catch(err=>{ console.warn(err); box.innerHTML = '<div class="empty">تعذر تحميل المُحيلين (راجع قواعد Firestore).</div>'; });
+}
+const refBal = r => Math.max(0, num(r.earned) - num(r.paidOut));
+function renderRefs(){
+  const box = $('refsBox');
+  if(!REFS.length){ box.innerHTML = '<div class="empty">لسه محدش فعّل كود الإحالة.<br><small>أي عميل يفعّل الكود من "طلباتي" بيظهر هنا ببياناته.</small></div>'; return; }
+  const list = REFS.slice().sort((a,b)=> refBal(b) - refBal(a) || num(b.paidCount) - num(a.paidCount));
+  const totalBal = list.reduce((s,r)=> s + refBal(r), 0), totalPaid = list.reduce((s,r)=> s + num(r.paidOut), 0);
+  box.innerHTML = `
+    <div class="mem-stats">
+      <div class="stat"><b>${list.length}</b><span>مُحيلين</span></div>
+      <div class="stat warn"><b>${fmtN(totalBal)}</b><span>مستحق تحويله</span></div>
+      <div class="stat"><b>${fmtN(totalPaid)}</b><span>تم تحويله</span></div>
+      <div class="stat"><b>${list.reduce((s,r)=> s + num(r.paidCount), 0)}</b><span>عملاء دفعوا بأكوادهم</span></div>
+    </div>
+    <div class="mem-tools"><button class="mini" id="refsRefresh" type="button">🔄 تحديث</button></div>` +
+    list.map(r=>{
+      const bal = refBal(r), id = esc(r.id);
+      const pays = (r.payouts || []).slice(-3).reverse().map(p=>`<div>💸 ${fmtN(p.amount)} جنيه — ${esc(fmtDate(p.at))}${p.note ? ' — ' + esc(p.note) : ''}</div>`).join('');
+      return `<div class="adm-card ref-admin">
+        <div class="adm-card-head"><b>🎁 ${esc(r.payName || r.displayName || '-')}</b><span class="st ${bal ? 'st-wait' : 'st-done'}">${bal ? 'مستحق ' + fmtN(bal) : 'مفيش مستحقات'}</span></div>
+        <div class="mem-info">
+          <div>📧 <span dir="ltr">${esc(r.email || '-')}</span></div>
+          <div>🏷️ الكود: <b dir="ltr">${esc(r.code)}</b></div>
+          <div>💳 ${esc(r.payMethod || '-')}: <b dir="ltr">${esc(r.payNumber || '-')}</b></div>
+          <div>👤 باسم: ${esc(r.payName || '-')}</div>
+          <div>📱 واتساب: <span dir="ltr">${esc(r.whatsapp || '-')}</span></div>
+          <div>👥 دفعوا: ${num(r.paidCount)} • أرباح ${fmtN(r.earned)} • حُوّل ${fmtN(r.paidOut)}</div>
+        </div>
+        <div class="mem-actions">
+          <a class="act-btn wa" target="_blank" rel="noopener" href="https://wa.me/${esc(waPhone(r.whatsapp))}">💬 واتساب</a>
+          <button class="act-btn" data-ract="copy" data-v="${esc(r.payNumber || '')}" type="button">📋 نسخ رقم التحويل</button>
+        </div>
+        <button class="big-btn" data-ract="pay" data-rid="${id}" type="button" style="width:100%;">💸 تسجيل تحويل مبلغ</button>
+        ${pays ? '<div class="mt-log" style="margin-top:10px;">' + pays + '</div>' : ''}
+      </div>`;
+    }).join('');
+}
+$('refsBox').addEventListener('click', e=>{
+  if(e.target.id === 'refsRefresh'){ loadRefs(); return; }
+  const b = e.target.closest('[data-ract]'); if(!b) return;
+  if(b.dataset.ract === 'copy'){ copyText(b.dataset.v); return; }
+  const r = REFS.find(x=>x.id === b.dataset.rid); if(!r) return;
+  payCtx = r.id;
+  $('payTitle').textContent = 'تحويل مكافأة: ' + (r.payName || r.displayName || '');
+  $('payAmount').value = refBal(r) || '';
+  $('payNote').value = '';
+  $('payInfo').innerHTML = '💳 ' + esc(r.payMethod || '') + ': <b dir="ltr">' + esc(r.payNumber || '') + '</b><br>المستحق حاليًا: ' + fmtN(refBal(r)) + ' جنيه';
+  $('payModal').style.display = 'flex';
+  setTimeout(()=> $('payAmount').focus(), 60);
+});
+function closePay(){ $('payModal').style.display = 'none'; payCtx = null; }
+$('payCancel').addEventListener('click', closePay);
+$('payModal').addEventListener('click', e=>{ if(e.target.id === 'payModal') closePay(); });
+async function savePayout(notify){
+  const r = REFS.find(x=>x.id === payCtx); if(!r) return;
+  const amount = Math.round(num($('payAmount').value)), note = $('payNote').value.trim();
+  if(amount <= 0){ toast('اكتب مبلغ صحيح', false); return; }
+  const entry = {at: Date.now(), amount, note};
+  try{
+    await db.collection('referrals').doc(r.id).update({
+      paidOut: firebase.firestore.FieldValue.increment(amount),
+      payouts: firebase.firestore.FieldValue.arrayUnion(entry)
+    });
+    r.paidOut = num(r.paidOut) + amount; r.payouts = (r.payouts || []).concat([entry]);
+    closePay(); renderRefs(); toast('اتسجل تحويل ' + amount + ' جنيه ✅');
+    if(notify){
+      const m = 'السلام عليكم ورحمة الله وبركاته\nازي حضرتك ' + firstName(r.payName || r.displayName) + ' 🌹\nتم تحويل مبلغ ' + amount + ' جنيه مكافأة الإحالة على ' + (r.payMethod || '') + ' ' + (r.payNumber || '') + ' ✅\nشكرًا لثقتك في لمح وربنا يزيدك 🙏';
+      window.open('https://wa.me/' + waPhone(r.whatsapp) + '?text=' + encodeURIComponent(m), '_blank');
+    }
+  }catch(err){ console.warn(err); toast('تعذر تسجيل التحويل — راجع قواعد Firestore', false); }
+}
+$('paySave').addEventListener('click', ()=> savePayout(false));
+$('paySaveWa').addEventListener('click', ()=> savePayout(true));
 
 // ---------- start ----------
 applySite();
