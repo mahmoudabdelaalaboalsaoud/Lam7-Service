@@ -353,14 +353,14 @@
   .acc-out{background:none;border:none;color:var(--muted);font-family:inherit;font-size:12px;cursor:pointer;text-decoration:underline;}
   .inst-foot{background:transparent;border:1px solid rgba(226,32,31,.45);color:#ff8b86;border-radius:30px;padding:9px 18px;font-family:inherit;font-weight:800;font-size:13px;cursor:pointer;margin-top:12px;}
   /* install sheet */
-  #installSheet{position:fixed;inset:0;z-index:80;display:flex;align-items:flex-end;justify-content:center;pointer-events:none;}
-  #installSheet.show{pointer-events:auto;}
+  #installSheet,#loginSheet{position:fixed;inset:0;z-index:80;display:flex;align-items:flex-end;justify-content:center;pointer-events:none;}
+  #installSheet.show,#loginSheet.show{pointer-events:auto;}
   .ins-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.62);opacity:0;transition:opacity .3s;}
-  #installSheet.show .ins-backdrop{opacity:1;}
+  #installSheet.show .ins-backdrop,#loginSheet.show .ins-backdrop{opacity:1;}
   .ins-card{position:relative;width:100%;max-width:480px;background:linear-gradient(180deg,#201519,#130f13);border:1px solid rgba(226,32,31,.38);border-bottom:none;
     border-radius:28px 28px 0 0;padding:20px 22px calc(22px + env(safe-area-inset-bottom,0px));text-align:center;transform:translateY(105%);
     transition:transform .38s cubic-bezier(.2,.8,.2,1);box-shadow:0 -18px 60px rgba(226,32,31,.22);}
-  #installSheet.show .ins-card{transform:translateY(0);}
+  #installSheet.show .ins-card,#loginSheet.show .ins-card{transform:translateY(0);}
   .ins-x{position:absolute;top:12px;left:12px;width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:#241b21;color:var(--muted);cursor:pointer;font-size:13px;}
   .ins-logo{width:84px;height:84px;object-fit:contain;display:block;margin:-62px auto 12px;border-radius:22px;background:#08070a;padding:6px;
     border:1px solid rgba(226,32,31,.5);box-shadow:0 12px 30px rgba(226,32,31,.4);}
@@ -416,6 +416,14 @@
   #payModal{display:none;position:absolute;inset:0;z-index:5;background:rgba(0,0,0,.72);align-items:center;justify-content:center;padding:16px;}
   #payModal .pm-card input{margin-bottom:2px;}
   #payModal .pm-btns{flex-wrap:wrap;}
+  /* login helpers */
+  .g-btn.busy{background:#f1f1f1;color:#444;}
+  .spin{width:18px;height:18px;border-radius:50%;border:3px solid #cfcfcf;border-top-color:#e2201f;animation:lspin .8s linear infinite;flex-shrink:0;}
+  @keyframes lspin{to{transform:rotate(360deg);}}
+  .ls-ico{font-size:36px;margin:2px 0 6px;}
+  .ins-card .ins-go + .ins-go{margin-top:10px;}
+  .ins-go.ls-alt{background:#2a2229;box-shadow:none;border:1px solid var(--border);}
+  @media (prefers-reduced-motion:reduce){.spin{animation-duration:2s;}}
 
   /* addon showcase on main page */
   .addon-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
@@ -1206,12 +1214,15 @@ function saveDoc(name, data, okMsg){
 // =====================================================================
 let wantOpenAdmin = false;
 let currentUser = null;
+let loginBusy = false, loginTimer = null;
 const G_SVG = `<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>`;
 
 function updateAccountUI(){
   const box = $('accountBox'), u = currentUser;
   if(!u){
-    box.innerHTML = `<button class="g-btn" id="gLogin" type="button">${G_SVG}<span>تسجيل الدخول بجوجل</span></button>`;
+    box.innerHTML = loginBusy
+      ? `<button class="g-btn busy" id="gLogin" type="button"><span class="spin"></span><span>جارِ فتح جوجل… (اضغط لو وقف)</span></button>`
+      : `<button class="g-btn" id="gLogin" type="button">${G_SVG}<span>تسجيل الدخول بجوجل</span></button>`;
     refreshCreditUI();
     return;
   }
@@ -1225,17 +1236,82 @@ function updateAccountUI(){
   if(nm && !nm.value && u.displayName) nm.value = u.displayName;
   refreshCreditUI();
 }
+const isInAppBrowser = () => /FBAN|FBAV|FB_IAB|FBIOS|Instagram|Messenger|Line\/|Snapchat|musical_ly|TikTok|Bytedance|Twitter|LinkedInApp|Pinterest|MicroMessenger|; wv\)/i.test(navigator.userAgent || '');
+function chromeIntent(){
+  return 'intent://' + location.host + location.pathname + location.search + '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=' + encodeURIComponent(location.href.split('#')[0]) + ';end';
+}
+function setLoginBusy(b){
+  loginBusy = b;
+  if(!b){ clearTimeout(loginTimer); loginTimer = null; }
+  updateAccountUI();
+}
+function hideLoginSheet(){
+  const sh = $('loginSheet'); if(!sh) return;
+  sh.classList.remove('show');
+  setTimeout(()=> sh.remove(), 350);
+}
+function showLoginSheet(kind){
+  hideLoginSheet();
+  const android = /android/i.test(navigator.userAgent || '');
+  const inapp = kind === 'inapp';
+  const sh = document.createElement('div');
+  sh.id = 'loginSheet';
+  sh.innerHTML = `
+    <div class="ins-backdrop" data-ls="close"></div>
+    <div class="ins-card" role="dialog" aria-modal="true">
+      <button class="ins-x" data-ls="close" type="button" aria-label="إغلاق">✕</button>
+      <div class="ls-ico">${inapp ? '🌐' : '⏳'}</div>
+      <h3>${inapp ? 'افتح الموقع في المتصفح عشان تسجّل دخول' : 'تسجيل الدخول واخد وقت؟'}</h3>
+      <p>${inapp
+        ? 'جوجل مبتسمحش بتسجيل الدخول من جوه متصفح فيسبوك وتطبيقات التواصل. افتح الموقع في ' + (android ? 'كروم' : 'سفاري أو كروم') + ' وسجّل منه.'
+        : 'لو صفحة جوجل فضلت بيضاء أو وقفت، جرّب الطريقة التانية، أو افتح الموقع في المتصفح العادي وسجّل منه.'}</p>
+      ${android ? `<a class="ins-go" style="display:block;text-decoration:none;" href="${esc(chromeIntent())}">🌐 فتح في كروم</a>` : ''}
+      ${!inapp ? '<button class="ins-go ls-alt" data-ls="redirect" type="button">🔁 جرّب طريقة تانية</button>' : ''}
+      <button class="ins-later" data-ls="copy" type="button">📋 نسخ رابط الموقع</button>
+      <button class="ins-later" data-ls="close" type="button">إغلاق</button>
+    </div>`;
+  document.body.appendChild(sh);
+  requestAnimationFrame(()=> requestAnimationFrame(()=> sh.classList.add('show')));
+  sh.addEventListener('click', e=>{
+    const t = e.target.closest('[data-ls]'); if(!t) return;
+    const k = t.dataset.ls;
+    if(k === 'close') hideLoginSheet();
+    else if(k === 'copy') copyText(location.href.split('#')[0]);
+    else if(k === 'redirect'){ hideLoginSheet(); startRedirectLogin(); }
+  });
+}
+function startRedirectLogin(){
+  try{ sessionStorage.setItem('lam7_want_admin', wantOpenAdmin ? '1' : ''); }catch(e){}
+  setLoginBusy(true);
+  auth.signInWithRedirect(googleProvider).catch(err=>{
+    console.warn(err); setLoginBusy(false);
+    alert('تعذر بدء تسجيل الدخول. جرّب من متصفح كروم أو سفاري.');
+  });
+}
 function googleLogin(openAdminIfAdmin){
   if(!FIREBASE_READY){
     alert('تسجيل الدخول محتاج ربط فايربيز الأول. راجع تعليمات الإعداد في أعلى الكود (firebaseConfig).');
     return;
   }
+  if(loginBusy){ showLoginSheet('stuck'); return; }
+  if(isInAppBrowser()){ showLoginSheet('inapp'); return; }
   wantOpenAdmin = openAdminIfAdmin !== false;   // يفتح اللوحة فقط لو الحساب هو الأدمن
-  auth.signInWithPopup(googleProvider).catch(err=>{
+  setLoginBusy(true);
+  loginTimer = setTimeout(()=>{ if(loginBusy) showLoginSheet('stuck'); }, 12000);
+  auth.signInWithPopup(googleProvider).then(()=>{
+    setLoginBusy(false); hideLoginSheet();
+  }).catch(err=>{
+    setLoginBusy(false); hideLoginSheet();
+    const c = (err && err.code) || '';
+    if(c === 'auth/popup-closed-by-user' || c === 'auth/cancelled-popup-request'){ wantOpenAdmin = false; return; }
+    if(c === 'auth/popup-blocked' || c === 'auth/operation-not-supported-in-this-environment' || c === 'auth/web-storage-unsupported'){
+      startRedirectLogin(); return;   // المتصفح منع النافذة المنبثقة: نكمل بالطريقة التانية تلقائيًا
+    }
     wantOpenAdmin = false;
     console.warn(err);
-    if(err && err.code === 'auth/popup-closed-by-user') return;
-    alert('حصل خطأ أثناء تسجيل الدخول بجوجل. تأكد إن الدومين مضاف في Firebase Authentication > Authorized domains.');
+    alert(c === 'auth/unauthorized-domain'
+      ? 'الدومين مش مضاف في Firebase Authentication > Authorized domains.'
+      : 'حصل خطأ أثناء تسجيل الدخول بجوجل، جرّب مرة تانية.');
   });
 }
 $('accountBox').addEventListener('click', e=>{
@@ -1247,6 +1323,12 @@ $('accountBox').addEventListener('click', e=>{
 });
 
 if(FIREBASE_READY){
+  googleProvider.setCustomParameters({prompt: 'select_account'});   // يخلي العميل يختار الإيميل بنفسه
+  auth.getRedirectResult().catch(err=>{
+    console.warn(err);
+    const c = err && err.code;
+    if(c && c !== 'auth/no-auth-event') alert('تعذر إكمال تسجيل الدخول. جرّب من متصفح كروم أو سفاري.');
+  });
   auth.onAuthStateChanged(user=>{
     currentUser = user;
     isAdmin = !!(user && user.email && user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase());
@@ -1254,7 +1336,10 @@ if(FIREBASE_READY){
     if(!user){ myReferral = null; closeMy(); }
     updateAccountUI();
     if(user) loadMyReferral().then(()=>{ refreshCreditUI(); });
-    if(isAdmin && (wantOpenAdmin || location.hash === '#admin')) openAdmin();
+    let wantStored = false;
+    try{ wantStored = sessionStorage.getItem('lam7_want_admin') === '1'; if(user) sessionStorage.removeItem('lam7_want_admin'); }catch(e){}
+    if(user){ loginBusy = false; hideLoginSheet(); }
+    if(isAdmin && (wantOpenAdmin || wantStored || location.hash === '#admin')) openAdmin();
     wantOpenAdmin = false;
   });
 } else {
