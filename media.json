@@ -1,0 +1,61 @@
+{
+ "v": 1,
+ "updated": "2026-10-22T19:38:00.455Z",
+ "testimonials": [
+  {
+   "src": "images/testimonial-1.jpg",
+   "caption": "عميل راضٍ عن الخدمة"
+  },
+  {
+   "src": "images/testimonial-2.jpg",
+   "caption": "تم البيع بنجاح"
+  },
+  {
+   "src": "images/testimonial-3.jpg",
+   "caption": "شكر وتقدير"
+  },
+  {
+   "src": "images/testimonial-4.jpg",
+   "caption": "نتيجة سريعة"
+  },
+  {
+   "src": "images/testimonial-5.jpg",
+   "caption": "تجربة ممتازة"
+  },
+  {
+   "src": "images/testimonial-6.jpg",
+   "caption": "عميل سعيد بالنتيجة"
+  },
+  {
+   "src": "images/testimonial-7.jpg",
+   "caption": "توصية بالخدمة"
+  },
+  {
+   "src": "images/testimonial-8.jpg",
+   "caption": "بيع في وقت قياسي"
+  }
+ ],
+ "promo": [
+  {
+   "src": "images/promo/p-1792697867035-0.jpg"
+  },
+  {
+   "src": "images/promo/p-1792697867035-1.jpg"
+  },
+  {
+   "src": "images/promo/p-1792697867035-2.jpg"
+  },
+  {
+   "src": "images/promo/p-1792697867035-3.jpg"
+  },
+  {
+   "src": "images/promo/p-1792697867035-4.jpg"
+  },
+  {
+   "src": "images/promo/p-1792697867035-5.jpg"
+  },
+  {
+   "src": "images/promo/p-1792697867035-6.jpg"
+  }
+ ]
+}
