@@ -442,6 +442,18 @@
   .promo-item img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:#0b090c;}
   .pi-btns{display:flex;gap:6px;padding:8px;justify-content:center;flex-wrap:wrap;}
   .pi-btns .mini{text-decoration:none;flex:1;text-align:center;}
+  /* media manager */
+  .gh-steps{margin:0 0 6px;padding:0 20px 0 0;font-size:13px;line-height:2.1;color:#c9cee0;}
+  .gh-steps a{color:#7ab8ff;font-weight:700;}
+  .media-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+  .media-item{position:relative;background:#110d12;border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;}
+  .media-item.new{border-color:var(--green);}
+  .media-item img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;display:block;background:#0b090c;}
+  .media-item input{margin:8px 8px 0 !important;width:auto !important;font-size:12px !important;padding:8px 10px !important;}
+  .mi-btns{display:flex;gap:6px;padding:8px;justify-content:center;}
+  .mi-btns .mini{flex:1;}
+  .mi-badge{position:absolute;top:8px;right:8px;z-index:1;background:var(--green);color:#04220f;font-size:10.5px;font-weight:900;padding:3px 8px;border-radius:10px;}
+  .media-status{font-size:12.5px;line-height:1.8;color:#c9cee0;padding:0 2px 8px;text-align:center;}
 
   /* addon showcase on main page */
   .addon-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
@@ -501,7 +513,7 @@
   <div class="testi-wrap" id="testiWrap" style="margin-top:24px;">
     <h2 class="section-title" style="margin-top:0;">آراء عملائنا</h2>
     <p class="section-sub">لقطات حقيقية من محادثاتنا مع عملاء<br>تم بيع سياراتهم بنجاح</p>
-    <div class="testi-scroll">
+    <div class="testi-scroll" id="testiScroll">
       <div class="testi-card"><div class="testi-imgbox"><img src="images/testimonial-1.jpg" alt="لقطة شاشة من محادثة عميل لدى لمح: عميل راضٍ عن الخدمة" decoding="async" loading="lazy"></div><div class="testi-cap">⭐ عميل راضٍ عن الخدمة</div></div>
       <div class="testi-card"><div class="testi-imgbox"><img src="images/testimonial-2.jpg" alt="لقطة شاشة من محادثة عميل لدى لمح: تم البيع بنجاح" decoding="async" loading="lazy"></div><div class="testi-cap">⭐ تم البيع بنجاح</div></div>
       <div class="testi-card"><div class="testi-imgbox"><img src="images/testimonial-3.jpg" alt="لقطة شاشة من محادثة عميل لدى لمح: شكر وتقدير" decoding="async" loading="lazy"></div><div class="testi-cap">⭐ شكر وتقدير</div></div>
@@ -675,6 +687,7 @@
       <button data-tab="members" type="button" class="active">👥 الأعضاء</button>
       <button data-tab="stats" type="button">📊 الأرقام</button>
       <button data-tab="refs" type="button">🤝 المسوّقون</button>
+      <button data-tab="media" type="button">🖼️ الوسائط</button>
     </div>
     <div class="adm-body" id="admBody">
       <section id="tab-site" style="display:none;"><div id="admSite"></div></section>
@@ -690,6 +703,7 @@
       </section>
       <section id="tab-stats" style="display:none;"><div id="statsBox"></div></section>
       <section id="tab-refs" style="display:none;"><div id="refsBox"></div></section>
+      <section id="tab-media" style="display:none;"><div id="mediaBox"></div></section>
     </div>
   </div>
   <div id="payModal"><div class="pm-card">
@@ -889,7 +903,7 @@ function applySite(){
   $('footText').innerHTML = nl2br(SITE.footerText);
   $('testiLink').href = SITE.testiLink || '#';
   $('testiLink').style.display = SITE.testiLink ? '' : 'none';
-  $('testiWrap').style.display = SITE.showTestimonials ? '' : 'none';
+  syncTesti();
   $('addonsSec').style.display = SITE.showAddons ? '' : 'none';
   $('affSec').style.display = SITE.refEnabled ? '' : 'none';
   $('affReward').textContent = num(SITE.refReward);
@@ -1573,9 +1587,10 @@ function closeAdmin(){
 function switchTab(t){
   document.querySelectorAll('.adm-tabs button').forEach(b=> b.classList.toggle('active', b.dataset.tab === t));
   { const ab = document.querySelector('.adm-tabs button.active'); if(ab && ab.scrollIntoView) ab.scrollIntoView({inline:'center', block:'nearest'}); }
-  ['site','packages','members','stats','refs'].forEach(k=>{ $('tab-'+k).style.display = (k === t) ? 'block' : 'none'; });
+  ['site','packages','members','stats','refs','media'].forEach(k=>{ $('tab-'+k).style.display = (k === t) ? 'block' : 'none'; });
   if(t === 'stats') renderStats();
   if(t === 'refs') loadRefs();
+  if(t === 'media') renderMedia();
   $('admBody').scrollTop = 0;
 }
 document.querySelector('.adm-tabs').addEventListener('click', e=>{
@@ -1637,9 +1652,7 @@ function renderSiteAdmin(){
       <textarea data-s="promoText" style="min-height:170px;">${esc(s.promoText)}</textarea>
       <label>الرسالة القصيرة (للستوري والتعليقات)</label>
       <textarea data-s="promoShort">${esc(s.promoShort)}</textarea>
-      <label>الصور الدعائية (اختياري)</label>
-      <textarea data-s="promoImages" dir="ltr" placeholder="promo-1.jpg&#10;promo-2.jpg">${esc(s.promoImages)}</textarea>
-      <p class="adm-hint" style="margin:6px 0 0;">ارفع الصور على GitHub داخل فولدر <b dir="ltr">images/promo</b>. لو سمّيتها <b dir="ltr">promo-1.jpg</b> و<b dir="ltr">promo-2.jpg</b> وهكذا بالترتيب، هتظهر لوحدها من غير ما تكتب حاجة هنا. وإن كانت أسماؤها مختلفة اكتب اسم كل صورة في سطر.</p>
+      <p class="adm-hint" style="margin:10px 0 0;">🖼️ الصور الدعائية وصور آراء العملاء بترفعها من تبويب <b>الوسائط</b>.</p>
     </div>
     <div class="adm-card">
       <div class="adm-sub">🎁 نظام الإحالة</div>
@@ -2375,6 +2388,7 @@ function promoCardsHTML(){
 let PROMO_LIST = null;
 const probeImg = url => new Promise(res=>{ const i = new Image(); i.onload = ()=> res(true); i.onerror = ()=> res(false); i.src = url; });
 async function getPromoList(){
+  if(MEDIA.promo.length) return MEDIA.promo.map(x=>x.src);
   const lines = String(SITE.promoImages || '').split('\n').map(x=>x.trim()).filter(Boolean);
   if(lines.length) return lines.map(l=> (/^(https?:)?\/\//.test(l) || l.startsWith('/')) ? l : 'images/promo/' + l);
   const out = [];
@@ -2405,11 +2419,226 @@ async function sharePromoImage(i){
   copyText(text); toast('اتنسخ النص — نزّل الصورة وابعتها معاه');
 }
 
+// =====================================================================
+// الوسائط: صور آراء العملاء + الصور الدعائية — بتترفع من التطبيق مباشرة لريبو GitHub
+// الموقع بيقرا قائمة الصور من ملف media.json (لو مش موجود بيستخدم الصور الأصلية)
+// =====================================================================
+const GH = {owner: 'mahmoudabdelaalaboalsaoud', repo: 'Lam7-Service', branch: 'main'};
+const DEFAULT_MEDIA = () => ({
+  testimonials: [
+    ['عميل راضٍ عن الخدمة'], ['تم البيع بنجاح'], ['شكر وتقدير'], ['نتيجة سريعة'],
+    ['تجربة ممتازة'], ['عميل سعيد بالنتيجة'], ['توصية بالخدمة'], ['بيع في وقت قياسي']
+  ].map((c,i)=>({src: 'images/testimonial-' + (i+1) + '.jpg', caption: c[0]})),
+  promo: []
+});
+let MEDIA = DEFAULT_MEDIA();
+function normMedia(m){
+  const ok = /^images\/[\w\-./]+\.(jpe?g|png|webp|gif)$/i;
+  const cl = a => (Array.isArray(a) ? a : []).filter(x=> x && typeof x.src === 'string' && ok.test(x.src)).map(x=>({src: x.src, caption: String(x.caption || '')}));
+  return {testimonials: Array.isArray(m.testimonials) ? cl(m.testimonials) : DEFAULT_MEDIA().testimonials, promo: cl(m.promo)};
+}
+function syncTesti(){
+  const w = $('testiWrap'); if(!w) return;
+  w.style.display = (SITE.showTestimonials && MEDIA.testimonials.length) ? '' : 'none';
+}
+function renderTestimonials(){
+  const box = $('testiScroll'); if(!box) return;
+  box.innerHTML = MEDIA.testimonials.map(t=>
+    `<div class="testi-card"><div class="testi-imgbox"><img src="${esc(t.src)}" alt="لقطة شاشة من محادثة عميل لدى لمح${t.caption ? ': ' + esc(t.caption) : ''}" loading="lazy" decoding="async"></div>${t.caption ? `<div class="testi-cap">⭐ ${esc(t.caption)}</div>` : ''}</div>`).join('');
+  syncTesti();
+}
+function loadMedia(){
+  fetch('media.json', {cache: 'no-cache'}).then(r=> r.ok ? r.json() : null).then(m=>{
+    if(!m) return;
+    MEDIA = normMedia(m); PROMO_LIST = null;
+    renderTestimonials();
+  }).catch(()=>{});
+}
+
+// ---------- لوحة الوسائط (الأدمن) ----------
+let MDRAFT = null, MDEL = [], mediaDirty = false, mediaBusy = false, mediaKind = 'testimonials', mediaStatus = '';
+const ghToken = () => { try{ return localStorage.getItem('lam7_gh') || ''; }catch(e){ return ''; } };
+const MEDIA_OK_DEL = /^images\/(testimonial-\d+\.jpg|testimonials\/[\w\-.]+|promo\/[\w\-.]+)$/;
+function compressImage(file, maxSide){
+  return new Promise((resolve, reject)=>{
+    const url = URL.createObjectURL(file), img = new Image();
+    img.onload = ()=>{
+      let w = img.naturalWidth, h = img.naturalHeight;
+      const sc = Math.min(1, maxSide / Math.max(w, h)); w = Math.round(w * sc); h = Math.round(h * sc);
+      const c = document.createElement('canvas'); c.width = w; c.height = h;
+      const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, w, h); x.drawImage(img, 0, 0, w, h);
+      let q = 0.86, data = c.toDataURL('image/jpeg', q);
+      while(data.length * 0.75 > 450 * 1024 && q > 0.55){ q -= 0.08; data = c.toDataURL('image/jpeg', q); }
+      URL.revokeObjectURL(url); resolve(data);
+    };
+    img.onerror = ()=>{ URL.revokeObjectURL(url); reject(new Error('bad image')); };
+    img.src = url;
+  });
+}
+function mediaListHTML(kind){
+  const L = MDRAFT[kind];
+  if(!L.length) return '<div class="empty small">لسه مفيش صور هنا.</div>';
+  return '<div class="media-grid">' + L.map((e,i)=>`<div class="media-item ${e.isNew ? 'new' : ''}">
+      ${e.isNew ? '<span class="mi-badge">جديدة</span>' : ''}
+      <img src="${esc(e.preview || e.src)}" alt="" loading="lazy">
+      ${kind === 'testimonials' ? `<input data-mcap="${i}" value="${esc(e.caption || '')}" placeholder="التعليق تحت الصورة">` : ''}
+      <div class="mi-btns">
+        <button class="mini" data-m="up" data-k="${kind}" data-i="${i}" type="button" ${i === 0 ? 'disabled' : ''}>→</button>
+        <button class="mini" data-m="down" data-k="${kind}" data-i="${i}" type="button" ${i === L.length - 1 ? 'disabled' : ''}>←</button>
+        <button class="mini danger" data-m="del" data-k="${kind}" data-i="${i}" type="button">🗑</button>
+      </div></div>`).join('') + '</div>';
+}
+function renderMedia(){
+  if(!MDRAFT){ MDRAFT = deepCopy(MEDIA); MDEL = []; mediaDirty = false; }
+  const tok = ghToken();
+  const tokenCard = tok ? `<div class="adm-card"><div class="adm-sub">🔗 الربط مع GitHub</div>
+      <p class="adm-hint" style="margin:0 0 10px;">✅ متصل. التوكن محفوظ على جهازك بس.</p>
+      <div class="mem-actions" style="margin:0;"><button class="act-btn" data-m="verify" type="button">🔍 اختبار الاتصال</button><button class="act-btn" data-m="forget" type="button">🗑 فصل التوكن</button></div></div>`
+    : `<div class="adm-card"><div class="adm-sub">🔗 ربط GitHub (مرة واحدة)</div>
+      <p class="adm-hint">عشان الصور تترفع من هنا لازم تعمل توكن صغير يسمح للتطبيق يضيف ملفات لريبو الموقع بس:</p>
+      <ol class="gh-steps">
+        <li>افتح الصفحة: <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">إنشاء توكن على GitHub</a></li>
+        <li>الاسم: <b dir="ltr">lam7-site</b> — المدة: سنة</li>
+        <li>Repository access ← <b>Only select repositories</b> ← اختار <b dir="ltr">${esc(GH.repo)}</b></li>
+        <li>Permissions ← Repository permissions ← <b dir="ltr">Contents</b> ← <b dir="ltr">Read and write</b></li>
+        <li>دوس Generate token وانسخ التوكن والصقه تحت</li>
+      </ol>
+      <label>التوكن</label>
+      <input id="ghTok" type="password" dir="ltr" autocomplete="off" placeholder="github_pat_...">
+      <button class="big-btn" data-m="saveTok" type="button" style="width:100%;margin-top:10px;">💾 حفظ وربط</button>
+      <p class="adm-hint" style="margin:10px 0 0;">🔒 التوكن بيتحفظ على جهازك بس ومش بيتبعت لأي مكان غير GitHub.</p></div>`;
+  $('mediaBox').innerHTML = tokenCard + `
+    <div class="adm-card"><div class="adm-sub">⭐ صور آراء العملاء</div>
+      ${mediaListHTML('testimonials')}
+      <button class="add-item-btn" data-m="add" data-k="testimonials" type="button">➕ رفع صور</button></div>
+    <div class="adm-card"><div class="adm-sub">🖼️ الصور الدعائية للمسوّقين</div>
+      ${mediaListHTML('promo')}
+      <button class="add-item-btn" data-m="add" data-k="promo" type="button">➕ رفع صور</button></div>
+    <input id="mediaFile" type="file" accept="image/*" multiple style="display:none;">
+    <div class="save-bar"><div class="media-status" id="mediaStatus">${esc(mediaStatus)}</div>
+      <button class="save-btn" data-m="publish" type="button" ${mediaBusy ? 'disabled' : ''}>${mediaBusy ? '⏳ جارِ الرفع...' : '🚀 نشر التغييرات'}</button></div>`;
+}
+function setMediaStatus(t){ mediaStatus = t; const el = $('mediaStatus'); if(el) el.textContent = t; }
+async function ghCommit(files, deletes, message){
+  const tok = ghToken();
+  const H = {Authorization: 'Bearer ' + tok, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json'};
+  const api = 'https://api.github.com/repos/' + GH.owner + '/' + GH.repo;
+  const j = async (url, opt)=>{ const r = await fetch(url, opt); if(!r.ok){ const e = new Error('GH ' + r.status); e.status = r.status; throw e; } return r.json(); };
+  const ref = await j(api + '/git/ref/heads/' + GH.branch, {headers: H});
+  const head = ref.object.sha;
+  const commit = await j(api + '/git/commits/' + head, {headers: H});
+  const tree = [];
+  for(const f of files){
+    const body = f.base64 !== undefined ? {content: f.base64, encoding: 'base64'} : {content: f.text, encoding: 'utf-8'};
+    const b = await j(api + '/git/blobs', {method: 'POST', headers: H, body: JSON.stringify(body)});
+    tree.push({path: f.path, mode: '100644', type: 'blob', sha: b.sha});
+  }
+  deletes.forEach(p=> tree.push({path: p, mode: '100644', type: 'blob', sha: null}));
+  const nt = await j(api + '/git/trees', {method: 'POST', headers: H, body: JSON.stringify({base_tree: commit.tree.sha, tree})});
+  const nc = await j(api + '/git/commits', {method: 'POST', headers: H, body: JSON.stringify({message, tree: nt.sha, parents: [head]})});
+  await j(api + '/git/refs/heads/' + GH.branch, {method: 'PATCH', headers: H, body: JSON.stringify({sha: nc.sha})});
+}
+function ghErrorText(err){
+  const st = err && err.status;
+  if(st === 401) return '❌ التوكن غلط أو منتهي. اعمل توكن جديد.';
+  if(st === 403 || st === 404) return '❌ التوكن مالوش صلاحية Contents: Read and write على الريبو ' + GH.repo + '.';
+  if(st === 409 || st === 422) return '❌ حصل تعارض في الريبو. جرّب تاني بعد ثواني.';
+  return '❌ تعذر الاتصال بـ GitHub. تأكد من النت وجرّب تاني.';
+}
+async function publishMedia(){
+  if(mediaBusy) return;
+  if(!ghToken()){ toast('اربط GitHub الأول', false); return; }
+  if(!mediaDirty){ toast('مفيش تغييرات للنشر'); return; }
+  mediaBusy = true; setMediaStatus('جارِ الرفع... متقفلش الصفحة'); renderMedia();
+  const files = [];
+  ['testimonials', 'promo'].forEach(k=> MDRAFT[k].forEach(e=>{ if(e.isNew && e.b64) files.push({path: e.src, base64: e.b64}); }));
+  const manifest = {v: 1, updated: new Date().toISOString(),
+    testimonials: MDRAFT.testimonials.map(e=>({src: e.src, caption: e.caption || ''})),
+    promo: MDRAFT.promo.map(e=>({src: e.src}))};
+  files.push({path: 'media.json', text: JSON.stringify(manifest, null, 1)});
+  const msg = 'media update from dashboard';
+  try{
+    try{ await ghCommit(files, MDEL.filter(p=> MEDIA_OK_DEL.test(p)), msg); }
+    catch(err){
+      if(MDEL.length && (err.status === 422 || err.status === 409)) await ghCommit(files, [], msg);   // الحذف فشل: نكمل بدونه
+      else throw err;
+    }
+    ['testimonials', 'promo'].forEach(k=> MDRAFT[k].forEach(e=>{ e.isNew = false; delete e.b64; }));
+    MDEL = []; mediaDirty = false; MEDIA = normMedia(manifest);
+    mediaStatus = '✅ اتنشر على GitHub. التغييرات هتظهر للزوار بعد حوالي دقيقة (لما الاستضافة تخلّص).';
+    toast('تم الرفع ✅');
+  }catch(err){
+    console.warn(err); mediaStatus = ghErrorText(err); toast('تعذر الرفع', false);
+  }
+  mediaBusy = false; renderMedia();
+}
+$('mediaBox').addEventListener('input', e=>{
+  const i = e.target.dataset.mcap;
+  if(i !== undefined && MDRAFT && MDRAFT.testimonials[+i]){ MDRAFT.testimonials[+i].caption = e.target.value; mediaDirty = true; }
+});
+$('mediaBox').addEventListener('change', async e=>{
+  if(e.target.id !== 'mediaFile') return;
+  const files = [...e.target.files]; e.target.value = '';
+  if(!files.length) return;
+  const k = mediaKind, max = k === 'promo' ? 1600 : 1400, ts = Date.now();
+  setMediaStatus('جارِ تجهيز ' + files.length + ' صورة...');
+  let ok = 0, bad = 0;
+  for(let i = 0; i < files.length; i++){
+    try{
+      const data = await compressImage(files[i], max);
+      const dir = k === 'promo' ? 'images/promo/p-' : 'images/testimonials/t-';
+      MDRAFT[k].push({src: dir + ts + '-' + i + '.jpg', caption: '', isNew: true, b64: data.split(',')[1], preview: data});
+      ok++;
+    }catch(err){ bad++; }
+  }
+  if(ok) mediaDirty = true;
+  mediaStatus = ok ? '📎 ' + ok + ' صورة جاهزة — دوس "نشر التغييرات" لرفعها.' + (bad ? ' (' + bad + ' صورة صيغتها مش مدعومة)' : '') : '❌ الصور دي صيغتها مش مدعومة. استخدم JPG أو PNG.';
+  renderMedia();
+});
+$('mediaBox').addEventListener('click', async e=>{
+  const b = e.target.closest('[data-m]'); if(!b) return;
+  const act = b.dataset.m, k = b.dataset.k, i = +b.dataset.i;
+  if(act === 'add'){ mediaKind = k; $('mediaFile').click(); }
+  else if(act === 'del'){
+    const e0 = MDRAFT[k][i]; if(!e0) return;
+    if(!confirm('حذف الصورة دي؟')) return;
+    MDRAFT[k].splice(i, 1);
+    if(!e0.isNew && !MDEL.includes(e0.src)) MDEL.push(e0.src);
+    mediaDirty = true; renderMedia();
+  }
+  else if(act === 'up' || act === 'down'){
+    const L = MDRAFT[k], j = act === 'up' ? i - 1 : i + 1;
+    if(j < 0 || j >= L.length) return;
+    [L[i], L[j]] = [L[j], L[i]]; mediaDirty = true; renderMedia();
+  }
+  else if(act === 'saveTok'){
+    const v = ($('ghTok').value || '').trim();
+    if(v.length < 20){ toast('اللصق التوكن كامل', false); return; }
+    try{ localStorage.setItem('lam7_gh', v); }catch(x){ toast('تعذر حفظ التوكن على الجهاز', false); return; }
+    renderMedia(); b.disabled = true;
+    verifyGh();
+  }
+  else if(act === 'verify') verifyGh();
+  else if(act === 'forget'){ if(confirm('فصل التوكن من الجهاز ده؟')){ try{ localStorage.removeItem('lam7_gh'); }catch(x){} mediaStatus = ''; renderMedia(); } }
+  else if(act === 'publish') publishMedia();
+});
+async function verifyGh(){
+  setMediaStatus('جارِ اختبار الاتصال...');
+  try{
+    const r = await fetch('https://api.github.com/repos/' + GH.owner + '/' + GH.repo, {headers: {Authorization: 'Bearer ' + ghToken(), Accept: 'application/vnd.github+json'}});
+    if(!r.ok){ const e = new Error('GH'); e.status = r.status; throw e; }
+    const d = await r.json();
+    if(d.permissions && d.permissions.push === false){ setMediaStatus('❌ التوكن مالوش صلاحية الكتابة. اختار Contents: Read and write.'); return; }
+    setMediaStatus('✅ الاتصال سليم — تقدر ترفع الصور.'); toast('الاتصال سليم ✅');
+  }catch(err){ setMediaStatus(ghErrorText(err)); }
+}
+
 // ---------- start ----------
 applySite();
 renderCards();
 renderAddonsShowcase();
 loadConfig();
+loadMedia();
 
 // ---- scroll reveal ----
 const revealObserver = new IntersectionObserver((entries)=>{
