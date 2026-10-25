@@ -454,6 +454,8 @@
   .mi-btns .mini{flex:1;}
   .mi-badge{position:absolute;top:8px;right:8px;z-index:1;background:var(--green);color:#04220f;font-size:10.5px;font-weight:900;padding:3px 8px;border-radius:10px;}
   .media-status{font-size:12.5px;line-height:1.8;color:#c9cee0;padding:0 2px 8px;text-align:center;}
+  .chk-same{display:flex !important;align-items:center;gap:8px;font-size:12.5px !important;color:var(--text) !important;cursor:pointer;margin-top:8px !important;}
+  .chk-same input{width:18px !important;height:18px;accent-color:var(--accent);}
 
   /* addon showcase on main page */
   .addon-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
@@ -1452,33 +1454,37 @@ async function loadMy(){
   }
 }
 let refEditing = false;
-const PAY_METHODS = ['فودافون كاش', 'اتصالات كاش', 'أورنج كاش', 'وي باي', 'إنستا باي'];
+const EG_MOBILE = /^01[0125]\d{8}$/;
+const normDigits = v => String(v || '').replace(/[٠-٩]/g, c=>'٠١٢٣٤٥٦٧٨٩'.indexOf(c)).replace(/\D/g, '');
+const localPhone = v => { const d = normDigits(v); return d.startsWith('20') && d.length === 12 ? '0' + d.slice(2) : d; };
+const isFullName = n => /^\S{2,}(\s+\S{2,})+$/.test(String(n || '').trim());
+// الحساب ما يشتغلش كمسوّق غير بعد اكتمال: الاسم الأول والأخير + واتساب + رقم محفظة كاش
+const isRefComplete = r => !!(r && isFullName(r.payName) && EG_MOBILE.test(localPhone(r.whatsapp)) && EG_MOBILE.test(localPhone(r.payNumber)));
 function refFormHTML(r){
   r = r || {};
   const email = currentUser ? currentUser.email : '';
   return `<div class="ref-form">
-    <label>اسم صاحب المحفظة / الحساب</label>
-    <input id="rf_name" type="text" value="${esc(r.payName || currentUser.displayName || '')}" placeholder="الاسم زي ما هو على المحفظة">
-    <label>طريقة استلام المكافأة</label>
-    <select id="rf_method">${PAY_METHODS.map(m=>`<option ${m === (r.payMethod || PAY_METHODS[0]) ? 'selected' : ''}>${m}</option>`).join('')}</select>
-    <label>رقم المحفظة أو عنوان إنستا باي</label>
-    <input id="rf_number" type="text" dir="ltr" value="${esc(r.payNumber || '')}" placeholder="01xxxxxxxxx أو name@instapay">
-    <label>رقم واتساب للتواصل</label>
-    <input id="rf_wa" type="tel" inputmode="numeric" dir="ltr" value="${esc(r.whatsapp ? '0' + String(r.whatsapp).replace(/^20/, '') : '')}" placeholder="01xxxxxxxxx">
-    <p class="adm-hint" style="margin:10px 0 0;">📧 بريدك (${esc(email)}) بيتسجل تلقائي. بياناتك دي سرية ومش بتظهر غير لإدارة لمح عشان نحوّلك مكافأتك.</p>
-    <button class="big-btn" id="refSave" type="button" style="width:100%;margin-top:12px;">✅ ${r.code ? 'حفظ التعديلات' : 'حفظ وتفعيل الكود'}</button>
-    ${r.code ? '<button class="ins-later" id="refCancelEdit" type="button">إلغاء</button>' : ''}
+    <label>الاسم الأول والأخير</label>
+    <input id="rf_name" type="text" value="${esc(r.payName || '')}" placeholder="مثال: محمد أحمد" autocomplete="name">
+    <label>رقم الواتساب</label>
+    <input id="rf_wa" type="tel" inputmode="numeric" dir="ltr" value="${esc(localPhone(r.whatsapp))}" placeholder="01xxxxxxxxx" maxlength="11">
+    <label>رقم محفظة كاش (لاستلام المكافآت)</label>
+    <input id="rf_number" type="tel" inputmode="numeric" dir="ltr" value="${esc(localPhone(r.payNumber))}" placeholder="01xxxxxxxxx" maxlength="11">
+    <label class="chk-same"><input type="checkbox" id="rf_same"> رقم المحفظة هو نفس رقم الواتساب</label>
+    <p class="adm-hint" style="margin:10px 0 0;">📧 بريدك (${esc(email)}) بيتسجل تلقائي. كل البيانات دي إجبارية وسرية، ومش بتظهر غير لإدارة لمح عشان نحوّلك مكافأتك.</p>
+    <button class="big-btn" id="refSave" type="button" style="width:100%;margin-top:12px;">✅ ${r.code && isRefComplete(r) ? 'حفظ التعديلات' : 'حفظ وتفعيل الكود'}</button>
+    ${r.code && isRefComplete(r) ? '<button class="ins-later" id="refCancelEdit" type="button">إلغاء</button>' : ''}
   </div>`;
 }
 function refLink(code){ return SITE_URL + '?ref=' + code; }
 function refCardHTML(){
   if(!SITE.refEnabled) return '';
   const pct = num(SITE.refDiscount), reward = num(SITE.refReward), r = myReferral;
-  if(!r){
+  if(!r || !isRefComplete(r)){
     return `<div class="adm-card ref-card">
-      <div class="adm-sub">🎁 اكسب من إحالة أصحابك</div>
-      <p class="adm-hint">اكتب بياناتك مرة واحدة وهتاخد <b>كود ورابط إحالة</b> خاص بيك. أي حد يطلب باقة بكودك ياخد خصم ${pct}%، وأنت تاخد <b>${reward} جنيه</b> تحويل على محفظتك أو إنستا باي بعد ما يدفع.</p>
-      ${refFormHTML(null)}</div>`;
+      <div class="adm-sub">🎁 ${r ? 'كمّل بياناتك عشان كودك يشتغل' : 'اكسب من إحالة أصحابك'}</div>
+      <p class="adm-hint">${r ? '⚠️ بياناتك ناقصة. ' : ''}لازم تكتب بياناتك كاملة (الاسم الأول والأخير ورقم الواتساب ورقم محفظة كاش) عشان تاخد <b>كود ورابط إحالة</b>. أي حد يطلب باقة بكودك ياخد خصم ${pct}%، وأنت تاخد <b>${reward} جنيه</b> تحويل على محفظتك بعد ما يدفع.</p>
+      ${refFormHTML(r)}</div>`;
   }
   if(refEditing){
     return `<div class="adm-card ref-card"><div class="adm-sub">✏️ تعديل بياناتي</div>${refFormHTML(r)}</div>`;
@@ -1504,7 +1510,7 @@ function refCardHTML(){
     <div class="mem-actions" style="margin-bottom:8px;">
       <a class="act-btn wa" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(share)}">💬 مشاركة على واتساب</a>
     </div>
-    <div class="ref-paydata">💳 ${esc(r.payMethod)}: <b dir="ltr">${esc(r.payNumber)}</b> — باسم ${esc(r.payName)} <button class="mini" id="refEdit" type="button">✏️ تعديل</button></div>
+    <div class="ref-paydata">💳 محفظة كاش: <b dir="ltr">${esc(localPhone(r.payNumber))}</b> — باسم ${esc(r.payName)} <button class="mini" id="refEdit" type="button">✏️ تعديل</button></div>
   </div>`;
 }
 function myOrderHTML(o){
@@ -1532,27 +1538,29 @@ function myOrderHTML(o){
 function renderMy(){
   let h;
   if(myView === 'affiliate'){
-    h = SITE.refEnabled ? refCardHTML() + ((myReferral && !refEditing) ? promoCardsHTML() : '') : '<div class="empty">برنامج التسويق بالعمولة متوقف حاليًا.</div>';
+    h = SITE.refEnabled ? refCardHTML() + ((isRefComplete(myReferral) && !refEditing) ? promoCardsHTML() : '') : '<div class="empty">برنامج التسويق بالعمولة متوقف حاليًا.</div>';
   } else {
     h = MY_ORDERS.length ? MY_ORDERS.map(myOrderHTML).join('')
       : '<div class="empty">لسه معندكش طلبات على حسابك.<br>اختار باقة وابعت طلبك وهتلاقيه هنا بتفاصيل التنفيذ.<br><button class="mini" id="myToPk" type="button">شوف الباقات</button></div>';
   }
   $('myBody').innerHTML = h;
-  if(myView === 'affiliate' && myReferral && !refEditing) fillPromoGrid();
+  if(myView === 'affiliate' && isRefComplete(myReferral) && !refEditing) fillPromoGrid();
 }
 $('myClose').addEventListener('click', closeMy);
+$('myBody').addEventListener('change', e=>{ if(e.target.id === 'rf_same' && e.target.checked) $('rf_number').value = $('rf_wa').value; });
 function copyText(text){
   const done = ()=> toast('تم النسخ ✅');
   if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done).catch(done);
   else { const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); }catch(x){} ta.remove(); done(); }
 }
 async function submitRefProfile(btn){
-  const p = {payName: $('rf_name').value.trim(), payMethod: $('rf_method').value, payNumber: $('rf_number').value.trim(), whatsapp: waPhone($('rf_wa').value)};
-  if(p.payName.length < 3){ toast('اكتب اسم صاحب المحفظة', false); return; }
-  if(p.payNumber.length < 6){ toast('اكتب رقم المحفظة أو عنوان إنستا باي', false); return; }
-  if(p.whatsapp.length < 10){ toast('اكتب رقم واتساب صحيح', false); return; }
+  const name = $('rf_name').value.trim().replace(/\s+/g, ' ');
+  const wa = localPhone($('rf_wa').value), wallet = localPhone($('rf_number').value);
+  if(!isFullName(name)){ toast('اكتب الاسم الأول والأخير', false); return; }
+  if(!EG_MOBILE.test(wa)){ toast('رقم الواتساب لازم يكون 11 رقم يبدأ بـ 01', false); return; }
+  if(!EG_MOBILE.test(wallet)){ toast('رقم المحفظة لازم يكون 11 رقم يبدأ بـ 01', false); return; }
   btn.disabled = true;
-  try{ await saveReferralProfile(p); refEditing = false; toast('تم حفظ بياناتك ✅'); renderMy(); }
+  try{ await saveReferralProfile({payName: name, payMethod: 'محفظة كاش', payNumber: wallet, whatsapp: waPhone(wa)}); refEditing = false; toast('تم حفظ بياناتك ✅'); renderMy(); }
   catch(err){ console.warn(err); btn.disabled = false; toast('تعذر الحفظ — حاول مرة تانية', false); }
 }
 $('myBody').addEventListener('click', e=>{
@@ -1561,6 +1569,7 @@ $('myBody').addEventListener('click', e=>{
   else if(b.dataset.shareImg !== undefined) sharePromoImage(+b.dataset.shareImg);
   else if(b.id === 'copyRefCode' || b.id === 'copyRefLink') copyText(b.dataset.v);
   else if(b.id === 'refSave') submitRefProfile(b);
+  else if(b.id === 'rf_same'){}
   else if(b.id === 'refEdit'){ refEditing = true; renderMy(); }
   else if(b.id === 'refCancelEdit'){ refEditing = false; renderMy(); }
   else if(b.id === 'myToPk'){ closeMy(); $('packages').scrollIntoView({behavior:'smooth'}); }
@@ -2306,22 +2315,24 @@ function renderRefs(){
     list.map(r=>{
       const bal = refBal(r), id = esc(r.id);
       const pays = (r.payouts || []).slice(-3).reverse().map(p=>`<div>💸 ${fmtN(p.amount)} جنيه — ${esc(fmtDate(p.at))}${p.note ? ' — ' + esc(p.note) : ''}</div>`).join('');
+      const complete = isRefComplete(r);
       return `<div class="adm-card ref-admin">
-        <div class="adm-card-head"><b>🎁 ${esc(r.payName || r.displayName || '-')}</b><span class="st ${bal ? 'st-wait' : 'st-done'}">${bal ? 'مستحق ' + fmtN(bal) : 'مفيش مستحقات'}</span></div>
+        <div class="adm-card-head"><b>🎁 ${esc(r.payName || r.displayName || r.email || 'مسوّق بدون بيانات')}</b>${complete ? `<span class="st ${bal ? 'st-wait' : 'st-done'}">${bal ? 'مستحق ' + fmtN(bal) : 'مفيش مستحقات'}</span>` : '<span class="st st-bad">⚠️ بيانات ناقصة</span>'}</div>
         <div class="mem-info">
           <div>📧 <span dir="ltr">${esc(r.email || '-')}</span></div>
-          <div>🏷️ الكود: <b dir="ltr">${esc(r.code)}</b></div>
-          <div>💳 ${esc(r.payMethod || '-')}: <b dir="ltr">${esc(r.payNumber || '-')}</b></div>
+          <div>🏷️ الكود: <b dir="ltr">${esc(r.code || r.id)}</b></div>
+          <div>💳 محفظة كاش: <b dir="ltr">${esc(localPhone(r.payNumber) || '-')}</b></div>
           <div>👤 باسم: ${esc(r.payName || '-')}</div>
-          <div>📱 واتساب: <span dir="ltr">${esc(r.whatsapp || '-')}</span></div>
+          <div>📱 واتساب: <span dir="ltr">${esc(localPhone(r.whatsapp) || '-')}</span></div>
           <div>👥 دفعوا: ${num(r.paidCount)} • أرباح ${fmtN(r.earned)} • حُوّل ${fmtN(r.paidOut)}</div>
         </div>
-        <div class="mem-actions">
+        ${complete ? `<div class="mem-actions">
           <a class="act-btn wa" target="_blank" rel="noopener" href="https://wa.me/${esc(waPhone(r.whatsapp))}">💬 واتساب</a>
-          <button class="act-btn" data-ract="copy" data-v="${esc(r.payNumber || '')}" type="button">📋 نسخ رقم التحويل</button>
-        </div>
-        <button class="big-btn" data-ract="pay" data-rid="${id}" type="button" style="width:100%;">💸 تسجيل تحويل مبلغ</button>
+          <button class="act-btn" data-ract="copy" data-v="${esc(localPhone(r.payNumber))}" type="button">📋 نسخ رقم المحفظة</button>
+        </div>` : '<p class="adm-hint" style="margin:0 0 10px;">المسوّق ده ما كمّلش بياناته، فكوده مش شغال عنده.</p>'}
+        ${complete || bal ? `<button class="big-btn" data-ract="pay" data-rid="${id}" type="button" style="width:100%;">💸 تسجيل تحويل مبلغ</button>` : ''}
         ${pays ? '<div class="mt-log" style="margin-top:10px;">' + pays + '</div>' : ''}
+        <button class="mini danger" data-ract="del" data-rid="${id}" type="button" style="margin-top:10px;">🗑 حذف المسوّق</button>
       </div>`;
     }).join('');
 }
@@ -2330,6 +2341,7 @@ $('refsBox').addEventListener('click', e=>{
   const b = e.target.closest('[data-ract]'); if(!b) return;
   if(b.dataset.ract === 'copy'){ copyText(b.dataset.v); return; }
   const r = REFS.find(x=>x.id === b.dataset.rid); if(!r) return;
+  if(b.dataset.ract === 'del'){ deleteReferrer(r); return; }
   payCtx = r.id;
   $('payTitle').textContent = 'تحويل مكافأة: ' + (r.payName || r.displayName || '');
   $('payAmount').value = refBal(r) || '';
@@ -2338,6 +2350,18 @@ $('refsBox').addEventListener('click', e=>{
   $('payModal').style.display = 'flex';
   setTimeout(()=> $('payAmount').focus(), 60);
 });
+async function deleteReferrer(r){
+  const bal = refBal(r);
+  const msg = 'حذف المسوّق "' + (r.payName || r.displayName || r.email || r.id) + '" نهائيًا؟\nكوده ورابطه هيتوقفوا.' + (bal ? '\n⚠️ عليه مستحقات ' + fmtN(bal) + ' جنيه لسه ما اتحولتش!' : '');
+  if(!confirm(msg)) return;
+  try{
+    await Promise.all([
+      db.collection('referrals').doc(r.id).delete(),
+      db.collection('referralCodes').doc(r.code || r.id).delete()
+    ]);
+    REFS = REFS.filter(x=>x.id !== r.id); renderRefs(); toast('تم حذف المسوّق');
+  }catch(err){ console.warn(err); toast('تعذر الحذف — راجع قواعد Firestore', false); }
+}
 function closePay(){ $('payModal').style.display = 'none'; payCtx = null; }
 $('payCancel').addEventListener('click', closePay);
 $('payModal').addEventListener('click', e=>{ if(e.target.id === 'payModal') closePay(); });
