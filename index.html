@@ -500,6 +500,38 @@
   .testi-card .testi-imgbox{width:100%;aspect-ratio:3/4;overflow:hidden;background:#0c0a0d;}
   .testi-card img{width:100%;height:100%;display:block;object-fit:cover;object-position:top center;}
   .testi-cap{padding:10px 12px;text-align:center;font-size:12px;color:var(--muted);border-top:1px solid var(--border);}
+
+  /* ===== قسم تصميم وإنشاء مواقع المعارض ===== */
+  .secbar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:18px 0 0;}
+  .secbar a{padding:9px 18px;border-radius:999px;border:1px solid var(--border);background:var(--card);color:var(--text);text-decoration:none;font-weight:800;font-size:13.5px;}
+  .secbar a:first-child{border-color:rgba(226,32,31,.5);}
+  #webSec{scroll-margin-top:12px;}
+  .web-desc{color:#c9cee0;font-size:14px;line-height:1.8;margin:4px 0 10px;}
+  .web-ask{font-size:17px;font-weight:800;color:#ffb4b0;}
+  .web-card .choose-btn{margin-top:10px;}
+  .web-card .choose-btn.web-prev{background:#1d1620;border:1px solid var(--accent);color:#fff;}
+  .ws-scroll{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 4px 18px;-webkit-overflow-scrolling:touch;margin-bottom:10px;}
+  .ws-item{flex:0 0 82%;max-width:420px;margin:0;scroll-snap-align:center;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--card);cursor:zoom-in;}
+  .ws-item img{display:block;width:100%;height:auto;}
+  .ws-item figcaption{padding:9px 12px;font-size:12.5px;color:var(--muted);text-align:center;}
+#webFormSec{display:none;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px 22px;margin-top:38px;
+    animation:fadeIn .4s ease;}
+  #webFormSec{box-shadow:0 24px 60px rgba(0,0,0,.45);}
+  #webFormSec h3{margin-top:0;font-size:20px;display:flex;align-items:center;gap:8px;}
+  #webFormSec .selected-pkg{display:inline-block;background:#2a1518;color:#ff8b86;padding:5px 14px;border-radius:20px;font-size:13px;margin-bottom:18px;font-weight:700;border:1px solid rgba(226,32,31,.3);}
+  #webPrev,#wsLb{position:fixed;inset:0;z-index:9000;display:none;}
+  #webPrev{background:#0b090c;flex-direction:column;}
+  .wp-bar{display:flex;align-items:center;gap:6px;padding:10px 12px;border-bottom:1px solid var(--border);background:#120e13;}
+  .wp-bar b{flex:1;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .wp-bar a.mini{text-decoration:none;}
+  .wp-bar .mini.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .wp-stage{flex:1;display:flex;justify-content:center;background:#050406;min-height:0;}
+  .wp-wrap{width:100%;height:100%;}
+  .wp-wrap.phone{width:390px;max-width:100%;}
+  .wp-wrap iframe{width:100%;height:100%;border:0;background:#fff;}
+  .wp-note{font-size:11.5px;color:var(--muted);text-align:center;padding:6px 10px;background:#120e13;}
+  #wsLb{background:rgba(0,0,0,.92);align-items:center;justify-content:center;padding:14px;cursor:zoom-out;}
+  #wsLb img{max-width:100%;max-height:100%;border-radius:10px;}
 </style>
 <script type="application/ld+json" id="ldMain">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://lam7-service2.pages.dev/#org","name":"لمح","alternateName":["Lam7","Lam7 Service","لمح لتسويق السيارات"],"url":"https://lam7-service2.pages.dev/","logo":{"@type":"ImageObject","url":"https://lam7-service2.pages.dev/images/icon-512.png","width":512,"height":512},"image":"https://lam7-service2.pages.dev/images/og-logo.jpg","description":"خدمة تسويق سيارات مستعملة في مصر: كتابة إعلان احترافي، إعلان ممول على فيسبوك، ونشر على مجموعات واتساب وفيسبوك وتيليجرام ويوتيوب وتيك توك.","areaServed":{"@type":"Country","name":"مصر"},"knowsLanguage":"ar","contactPoint":[{"@type":"ContactPoint","telephone":"+201015726786","contactType":"customer service","availableLanguage":["ar"],"areaServed":"EG"}]},{"@type":"WebSite","@id":"https://lam7-service2.pages.dev/#website","url":"https://lam7-service2.pages.dev/","name":"لمح","inLanguage":"ar","publisher":{"@id":"https://lam7-service2.pages.dev/#org"}},{"@type":"WebPage","@id":"https://lam7-service2.pages.dev/#webpage","url":"https://lam7-service2.pages.dev/","name":"لمح | تسويق سيارتك للبيع في مصر بإعلان ممول ونشر في كل مكان","inLanguage":"ar","isPartOf":{"@id":"https://lam7-service2.pages.dev/#website"},"about":{"@id":"https://lam7-service2.pages.dev/#org"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://lam7-service2.pages.dev/images/og-logo.jpg"}},{"@type":"Service","@id":"https://lam7-service2.pages.dev/#service","name":"تسويق السيارات المستعملة","serviceType":"تسويق وبيع السيارات","provider":{"@id":"https://lam7-service2.pages.dev/#org"},"areaServed":{"@type":"Country","name":"مصر"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"باقات تسويق السيارات","itemListElement":[{"@type":"Offer","name":"الباقة الأساسية","price":"250","priceCurrency":"EGP","description":"إعلان ممول على الفيس بوك، النشر في مجموعتين واتساب، نشر العربية على مجموعة التليجرام، النشر مرة واحدة على ماركت بليس","url":"https://lam7-service2.pages.dev/#packages"},{"@type":"Offer","name":"الباقة المميزة","price":"490","priceCurrency":"EGP","description":"النشر على 5 مجموعات واتساب (مرتين)، إعلان ممول على الفيس بوك، النشر على أكبر قناة واتساب للسيارات في مصر (مرتين)، نشر العربية على مجموعة التليجرام، النشر على 10 مجموعات فيس بوك، النشر على اليوتيوب، النشر على التيك توك، النشر على صفحة ومجموعات لمح على الفيس بوك (مرتين)","url":"https://lam7-service2.pages.dev/#packages"},{"@type":"Offer","name":"الباقة الشاملة","price":"750","priceCurrency":"EGP","description":"النشر على 5 مجموعات واتساب (مرتين)، إعلان ممول على الفيس بوك، النشر على أكبر قناة واتساب للسيارات في مصر (مرتين)، نشر العربية على مجموعة التليجرام، النشر على 10 مجموعات فيس بوك، النشر على اليوتيوب، النشر على التيك توك، النشر على صفحة ومجموعات لمح على الفيس بوك (مرتين)، تصوير احترافي للسيارة، متابعة يومية حتى تمام البيع","url":"https://lam7-service2.pages.dev/#packages"},{"@type":"Offer","name":"باقة القيادة الملكية","price":"1500","priceCurrency":"EGP","description":"النشر على 5 مجموعات واتساب (مرتين)، إعلان ممول على الفيس بوك، النشر على أكبر قناة واتساب للسيارات في مصر (مرتين)، نشر العربية على مجموعة التليجرام، النشر على 10 مجموعات فيس بوك، النشر على اليوتيوب، النشر على التيك توك، النشر على صفحة ومجموعات لمح على الفيس بوك (مرتين)، تصوير احترافي للسيارة، النشر في مجموعات كبار عشاق السيارات الفاخرة، تصوير سينمائي وفيديو ترويجي احترافي، عرض مميز لمدة أطول في نتائج البحث، متابعة يومية مخصصة مع مدير حساب شخصي","url":"https://lam7-service2.pages.dev/#packages"}]}},{"@type":"FAQPage","@id":"https://lam7-service2.pages.dev/#faq","mainEntity":[{"@type":"Question","name":"إيه هي خدمة لمح؟","acceptedAnswer":{"@type":"Answer","text":"لمح خدمة تسويق سيارات في مصر: بنكتب إعلان احترافي لسيارتك وننشره على مجموعات واتساب وفيسبوك وتيليجرام، وعلى يوتيوب وتيك توك حسب الباقة، ومعاه إعلان ممول على فيسبوك عشان إعلانك يوصل لأكبر عدد من المشترين الجادين."}},{"@type":"Question","name":"إزاي أطلب الخدمة؟","acceptedAnswer":{"@type":"Answer","text":"اختار الباقة المناسبة لسعر سيارتك، واملأ بيانات السيارة، وابعت الطلب على واتساب. فريق لمح بيكتبلك الإعلان وبعد كده يبدأ النشر."}},{"@type":"Question","name":"أدفع إمتى؟","acceptedAnswer":{"@type":"Answer","text":"الدفع بعد كتابة الإعلان، يعني بتشوف شغلنا الأول، وبعد ما يعجبك بتدفع قيمة الباقة وبنبدأ النشر."}},{"@type":"Question","name":"كام سعر باقات تسويق السيارات؟","acceptedAnswer":{"@type":"Answer","text":"الباقات بتبدأ من 250 جنيه وبتوصل لـ 1500 جنيه، حسب سعر السيارة وعدد المنصات ومرات النشر. تقدر تقارن كل الباقات ومهامها في قسم \"اختر باقتك\"."}},{"@type":"Question","name":"إيه هو الإعلان الممول؟","acceptedAnswer":{"@type":"Answer","text":"الإعلان الممول هو إعلان مدفوع على فيسبوك بيظهر لناس مهتمين بشراء السيارات، وهو مشمول في باقات لمح كجزء أساسي مش إضافة اختيارية."}},{"@type":"Question","name":"فين بتنشروا إعلان سيارتي؟","acceptedAnswer":{"@type":"Answer","text":"على مجموعات واتساب، وأكبر قناة واتساب للسيارات في مصر، ومجموعات فيسبوك وصفحة لمح، ومجموعات تيليجرام، ويوتيوب وتيك توك. المنصات بتختلف حسب الباقة اللي تختارها."}},{"@type":"Question","name":"هل في ضمان لسرعة بيع السيارة؟","acceptedAnswer":{"@type":"Answer","text":"لا، سرعة البيع مش رقم ثابت، وبتختلف حسب سعر السيارة ومدى انتشار الموديل في السوق المصري وحجم الطلب عليه. اللي بنقدر نعمله إننا نزود فرصتك في الوصول لأكبر عدد من المشترين الجادين بأسرع وقت ممكن."}},{"@type":"Question","name":"إزاي أكسب من التسويق بالعمولة مع لمح؟","acceptedAnswer":{"@type":"Answer","text":"سجّل دخولك بجوجل وفعّل كود ورابط الإحالة الخاص بيك ببيانات محفظتك أو إنستا باي، وشاركه مع أي حد عايز يبيع سيارته. عن كل عميل يطلب باقة بكودك ويدفع بتاخد مكافأة محوّلة على بياناتك، والعميل نفسه بياخد خصم على باقته. مش لازم يكون عندك سيارة للبيع."}},{"@type":"Question","name":"هل الخدمة مناسبة للسيارات النادرة؟","acceptedAnswer":{"@type":"Answer","text":"الباقات والأسعار معمولة لسيارات السوق المصري ذات الطلب العادي. السيارات النادرة أو قليلة الطلب بتحتاج خطة تسويق مختلفة، فتواصل معنا على واتساب لعرض خاص."}}]}]}</script>
 </head>
@@ -512,6 +544,7 @@
 </nav>
 
 <div class="wrap">
+  <div class="secbar" id="secBar" style="display:none;"><a href="#packages">🚗 تسويق السيارات</a><a href="#webSec">🌐 مواقع المعارض</a></div>
   <div class="testi-wrap" id="testiWrap" style="margin-top:24px;">
     <h2 class="section-title" style="margin-top:0;">آراء عملائنا</h2>
     <p class="section-sub">لقطات حقيقية من محادثاتنا مع عملاء<br>تم بيع سياراتهم بنجاح</p>
@@ -638,6 +671,33 @@
     <span class="cancel-link" id="cancelForm">إلغاء والعودة للباقات</span>
   </div>
 
+  <section id="webSec" style="display:none;">
+    <h2 class="section-title" id="webTitle"></h2>
+    <p class="section-sub" id="webSub"></p>
+    <div id="webShots"></div>
+    <div class="cards" id="webCards"></div>
+  </section>
+
+  <div id="webFormSec">
+    <h3>🌐 طلب تصميم موقع لمعرضك</h3>
+    <div class="selected-pkg" id="wfLabel"></div>
+    <div class="field"><label>الاسم</label><input id="wf_name" type="text" placeholder="اسمك"></div>
+    <div class="field"><label>رقم الهاتف</label><input id="wf_phone" type="tel" placeholder="01xxxxxxxxx"></div>
+    <div class="field"><label>اسم المعرض</label><input id="wf_biz" type="text" placeholder="مثال: معرض النخبة للسيارات"></div>
+    <div class="field"><label>المدينة / العنوان</label><input id="wf_city" type="text" placeholder="مثال: مدينة نصر، القاهرة"></div>
+    <div class="field"><label>رابط صفحتك أو موقعك الحالي (اختياري)</label><input id="wf_links" type="text" dir="ltr" placeholder="https://facebook.com/..."></div>
+    <div class="field" id="wfRefField">
+      <label>عندك كود إحالة؟ <small id="wfRefHint" style="color:var(--muted);"></small></label>
+      <div class="ref-row"><input id="wf_ref" type="text" placeholder="مثال: LM4K9T2" dir="ltr" autocapitalize="characters" autocomplete="off"><button type="button" id="wfRefApply" class="mini">تطبيق</button></div>
+      <div class="ref-msg" id="wfRefMsg"></div>
+    </div>
+    <div class="total-line" id="wfDiscLine" style="display:none;"><span>🎁 خصم الإحالة</span><span class="tval" id="wfDiscVal"></span></div>
+    <div class="total-line"><span>💵 الإجمالي</span><span class="tval" id="wfTotal">0 جنيه</span></div>
+    <div class="field"><label>ملاحظات (اختياري)</label><textarea id="wf_notes" placeholder="ألوان معينة، عدد السيارات، أي تفاصيل تحب نعرفها..."></textarea></div>
+    <button class="submit-btn" id="wfSend" type="button">📩 إرسال الطلب على واتساب</button>
+    <span class="cancel-link" id="wfCancel">إلغاء</span>
+  </div>
+
   <section class="aff reveal" id="affSec">
     <h2 class="section-title" style="margin-top:0;">🤝 اكسب معانا بالتسويق بالعمولة</h2>
     <p class="section-sub">مش لازم يكون عندك سيارة للبيع — رشّح لمح لأصحابك واكسب</p>
@@ -647,6 +707,7 @@
       <div class="aff-step"><b>3</b><span>لما العميل يطلب باقة ويدفع، بتستلم <em id="affReward">50</em> جنيه على محفظتك أو إنستا باي</span></div>
     </div>
     <p class="aff-note">والعميل اللي يدخل من رابطك ياخد خصم <em id="affDisc">10</em>% على باقته 🎁</p>
+    <p class="aff-note" id="affWebNote" style="display:none;"></p>
     <button class="choose-btn aff-cta" id="affCta" type="button">🤝 ابدأ كمسوّق بالعمولة</button>
   </section>
 
@@ -672,6 +733,19 @@
   </footer>
 </div>
 
+<div id="webPrev" role="dialog" aria-modal="true">
+  <div class="wp-bar">
+    <b id="wpTitle"></b>
+    <button class="mini on" id="wpPhone" type="button">📱</button>
+    <button class="mini" id="wpDesk" type="button">💻</button>
+    <a class="mini" id="wpOpen" target="_blank" rel="noopener">↗ فتح</a>
+    <button class="mini" id="wpOrder" type="button">🛒 اطلب</button>
+    <button class="mini danger" id="wpClose" type="button">✕</button>
+  </div>
+  <div class="wp-stage"><div class="wp-wrap phone" id="wpWrap"><iframe id="wpFrame" title="معاينة حية للموقع" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer" loading="lazy"></iframe></div></div>
+  <div class="wp-note">لو المعاينة ما ظهرتش اضغط "↗ فتح" لفتح الموقع في تبويب جديد</div>
+</div>
+<div id="wsLb"><img id="wsLbImg" alt=""></div>
 <a class="float-wa" id="floatWa" href="https://wa.me/201015726786" target="_blank" title="تواصل عبر واتساب">💬</a>
 
 <div id="adminOverlay">
@@ -686,6 +760,7 @@
     <div class="adm-tabs">
       <button data-tab="site" type="button">🌐 الموقع</button>
       <button data-tab="packages" type="button">📦 الباقات</button>
+      <button data-tab="web" type="button">🌐 المواقع</button>
       <button data-tab="members" type="button" class="active">👥 الأعضاء</button>
       <button data-tab="stats" type="button">📊 الأرقام</button>
       <button data-tab="refs" type="button">🤝 المسوّقون</button>
@@ -694,6 +769,7 @@
     <div class="adm-body" id="admBody">
       <section id="tab-site" style="display:none;"><div id="admSite"></div></section>
       <section id="tab-packages" style="display:none;"><div id="admPkgs"></div></section>
+      <section id="tab-web" style="display:none;"><div id="admWeb"></div></section>
       <section id="tab-members">
         <div class="mem-stats" id="memStats"></div>
         <div class="mem-tools">
@@ -984,6 +1060,7 @@ function openForm(id){
   updateTotal();
   $('addonsList').style.display = 'none';
   $('addonsToggleLabel').classList.remove('open');
+  $('webFormSec').style.display = 'none';
   $('formSection').style.display = 'block';
   $('formSection').scrollIntoView({behavior:'smooth', block:'start'});
 }
@@ -1209,6 +1286,7 @@ ${discLine}💵 الإجمالي: ${total} جنيه
       discount: disc,
       refCode: appliedRef ? appliedRef.code : null,
       refName: appliedRef ? (appliedRef.name || null) : null,
+      refPct: num(currentPkg.refPct),
       paid: false,
       status: 'بانتظار الدفع',
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -1251,6 +1329,11 @@ function loadConfig(){
     renderAddonsShowcase();
     updateSeoData();
   }).catch(err=> console.warn('تعذر تحميل الباقات:', err));
+  db.collection('config').doc('webdesign').get().then(d=>{
+    if(!d.exists) return;
+    WEB = normWeb(d.data());
+    renderWeb();
+  }).catch(err=> console.warn('تعذر تحميل قسم المواقع:', err));
 }
 function saveDoc(name, data, okMsg){
   if(!FIREBASE_READY || !db){ toast('فايربيز غير متصل', false); return; }
@@ -1518,7 +1601,7 @@ function myOrderHTML(o){
   const wa = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent('مرحباً لمح 👋\nأنا ' + (o.name || '') + ' وطلبت ' + (o.packageName || '') + ' وعايز أكمل الدفع.');
   let h = `<div class="adm-card my-order">
     <div class="adm-card-head"><b>📦 ${esc(o.packageName || '-')}</b><span class="st ${ST_CLASS[s] || ''}">${esc(s)}</span></div>
-    <div class="mem-sub" style="white-space:normal;">🚗 ${esc(o.car || '-')} • 💵 ${num(o.total)} جنيه • 🕒 ${esc(fmtDate(o.createdAt))}</div>`;
+    <div class="mem-sub" style="white-space:normal;">${o.kind==='web'?'🌐':'🚗'} ${esc(o.car || '-')} • 💵 ${num(o.total)} جنيه • 🕒 ${esc(fmtDate(o.createdAt))}</div>`;
   if(!o.paid && s !== 'ملغي'){
     h += `<div class="pay-box wait" style="margin-top:12px;"><div>⏳ بانتظار الدفع<br><small>بعد كتابة الإعلان وتأكيد الدفع تبدأ المهام وتتابعها من هنا</small></div>
       <a class="big-btn" style="text-decoration:none;" target="_blank" rel="noopener" href="${wa}">💬 إكمال الدفع</a></div>`;
@@ -1581,6 +1664,7 @@ let DRAFT = null, SDRAFT = null;
 function openAdmin(tab){
   DRAFT = deepCopy(STATE);
   SDRAFT = deepCopy(SITE);
+  WDRAFT = null;
   renderSiteAdmin();
   renderPkgAdmin();
   loadMembers();
@@ -1596,10 +1680,11 @@ function closeAdmin(){
 function switchTab(t){
   document.querySelectorAll('.adm-tabs button').forEach(b=> b.classList.toggle('active', b.dataset.tab === t));
   { const ab = document.querySelector('.adm-tabs button.active'); if(ab && ab.scrollIntoView) ab.scrollIntoView({inline:'center', block:'nearest'}); }
-  ['site','packages','members','stats','refs','media'].forEach(k=>{ $('tab-'+k).style.display = (k === t) ? 'block' : 'none'; });
+  ['site','packages','web','members','stats','refs','media'].forEach(k=>{ $('tab-'+k).style.display = (k === t) ? 'block' : 'none'; });
   if(t === 'stats') renderStats();
   if(t === 'refs') loadRefs();
   if(t === 'media') renderMedia();
+  if(t === 'web') renderWebAdmin();
   $('admBody').scrollTop = 0;
 }
 document.querySelector('.adm-tabs').addEventListener('click', e=>{
@@ -1708,6 +1793,8 @@ function renderPkgAdmin(){
       <label>ملحوظة نطاق السعر (تظهر تحت اسم الباقة)</label>
       <input data-pi="${pi}" data-f="range" value="${esc(p.range||'')}" placeholder="مثال: مناسبة لو عربيتك تحت 600 ألف">
       <label class="chk" style="margin-top:12px;"><input type="checkbox" data-pi="${pi}" data-f="highlight" ${p.highlight?'checked':''}> شارة "الأكثر طلباً"</label>
+      <label style="margin-top:12px;">عمولة المسوّق % من سعر الباقة <small>(اختياري — لو فاضي يتحسب المبلغ الثابت ${num(SITE.refReward)} جنيه)</small></label>
+      <input type="number" inputmode="decimal" min="0" max="90" data-pi="${pi}" data-f="refpct" value="${p.refPct ? esc(p.refPct) : ''}" placeholder="مثال: 10">
       <div class="adm-sub">📋 مهام الباقة</div>
       <p class="adm-hint">كل صف = مهمة منفصلة. بعد ما العميل يدفع، كل مهمة تظهر لك في لوحة الأعضاء ومعاها عدد المرات المطلوبة والمتبقي منها. علّم "ممول" على الإعلان الممول.</p>
       ${p.tasks.map((t,ti)=>`
@@ -1749,6 +1836,7 @@ function onPkgInput(e){
   if(f === 'name' || f === 'range') p[f] = el.value;
   else if(f === 'price') p.price = num(el.value);
   else if(f === 'highlight') p.highlight = el.checked;
+  else if(f === 'refpct') p.refPct = Math.min(90, Math.max(0, num(el.value)));
   else {
     const t = p.tasks[+el.dataset.ti]; if(!t) return;
     if(f === 'tname') t.name = el.value;
@@ -1834,7 +1922,7 @@ function needsReminder(o){ return isOverdue(o) && !o.reminderSentAt; }
 function reminderMsg(o){
   return `السلام عليكم ورحمة الله وبركاته
 ازي حضرتك استاذ ${o.name||''}
-حضرتك لسه عايز تبيع عربيتك ؟`;
+${o.kind === 'web' ? 'حضرتك لسه عايز نكمل تصميم موقع معرضك ؟' : 'حضرتك لسه عايز تبيع عربيتك ؟'}`;
 }
 function ensureTasks(o){
   if(o.tasks && o.tasks.length) return o.tasks;
@@ -1896,7 +1984,7 @@ function memberHTML(o){
     <div class="mem-head" data-act="toggle" data-mid="${id}">
       <div class="mem-main">
         <div class="mem-name">${esc(o.name||'بدون اسم')}</div>
-        <div class="mem-sub">🚗 ${esc(o.car||'-')} • 📦 ${esc(o.packageName||'-')}</div>
+        <div class="mem-sub">${o.kind==='web'?'🌐':'🚗'} ${esc(o.car||'-')} • 📦 ${esc(o.packageName||'-')}</div>
       </div>
       <div class="mem-side"><span class="st ${ST_CLASS[s]||''}">${esc(s)}</span>${isOpenUnpaid(o) ? (o.reminderSentAt ? '<span class="rtag sent">📨 تم التنبيه</span>' : (isOverdue(o) ? '<span class="rtag late">⏰ متأخر عن الدفع</span>' : '')) : ''}${o.paid && p.total ? `<span class="mem-prog">${p.done}/${p.total}</span>` : ''}</div>
     </div>
@@ -1913,11 +2001,13 @@ function memberHTML(o){
       <div class="mem-info">
         <div>📱 ${phone||'-'}</div>
         <div>🕒 ${esc(fmtDate(o.createdAt))||'-'}</div>
-        <div>💰 سعر السيارة: ${esc(o.price||'-')}</div>
+        ${o.kind === 'web' ? `<div class="full">🏢 المعرض: ${esc(o.car||'-')}</div>
+        <div class="full">📍 المدينة: ${esc(o.location||'-')}</div>
+        ${o.webLinks ? `<div class="full">🔗 ${esc(o.webLinks)}</div>` : ''}` : `<div>💰 سعر السيارة: ${esc(o.price||'-')}</div>
         <div>🎨 الدهان: ${esc(o.paint||'-')}</div>
         <div>🪪 الرخصة: ${esc(o.license||'-')}</div>
         <div>🚦 المرور: ${esc(o.traffic||'-')}</div>
-        <div class="full">📍 المعاينة: ${esc(o.location||'-')}</div>
+        <div class="full">📍 المعاينة: ${esc(o.location||'-')}</div>`}
         ${o.notes ? `<div class="full">📝 ملاحظات العميل: ${esc(o.notes)}</div>` : ''}
         ${(o.addons||[]).length ? `<div class="full">🧩 إضافات: ${esc(o.addons.map(a=>a.name).join('، '))}</div>` : ''}
         ${o.refCode ? `<div class="full">🎁 كود إحالة: ${esc(o.refCode)}${o.refName ? ' (من ' + esc(o.refName) + ')' : ''}${num(o.discount) ? ' — خصم ' + num(o.discount) + ' جنيه' : ''}${o.refRewarded ? ' ✅ اتحسب للمُحيل' + (num(o.refRewardAmount) ? ' (' + num(o.refRewardAmount) + ' جنيه)' : '') : ''}</div>` : ''}
@@ -2198,7 +2288,7 @@ function reportMsg(o){
     else { if(d > 0) doneL.push('• ' + t.name + ' (' + d + '/' + times + ')'); leftL.push('• ' + t.name + (times > 1 ? ' (باقي ' + (times - d) + ' من ' + times + ')' : '')); }
     (t.log || []).forEach(x=>{ const u = safeUrl(x.url); if(u) links.push('• ' + t.name + ': ' + u); });
   });
-  let m = 'السلام عليكم ورحمة الله وبركاته\nازي حضرتك استاذ ' + (o.name || '') + ' 🌹\n\n📊 تقرير تنفيذ ' + (o.packageName || 'باقتك') + ' لسيارتك ' + (o.car || '') + ':\n';
+  let m = 'السلام عليكم ورحمة الله وبركاته\nازي حضرتك استاذ ' + (o.name || '') + ' 🌹\n\n📊 تقرير تنفيذ ' + (o.packageName || 'باقتك') + (o.kind === 'web' ? ' لمعرضك ' : ' لسيارتك ') + (o.car || '') + ':\n';
   if(doneL.length) m += '\n✅ تم تنفيذ:\n' + doneL.join('\n') + '\n';
   m += leftL.length ? '\n⏳ المتبقي:\n' + leftL.join('\n') + '\n' : '\n🎉 تم تنفيذ كل مهام باقتك.\n';
   if(links.length) m += '\n🔗 روابط النشر:\n' + links.slice(0, 8).join('\n') + '\n';
@@ -2277,7 +2367,7 @@ function rewardReferrer(o){
     try{
       const cd = await db.collection('referralCodes').doc(o.refCode).get();
       if(!cd.exists) throw new Error('code not found');
-      const ruid = cd.data().uid, reward = num(SITE.refReward);
+      const ruid = cd.data().uid, reward = rewardFor(o);
       if(o.uid && o.uid === ruid){ toast('الطلب ده من صاحب الكود نفسه — مفيش مكافأة', false); updateMember(o, {refRewardAmount: 0}, false); return; }
       await db.collection('referrals').doc(ruid).update({
         paidCount: firebase.firestore.FieldValue.increment(1),
@@ -2453,13 +2543,13 @@ const DEFAULT_MEDIA = () => ({
     ['عميل راضٍ عن الخدمة'], ['تم البيع بنجاح'], ['شكر وتقدير'], ['نتيجة سريعة'],
     ['تجربة ممتازة'], ['عميل سعيد بالنتيجة'], ['توصية بالخدمة'], ['بيع في وقت قياسي']
   ].map((c,i)=>({src: 'images/testimonial-' + (i+1) + '.jpg', caption: c[0]})),
-  promo: []
+  promo: [], web: []
 });
 let MEDIA = DEFAULT_MEDIA();
 function normMedia(m){
   const ok = /^images\/[\w\-./]+\.(jpe?g|png|webp|gif)$/i;
   const cl = a => (Array.isArray(a) ? a : []).filter(x=> x && typeof x.src === 'string' && ok.test(x.src)).map(x=>({src: x.src, caption: String(x.caption || '')}));
-  return {testimonials: Array.isArray(m.testimonials) ? cl(m.testimonials) : DEFAULT_MEDIA().testimonials, promo: cl(m.promo)};
+  return {testimonials: Array.isArray(m.testimonials) ? cl(m.testimonials) : DEFAULT_MEDIA().testimonials, promo: cl(m.promo), web: cl(m.web)};
 }
 function syncTesti(){
   const w = $('testiWrap'); if(!w) return;
@@ -2476,13 +2566,14 @@ function loadMedia(){
     if(!m) return;
     MEDIA = normMedia(m); PROMO_LIST = null;
     renderTestimonials();
+    renderWeb();
   }).catch(()=>{});
 }
 
 // ---------- لوحة الوسائط (الأدمن) ----------
 let MDRAFT = null, MDEL = [], mediaDirty = false, mediaBusy = false, mediaKind = 'testimonials', mediaStatus = '';
 const ghToken = () => { try{ return localStorage.getItem('lam7_gh') || ''; }catch(e){ return ''; } };
-const MEDIA_OK_DEL = /^images\/(testimonial-\d+\.jpg|testimonials\/[\w\-.]+|promo\/[\w\-.]+)$/;
+const MEDIA_OK_DEL = /^images\/(testimonial-\d+\.jpg|testimonials\/[\w\-.]+|promo\/[\w\-.]+|web\/[\w\-.]+)$/;
 function compressImage(file, maxSide){
   return new Promise((resolve, reject)=>{
     const url = URL.createObjectURL(file), img = new Image();
@@ -2505,7 +2596,7 @@ function mediaListHTML(kind){
   return '<div class="media-grid">' + L.map((e,i)=>`<div class="media-item ${e.isNew ? 'new' : ''}">
       ${e.isNew ? '<span class="mi-badge">جديدة</span>' : ''}
       <img src="${esc(e.preview || e.src)}" alt="" loading="lazy">
-      ${kind === 'testimonials' ? `<input data-mcap="${i}" value="${esc(e.caption || '')}" placeholder="التعليق تحت الصورة">` : ''}
+      ${(kind === 'testimonials' || kind === 'web') ? `<input data-mk="${kind}" data-mcap="${i}" value="${esc(e.caption || '')}" placeholder="التعليق تحت الصورة">` : ''}
       <div class="mi-btns">
         <button class="mini" data-m="up" data-k="${kind}" data-i="${i}" type="button" ${i === 0 ? 'disabled' : ''}>→</button>
         <button class="mini" data-m="down" data-k="${kind}" data-i="${i}" type="button" ${i === L.length - 1 ? 'disabled' : ''}>←</button>
@@ -2538,6 +2629,9 @@ function renderMedia(){
     <div class="adm-card"><div class="adm-sub">🖼️ الصور الدعائية للمسوّقين</div>
       ${mediaListHTML('promo')}
       <button class="add-item-btn" data-m="add" data-k="promo" type="button">➕ رفع صور</button></div>
+    <div class="adm-card"><div class="adm-sub">🌐 لقطات مواقع المعارض (بتظهر في قسم تصميم المواقع)</div>
+      ${mediaListHTML('web')}
+      <button class="add-item-btn" data-m="add" data-k="web" type="button">➕ رفع صور</button></div>
     <input id="mediaFile" type="file" accept="image/*" multiple style="display:none;">
     <div class="save-bar"><div class="media-status" id="mediaStatus">${esc(mediaStatus)}</div>
       <button class="save-btn" data-m="publish" type="button" ${mediaBusy ? 'disabled' : ''}>${mediaBusy ? '⏳ جارِ الرفع...' : '🚀 نشر التغييرات'}</button></div>`;
@@ -2575,10 +2669,11 @@ async function publishMedia(){
   if(!mediaDirty){ toast('مفيش تغييرات للنشر'); return; }
   mediaBusy = true; setMediaStatus('جارِ الرفع... متقفلش الصفحة'); renderMedia();
   const files = [];
-  ['testimonials', 'promo'].forEach(k=> MDRAFT[k].forEach(e=>{ if(e.isNew && e.b64) files.push({path: e.src, base64: e.b64}); }));
+  ['testimonials', 'promo', 'web'].forEach(k=> MDRAFT[k].forEach(e=>{ if(e.isNew && e.b64) files.push({path: e.src, base64: e.b64}); }));
   const manifest = {v: 1, updated: new Date().toISOString(),
     testimonials: MDRAFT.testimonials.map(e=>({src: e.src, caption: e.caption || ''})),
-    promo: MDRAFT.promo.map(e=>({src: e.src}))};
+    promo: MDRAFT.promo.map(e=>({src: e.src})),
+    web: MDRAFT.web.map(e=>({src: e.src, caption: e.caption || ''}))};
   files.push({path: 'media.json', text: JSON.stringify(manifest, null, 1)});
   const msg = 'media update from dashboard';
   try{
@@ -2587,8 +2682,8 @@ async function publishMedia(){
       if(MDEL.length && (err.status === 422 || err.status === 409)) await ghCommit(files, [], msg);   // الحذف فشل: نكمل بدونه
       else throw err;
     }
-    ['testimonials', 'promo'].forEach(k=> MDRAFT[k].forEach(e=>{ e.isNew = false; delete e.b64; }));
-    MDEL = []; mediaDirty = false; MEDIA = normMedia(manifest);
+    ['testimonials', 'promo', 'web'].forEach(k=> MDRAFT[k].forEach(e=>{ e.isNew = false; delete e.b64; }));
+    MDEL = []; mediaDirty = false; MEDIA = normMedia(manifest); renderWeb();
     mediaStatus = '✅ اتنشر على GitHub. التغييرات هتظهر للزوار بعد حوالي دقيقة (لما الاستضافة تخلّص).';
     toast('تم الرفع ✅');
   }catch(err){
@@ -2597,8 +2692,8 @@ async function publishMedia(){
   mediaBusy = false; renderMedia();
 }
 $('mediaBox').addEventListener('input', e=>{
-  const i = e.target.dataset.mcap;
-  if(i !== undefined && MDRAFT && MDRAFT.testimonials[+i]){ MDRAFT.testimonials[+i].caption = e.target.value; mediaDirty = true; }
+  const i = e.target.dataset.mcap, mk = e.target.dataset.mk || 'testimonials';
+  if(i !== undefined && MDRAFT && MDRAFT[mk] && MDRAFT[mk][+i]){ MDRAFT[mk][+i].caption = e.target.value; mediaDirty = true; }
 });
 $('mediaBox').addEventListener('change', async e=>{
   if(e.target.id !== 'mediaFile') return;
@@ -2610,7 +2705,7 @@ $('mediaBox').addEventListener('change', async e=>{
   for(let i = 0; i < files.length; i++){
     try{
       const data = await compressImage(files[i], max);
-      const dir = k === 'promo' ? 'images/promo/p-' : 'images/testimonials/t-';
+      const dir = k === 'promo' ? 'images/promo/p-' : (k === 'web' ? 'images/web/w-' : 'images/testimonials/t-');
       MDRAFT[k].push({src: dir + ts + '-' + i + '.jpg', caption: '', isNew: true, b64: data.split(',')[1], preview: data});
       ok++;
     }catch(err){ bad++; }
@@ -2657,11 +2752,270 @@ async function verifyGh(){
   }catch(err){ setMediaStatus(ghErrorText(err)); }
 }
 
+// =====================================================================
+// قسم تصميم وإنشاء مواقع المعارض: عرض + معاينة حية + طلب + عمولة % لكل منتج
+// البيانات في config/webdesign — والطلبات في orders بحقل kind:'web'
+// =====================================================================
+const DEFAULT_WEB = () => ({
+  enabled: false,
+  title: 'تصميم وإنشاء مواقع معارض السيارات',
+  sub: 'موقع احترافي لمعرضك يعرض سياراتك ويوصّلك بالعملاء مباشرة،\nشغّال على الموبايل والكمبيوتر',
+  products: [{
+    id: 201, name: 'موقع معرض سيارات احترافي', price: 0, highlight: true,
+    desc: 'موقع كامل باسم معرضك وهويته، يعرض السيارات بصورها وأسعارها ويوصّل العميل بواتساب بضغطة.',
+    features: ['تصميم احترافي باسم معرضك وشعارك', 'عرض السيارات بالصور والمواصفات والأسعار', 'زر واتساب واتصال مباشر', 'مناسب للموبايل والكمبيوتر', 'جاهز لمحركات البحث (SEO)', 'ربط بدومين خاص (اختياري)'],
+    steps: ['استلام بيانات وصور ومحتوى المعرض', 'تصميم الموقع', 'مراجعتك والتعديلات', 'الربط والتسليم'],
+    demoUrl: '', refPct: 10, discPct: 0
+  }]
+});
+let WEB = DEFAULT_WEB();
+let WDRAFT = null, curWeb = null, webRef = null, wpCur = null, wpOverflow = '';
+const toLines = a => (Array.isArray(a) ? a : []).map(x=> String(x == null ? '' : x).trim()).filter(Boolean);
+function normWeb(x){
+  const d = DEFAULT_WEB(); x = x || {};
+  return {
+    enabled: !!x.enabled,
+    title: String(x.title || d.title),
+    sub: String(x.sub == null ? d.sub : x.sub),
+    products: (Array.isArray(x.products) ? x.products : []).map(p=>({
+      id: p.id || Date.now(), name: String(p.name || ''), price: num(p.price), highlight: !!p.highlight,
+      desc: String(p.desc || ''), features: toLines(p.features), steps: toLines(p.steps),
+      demoUrl: String(p.demoUrl || ''),
+      refPct: Math.min(90, Math.max(0, num(p.refPct))),
+      discPct: Math.min(50, Math.max(0, num(p.discPct)))
+    }))
+  };
+}
+// مكافأة المسوّق: لو الطلب فيه نسبة → نسبة من سعر الباقة بعد الخصم، وإلا المبلغ الثابت
+function rewardFor(o){
+  const pct = num(o.refPct);
+  if(pct > 0) return Math.round(Math.max(0, num(o.packagePrice) - num(o.discount)) * pct / 100);
+  return num(SITE.refReward);
+}
+const httpsUrl = u => { const x = safeUrl(u); return /^https:\/\//i.test(x) ? x : ''; };
+
+function renderWeb(){
+  const sec = $('webSec'); if(!sec) return;
+  const on = !!(WEB.enabled && WEB.products.length);
+  sec.style.display = on ? '' : 'none';
+  $('secBar').style.display = on ? '' : 'none';
+  const wn = $('affWebNote');
+  if(!on){ if(wn) wn.style.display = 'none'; updateWebSeo(); return; }
+  $('webTitle').textContent = WEB.title;
+  $('webSub').innerHTML = nl2br(WEB.sub);
+  const shots = MEDIA.web || [];
+  $('webShots').innerHTML = shots.length ? '<div class="ws-scroll">' + shots.map((x,i)=>
+    `<figure class="ws-item" data-ws="${i}"><img src="${esc(x.src)}" alt="${esc(x.caption || 'لقطة من موقع معرض سيارات من تصميم لمح')}" loading="lazy" decoding="async">${x.caption ? `<figcaption>${esc(x.caption)}</figcaption>` : ''}</figure>`).join('') + '</div>' : '';
+  $('webCards').innerHTML = WEB.products.map(p=>`
+    <div class="card web-card${p.highlight ? ' highlight' : ''}">
+      ${p.highlight ? '<div class="badge">⭐ الأكثر طلباً</div>' : ''}
+      <h3>${esc(p.name)}</h3>
+      ${p.desc ? `<p class="web-desc">${nl2br(p.desc)}</p>` : ''}
+      <div class="price">${p.price > 0 ? esc(p.price) + ' <small>جنيه</small>' : '<span class="web-ask">السعر حسب المتطلبات</span>'}</div>
+      ${p.features.length ? `<ul>${p.features.map(f=>`<li><span class="tname">${esc(f)}</span></li>`).join('')}</ul>` : ''}
+      ${httpsUrl(p.demoUrl) ? `<button class="choose-btn web-prev" data-wact="prev" data-id="${esc(p.id)}" type="button">👁️ معاينة حية للموقع</button>` : ''}
+      <button class="choose-btn" data-wact="order" data-id="${esc(p.id)}" type="button">🛒 اطلب هذه الخدمة</button>
+    </div>`).join('');
+  if(wn){
+    const cm = WEB.products.filter(p=> p.refPct > 0);
+    wn.style.display = (cm.length && SITE.refEnabled) ? '' : 'none';
+    wn.innerHTML = '💻 وعلى مواقع المعارض عمولتك: ' + cm.map(p=> esc(p.name) + ' ← <b>' + esc(p.refPct) + '%</b> من السعر').join(' • ');
+  }
+  updateWebSeo();
+}
+// بيانات منظمة لمحركات البحث (بتشتغل مع اللي بيشغّل جافاسكريبت)
+function updateWebSeo(){
+  const el = $('ldMain'); if(!el) return;
+  try{
+    const d = JSON.parse(el.textContent);
+    d['@graph'] = (d['@graph'] || []).filter(n=> n['@id'] !== 'web-service');
+    if(WEB.enabled && WEB.products.length){
+      d['@graph'].push({'@type': 'Service', '@id': 'web-service', name: WEB.title, description: WEB.sub.replace(/\n/g, ' '),
+        serviceType: 'تصميم مواقع معارض السيارات', areaServed: 'EG',
+        hasOfferCatalog: {'@type': 'OfferCatalog', name: WEB.title, itemListElement: WEB.products.map(p=>
+          Object.assign({'@type': 'Offer', name: p.name, description: p.desc, url: location.href.split('#')[0] + '#webSec'},
+            p.price > 0 ? {price: String(p.price), priceCurrency: 'EGP'} : {}))}});
+    }
+    el.textContent = JSON.stringify(d);
+  }catch(e){}
+}
+
+// ---------- المعاينة الحية + عرض الصور ----------
+function openWebPrev(id){
+  const p = WEB.products.find(x=> String(x.id) === String(id)); if(!p) return;
+  const u = httpsUrl(p.demoUrl); if(!u) return;
+  wpCur = p;
+  $('wpTitle').textContent = p.name; $('wpOpen').href = u;
+  $('wpWrap').className = 'wp-wrap phone'; $('wpPhone').classList.add('on'); $('wpDesk').classList.remove('on');
+  $('wpFrame').src = u;
+  wpOverflow = document.body.style.overflow; document.body.style.overflow = 'hidden';
+  $('webPrev').style.display = 'flex';
+}
+function closeWebPrev(){
+  $('webPrev').style.display = 'none'; $('wpFrame').src = 'about:blank';
+  document.body.style.overflow = wpOverflow;
+}
+$('wpClose').addEventListener('click', closeWebPrev);
+$('wpPhone').addEventListener('click', ()=>{ $('wpWrap').className = 'wp-wrap phone'; $('wpPhone').classList.add('on'); $('wpDesk').classList.remove('on'); });
+$('wpDesk').addEventListener('click', ()=>{ $('wpWrap').className = 'wp-wrap'; $('wpDesk').classList.add('on'); $('wpPhone').classList.remove('on'); });
+$('wpOrder').addEventListener('click', ()=>{ const p = wpCur; closeWebPrev(); if(p) openWebForm(p.id); });
+$('wsLb').addEventListener('click', ()=>{ $('wsLb').style.display = 'none'; $('wsLbImg').removeAttribute('src'); });
+$('webSec').addEventListener('click', e=>{
+  const sh = e.target.closest('[data-ws]');
+  if(sh){ const it = (MEDIA.web || [])[+sh.dataset.ws]; if(it){ $('wsLbImg').src = it.src; $('wsLb').style.display = 'flex'; } return; }
+  const b = e.target.closest('[data-wact]'); if(!b) return;
+  if(b.dataset.wact === 'prev') openWebPrev(b.dataset.id); else openWebForm(b.dataset.id);
+});
+
+// ---------- فورم طلب موقع ----------
+function webDisc(){ return (curWeb && webRef && curWeb.discPct > 0) ? Math.round(curWeb.price * curWeb.discPct / 100) : 0; }
+function updateWebTotal(){
+  if(!curWeb) return;
+  const disc = webDisc(), total = Math.max(0, curWeb.price - disc);
+  $('wfDiscLine').style.display = disc ? '' : 'none';
+  $('wfDiscVal').textContent = '- ' + disc + ' جنيه';
+  $('wfTotal').textContent = curWeb.price > 0 ? total + ' جنيه' : 'بيتحدد بعد التواصل';
+  $('wfRefHint').textContent = (SITE.refEnabled && curWeb.discPct > 0) ? '(خصم ' + curWeb.discPct + '%)' : '';
+}
+function openWebForm(id){
+  curWeb = WEB.products.find(x=> String(x.id) === String(id)); if(!curWeb) return;
+  webRef = null; $('wf_ref').value = ''; $('wfRefMsg').textContent = ''; $('wfRefMsg').className = 'ref-msg';
+  $('wfRefField').style.display = SITE.refEnabled ? '' : 'none';
+  { const sr = storedRef(); if(sr && SITE.refEnabled){ $('wf_ref').value = sr; applyWebRef(); } }
+  if(currentUser && currentUser.displayName && !$('wf_name').value) $('wf_name').value = currentUser.displayName;
+  $('wfLabel').textContent = 'الخدمة المختارة: ' + curWeb.name + (curWeb.price > 0 ? ' - ' + curWeb.price + ' جنيه' : '');
+  updateWebTotal();
+  $('formSection').style.display = 'none';
+  $('webFormSec').style.display = 'block';
+  $('webFormSec').scrollIntoView({behavior: 'smooth', block: 'start'});
+}
+async function applyWebRef(){
+  const msg = $('wfRefMsg'), code = $('wf_ref').value.trim().toUpperCase();
+  const bad = t=>{ msg.textContent = t; msg.className = 'ref-msg bad'; webRef = null; updateWebTotal(); };
+  if(!code){ webRef = null; msg.textContent = ''; msg.className = 'ref-msg'; updateWebTotal(); return; }
+  if(!FIREBASE_READY || !db){ bad('الخدمة غير متاحة الآن'); return; }
+  try{
+    const d = await db.collection('referralCodes').doc(code).get();
+    if(!d.exists){ bad('الكود غير صحيح'); return; }
+    const r = d.data();
+    if(currentUser && r.uid === currentUser.uid){ bad('مينفعش تستخدم كودك الشخصي'); return; }
+    webRef = {code, name: r.name || ''};
+    msg.textContent = '✅ تم تطبيق الكود' + (r.name ? ' (من ' + r.name + ')' : '') + (curWeb && curWeb.discPct > 0 ? ' — خصم ' + curWeb.discPct + '%' : '');
+    msg.className = 'ref-msg ok';
+    updateWebTotal();
+  }catch(err){ console.warn(err); bad('تعذر التحقق من الكود، حاول مرة تانية'); }
+}
+$('wfRefApply').addEventListener('click', applyWebRef);
+$('wf_ref').addEventListener('keydown', e=>{ if(e.key === 'Enter'){ e.preventDefault(); applyWebRef(); } });
+$('wf_ref').addEventListener('input', e=>{
+  if(webRef && e.target.value.trim().toUpperCase() !== webRef.code){ webRef = null; $('wfRefMsg').textContent = ''; $('wfRefMsg').className = 'ref-msg'; updateWebTotal(); }
+});
+$('wfCancel').addEventListener('click', ()=>{ $('webFormSec').style.display = 'none'; $('webSec').scrollIntoView({behavior: 'smooth', block: 'start'}); });
+$('wfSend').addEventListener('click', ()=>{
+  if(!curWeb) return;
+  const g = id => $(id).value.trim();
+  const name = g('wf_name'), phone = g('wf_phone'), biz = g('wf_biz'), city = g('wf_city'), links = g('wf_links'), notes = g('wf_notes');
+  if(!name || !phone || !biz){ alert('من فضلك املأ الاسم ورقم الهاتف واسم المعرض على الأقل'); return; }
+  const disc = webDisc(), total = Math.max(0, curWeb.price - disc);
+  const msg = `مرحباً لمح 👋\nعايز أطلب تصميم موقع لمعرضي 🌐\n\n📦 الخدمة: ${curWeb.name}\n${curWeb.price > 0 ? '💰 السعر: ' + curWeb.price + ' جنيه\n' : ''}${disc ? '🎁 خصم إحالة: -' + disc + ' جنيه (كود ' + webRef.code + ')\n💵 الإجمالي: ' + total + ' جنيه\n' : ''}\n👤 الاسم: ${name}\n📱 الهاتف: ${phone}\n🏢 اسم المعرض: ${biz}\n📍 المدينة: ${city || 'غير محدد'}\n🔗 الروابط: ${links || 'لا يوجد'}\n📝 ملاحظات: ${notes || 'لا يوجد'}\n\nتأكيد ✅`;
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+  if(FIREBASE_READY && db){
+    db.collection('orders').add({
+      kind: 'web', name, phone, car: biz, price: null, paint: null, license: null, traffic: null,
+      location: city || null, notes: notes || null, webLinks: links || null,
+      uid: currentUser ? currentUser.uid : null,
+      email: currentUser ? currentUser.email : null,
+      packageId: curWeb.id, packageName: curWeb.name, packagePrice: curWeb.price,
+      addons: [],
+      tasks: curWeb.steps.map(t=>({name: t, times: 1, done: 0, sponsored: false})),
+      total, discount: disc,
+      refCode: webRef ? webRef.code : null,
+      refName: webRef ? (webRef.name || null) : null,
+      refPct: num(curWeb.refPct),
+      paid: false, status: 'بانتظار الدفع',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).catch(err=> console.warn('تعذر حفظ الطلب على فايربيز:', err));
+    if(currentUser){ hasOrders = true; updateAccountUI(); }
+  }
+  window.open(url, '_blank');
+});
+
+// ---------- لوحة التحكم: تبويب المواقع ----------
+function renderWebAdmin(){
+  if(!WDRAFT) WDRAFT = deepCopy(WEB);
+  const w = WDRAFT;
+  $('admWeb').innerHTML = `
+    <div class="adm-card"><div class="adm-sub">🌐 قسم تصميم مواقع المعارض</div>
+      <label class="chk"><input type="checkbox" data-wf="enabled" ${w.enabled ? 'checked' : ''}> إظهار القسم للزوار</label>
+      <label style="margin-top:12px;">عنوان القسم</label><input data-wf="title" value="${esc(w.title)}">
+      <label style="margin-top:12px;">وصف القسم</label><textarea data-wf="sub" rows="2">${esc(w.sub)}</textarea>
+      <p class="adm-hint" style="margin:10px 0 0;">📸 لقطات الموقع بترفعها من تبويب 🖼️ الوسائط ← "لقطات مواقع المعارض".</p></div>` +
+    w.products.map((p,i)=>`
+    <div class="adm-card">
+      <div class="adm-card-head"><b>🛒 ${esc(p.name) || 'منتج'}</b><button class="mini danger" data-wa="del" data-i="${i}" type="button">🗑 حذف</button></div>
+      <label>اسم المنتج</label><input data-wp="${i}" data-f="name" value="${esc(p.name)}">
+      <div class="adm-grid" style="margin-top:10px;">
+        <div><label>السعر (جنيه) — 0 = حسب المتطلبات</label><input type="number" inputmode="numeric" data-wp="${i}" data-f="price" value="${esc(p.price)}"></div>
+        <div><label>عمولة المسوّق %</label><input type="number" inputmode="decimal" min="0" max="90" data-wp="${i}" data-f="refPct" value="${esc(p.refPct)}"></div>
+      </div>
+      <label style="margin-top:10px;">خصم العميل بكود الإحالة % <small>(0 = بدون خصم)</small></label>
+      <input type="number" inputmode="decimal" min="0" max="50" data-wp="${i}" data-f="discPct" value="${esc(p.discPct)}">
+      <label style="margin-top:10px;">وصف مختصر</label><textarea data-wp="${i}" data-f="desc" rows="2">${esc(p.desc)}</textarea>
+      <label style="margin-top:10px;">المميزات (كل سطر = ميزة)</label><textarea data-wp="${i}" data-f="features" rows="5">${esc(p.features.join('\n'))}</textarea>
+      <label style="margin-top:10px;">مراحل التنفيذ بعد الدفع (كل سطر = مهمة بتظهر في لوحة الأعضاء)</label><textarea data-wp="${i}" data-f="steps" rows="4">${esc(p.steps.join('\n'))}</textarea>
+      <label style="margin-top:10px;">رابط الموقع للمعاينة الحية (https)</label>
+      <input dir="ltr" data-wp="${i}" data-f="demoUrl" value="${esc(p.demoUrl)}" placeholder="https://example.pages.dev">
+      <label class="chk" style="margin-top:12px;"><input type="checkbox" data-wp="${i}" data-f="highlight" ${p.highlight ? 'checked' : ''}> شارة "الأكثر طلباً"</label>
+    </div>`).join('') + `
+    <button class="add-item-btn" data-wa="add" type="button" style="margin-bottom:18px;">➕ إضافة منتج</button>
+    <div class="save-bar"><button class="save-btn" data-wa="save" type="button">💾 حفظ قسم المواقع</button></div>`;
+}
+function onWebInput(e){
+  const el = e.target;
+  if(!WDRAFT) return;
+  if(el.dataset.wf){
+    const k = el.dataset.wf;
+    WDRAFT[k] = (k === 'enabled') ? el.checked : el.value;
+    return;
+  }
+  const f = el.dataset.f, p = WDRAFT.products[+el.dataset.wp];
+  if(!f || !p) return;
+  if(f === 'price') p.price = num(el.value);
+  else if(f === 'refPct') p.refPct = Math.min(90, Math.max(0, num(el.value)));
+  else if(f === 'discPct') p.discPct = Math.min(50, Math.max(0, num(el.value)));
+  else if(f === 'features' || f === 'steps') p[f] = el.value.split('\n');
+  else if(f === 'highlight') p.highlight = el.checked;
+  else p[f] = el.value;
+}
+$('admWeb').addEventListener('input', onWebInput);
+$('admWeb').addEventListener('change', onWebInput);
+$('admWeb').addEventListener('click', e=>{
+  const b = e.target.closest('[data-wa]'); if(!b || !WDRAFT) return;
+  const act = b.dataset.wa;
+  if(act === 'add'){
+    WDRAFT.products.push({id: Date.now(), name: 'منتج جديد', price: 0, highlight: false, desc: '', features: [],
+      steps: ['استلام بيانات المعرض', 'تصميم الموقع', 'المراجعة والتعديلات', 'الربط والتسليم'], demoUrl: '', refPct: 10, discPct: 0});
+    renderWebAdmin();
+  } else if(act === 'del'){
+    if(confirm('متأكد من حذف المنتج ده؟')){ WDRAFT.products.splice(+b.dataset.i, 1); renderWebAdmin(); }
+  } else if(act === 'save'){
+    const bad = WDRAFT.products.find(p=> (p.demoUrl || '').trim() && !httpsUrl(p.demoUrl));
+    if(bad){ alert('رابط المعاينة لازم يبدأ بـ https:// — راجع رابط "' + (bad.name || 'المنتج') + '"'); return; }
+    WEB = normWeb(WDRAFT);
+    WEB.products = WEB.products.filter(p=> p.name.trim());
+    saveDoc('webdesign', WEB, 'تم حفظ قسم المواقع ✅');
+    renderWeb();
+    WDRAFT = deepCopy(WEB);
+    renderWebAdmin();
+  }
+});
+
 // ---------- start ----------
 applySite();
 renderCards();
 renderAddonsShowcase();
 loadConfig();
+renderWeb();
 loadMedia();
 
 // ---- scroll reveal ----
