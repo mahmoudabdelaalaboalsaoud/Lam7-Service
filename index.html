@@ -568,6 +568,15 @@
   .addon-edit{grid-template-columns:1fr auto;padding-bottom:12px;margin-bottom:12px;border-bottom:1px dashed var(--border);}
   .addon-edit input[data-f=aname]{grid-column:1 / -1;}
   .ae-btns{display:flex;gap:6px;}
+
+  /* ===== كروت اللوحة القابلة للطي ===== */
+  .adm-card.collapsible .cl-body{display:none;margin-top:14px;}
+  .adm-card.collapsible.open .cl-body{display:block;}
+  .cl-toggle{flex:1;cursor:pointer;user-select:none;display:flex;align-items:center;gap:8px;padding:6px 0;}
+  .cl-toggle small{color:var(--muted);font-weight:600;font-size:12px;}
+  .cl-arrow{display:inline-block;transition:transform .25s;color:var(--accent);}
+  .adm-card.collapsible:not(.open) .cl-arrow{transform:rotate(90deg);}
+  .ord-tools{display:flex;gap:8px;margin:0 0 6px;}
 </style>
 <script type="application/ld+json" id="ldMain">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://lam7-service2.pages.dev/#org","name":"لمح","alternateName":["Lam7","Lam7 Service","لمح لتسويق السيارات"],"url":"https://lam7-service2.pages.dev/","logo":{"@type":"ImageObject","url":"https://lam7-service2.pages.dev/images/icon-512.png","width":512,"height":512},"image":"https://lam7-service2.pages.dev/images/og-logo.jpg","description":"خدمة تسويق سيارات مستعملة في مصر: كتابة إعلان احترافي، إعلان ممول على فيسبوك، ونشر على مجموعات واتساب وفيسبوك وتيليجرام ويوتيوب وتيك توك.","areaServed":{"@type":"Country","name":"مصر"},"knowsLanguage":"ar","contactPoint":[{"@type":"ContactPoint","telephone":"+201015726786","contactType":"customer service","availableLanguage":["ar"],"areaServed":"EG"}]},{"@type":"WebSite","@id":"https://lam7-service2.pages.dev/#website","url":"https://lam7-service2.pages.dev/","name":"لمح","inLanguage":"ar","publisher":{"@id":"https://lam7-service2.pages.dev/#org"}},{"@type":"WebPage","@id":"https://lam7-service2.pages.dev/#webpage","url":"https://lam7-service2.pages.dev/","name":"لمح | تسويق سيارتك للبيع في مصر بإعلان ممول ونشر في كل مكان","inLanguage":"ar","isPartOf":{"@id":"https://lam7-service2.pages.dev/#website"},"about":{"@id":"https://lam7-service2.pages.dev/#org"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://lam7-service2.pages.dev/images/og-logo.jpg"}},{"@type":"Service","@id":"https://lam7-service2.pages.dev/#service","name":"تسويق السيارات المستعملة","serviceType":"تسويق وبيع السيارات","provider":{"@id":"https://lam7-service2.pages.dev/#org"},"areaServed":{"@type":"Country","name":"مصر"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"باقات تسويق السيارات","itemListElement":[{"@type":"Offer","name":"الباقة الأساسية","price":"250","priceCurrency":"EGP","description":"إعلان ممول على الفيس بوك، النشر في مجموعتين واتساب، نشر العربية على مجموعة التليجرام، النشر مرة واحدة على ماركت بليس","url":"https://lam7-service2.pages.dev/#packages"},{"@type":"Offer","name":"الباقة المميزة","price":"490","priceCurrency":"EGP","description":"النشر على 5 مجموعات واتساب (مرتين)، إعلان ممول على الفيس بوك، النشر على أكبر قناة واتساب للسيارات في مصر (مرتين)، نشر العربية على مجموعة التليجرام، النشر على 10 مجموعات فيس بوك، النشر على اليوتيوب، النشر على التيك توك، النشر على صفحة ومجموعات لمح على الفيس بوك (مرتين)","url":"https://lam7-service2.pages.dev/#packages"},{"@type":"Offer","name":"الباقة الشاملة","price":"750","priceCurrency":"EGP","description":"النشر على 5 مجموعات واتساب (مرتين)، إعلان ممول على الفيس بوك، النشر على أكبر قناة واتساب للسيارات في مصر (مرتين)، نشر العربية على مجموعة التليجرام، النشر على 10 مجموعات فيس بوك، النشر على اليوتيوب، النشر على التيك توك، النشر على صفحة ومجموعات لمح على الفيس بوك (مرتين)، تصوير احترافي للسيارة، متابعة يومية حتى تمام البيع","url":"https://lam7-service2.pages.dev/#packages"},{"@type":"Offer","name":"باقة القيادة الملكية","price":"1500","priceCurrency":"EGP","description":"النشر على 5 مجموعات واتساب (مرتين)، إعلان ممول على الفيس بوك، النشر على أكبر قناة واتساب للسيارات في مصر (مرتين)، نشر العربية على مجموعة التليجرام، النشر على 10 مجموعات فيس بوك، النشر على اليوتيوب، النشر على التيك توك، النشر على صفحة ومجموعات لمح على الفيس بوك (مرتين)، تصوير احترافي للسيارة، النشر في مجموعات كبار عشاق السيارات الفاخرة، تصوير سينمائي وفيديو ترويجي احترافي، عرض مميز لمدة أطول في نتائج البحث، متابعة يومية مخصصة مع مدير حساب شخصي","url":"https://lam7-service2.pages.dev/#packages"}]}},{"@type":"FAQPage","@id":"https://lam7-service2.pages.dev/#faq","mainEntity":[{"@type":"Question","name":"إيه هي خدمة لمح؟","acceptedAnswer":{"@type":"Answer","text":"لمح خدمة تسويق سيارات في مصر: بنكتب إعلان احترافي لسيارتك وننشره على مجموعات واتساب وفيسبوك وتيليجرام، وعلى يوتيوب وتيك توك حسب الباقة، ومعاه إعلان ممول على فيسبوك عشان إعلانك يوصل لأكبر عدد من المشترين الجادين."}},{"@type":"Question","name":"إزاي أطلب الخدمة؟","acceptedAnswer":{"@type":"Answer","text":"اختار الباقة المناسبة لسعر سيارتك، واملأ بيانات السيارة، وابعت الطلب على واتساب. فريق لمح بيكتبلك الإعلان وبعد كده يبدأ النشر."}},{"@type":"Question","name":"أدفع إمتى؟","acceptedAnswer":{"@type":"Answer","text":"الدفع بعد كتابة الإعلان، يعني بتشوف شغلنا الأول، وبعد ما يعجبك بتدفع قيمة الباقة وبنبدأ النشر."}},{"@type":"Question","name":"كام سعر باقات تسويق السيارات؟","acceptedAnswer":{"@type":"Answer","text":"الباقات بتبدأ من 250 جنيه وبتوصل لـ 1500 جنيه، حسب سعر السيارة وعدد المنصات ومرات النشر. تقدر تقارن كل الباقات ومهامها في قسم \"اختر باقتك\"."}},{"@type":"Question","name":"إيه هو الإعلان الممول؟","acceptedAnswer":{"@type":"Answer","text":"الإعلان الممول هو إعلان مدفوع على فيسبوك بيظهر لناس مهتمين بشراء السيارات، وهو مشمول في باقات لمح كجزء أساسي مش إضافة اختيارية."}},{"@type":"Question","name":"فين بتنشروا إعلان سيارتي؟","acceptedAnswer":{"@type":"Answer","text":"على مجموعات واتساب، وأكبر قناة واتساب للسيارات في مصر، ومجموعات فيسبوك وصفحة لمح، ومجموعات تيليجرام، ويوتيوب وتيك توك. المنصات بتختلف حسب الباقة اللي تختارها."}},{"@type":"Question","name":"هل في ضمان لسرعة بيع السيارة؟","acceptedAnswer":{"@type":"Answer","text":"لا، سرعة البيع مش رقم ثابت، وبتختلف حسب سعر السيارة ومدى انتشار الموديل في السوق المصري وحجم الطلب عليه. اللي بنقدر نعمله إننا نزود فرصتك في الوصول لأكبر عدد من المشترين الجادين بأسرع وقت ممكن."}},{"@type":"Question","name":"إزاي أكسب من التسويق بالعمولة مع لمح؟","acceptedAnswer":{"@type":"Answer","text":"سجّل دخولك بجوجل وفعّل كود ورابط الإحالة الخاص بيك ببيانات محفظتك أو إنستا باي، وشاركه مع أي حد عايز يبيع سيارته. عن كل عميل يطلب باقة بكودك ويدفع بتاخد مكافأة محوّلة على بياناتك، والعميل نفسه بياخد خصم على باقته. مش لازم يكون عندك سيارة للبيع."}},{"@type":"Question","name":"هل الخدمة مناسبة للسيارات النادرة؟","acceptedAnswer":{"@type":"Answer","text":"الباقات والأسعار معمولة لسيارات السوق المصري ذات الطلب العادي. السيارات النادرة أو قليلة الطلب بتحتاج خطة تسويق مختلفة، فتواصل معنا على واتساب لعرض خاص."}}]}]}</script>
 </head>
@@ -1840,17 +1849,20 @@ $('admSite').addEventListener('click', e=>{
 });
 
 // ---------- 2) لوحة الباقات ----------
+const PKG_OPEN = new Set(), WEB_OPEN = new Set();
 function pkgOrderHTML(){
   const n = DRAFT.packages.length;
   return `<div class="adm-card"><div class="adm-sub">↕️ ترتيب ظهور الباقات في الصفحة</div>
-    <p class="adm-hint">حرّك الباقة بالأسهم، والترتيب بيتطبق بعد "حفظ الباقات".</p>` +
+    <p class="adm-hint">حرّك الباقة بالأسهم، والترتيب بيتطبق بعد "حفظ الباقات". دوس على اسم الباقة تحت لفتحها أو طيّها.</p>
+    <div class="ord-tools"><button class="mini" data-act="pkgexpand" type="button">⬇️ فتح الكل</button><button class="mini" data-act="pkgcollapse" type="button">⬆️ طي الكل</button></div>` +
     DRAFT.packages.map((p,i)=>`<div class="ord-row"><span class="ord-n">${i+1}</span><span class="ord-name">${esc(p.name) || 'باقة'} <small>${esc(p.price)} ج</small></span><button class="mini" data-act="pkgup" data-pi="${i}" type="button" ${i === 0 ? 'disabled' : ''}>↑</button><button class="mini" data-act="pkgdown" data-pi="${i}" type="button" ${i === n-1 ? 'disabled' : ''}>↓</button></div>`).join('') + `</div>`;
 }
 function renderPkgAdmin(){
   const box = $('admPkgs');
   box.innerHTML = pkgOrderHTML() + DRAFT.packages.map((p,pi)=>`
-    <div class="adm-card">
-      <div class="adm-card-head"><b>📦 ${esc(p.name)||'باقة'}</b><button class="mini danger" data-act="delpkg" data-pi="${pi}" type="button">🗑 حذف الباقة</button></div>
+    <div class="adm-card collapsible${PKG_OPEN.has(p.id) ? ' open' : ''}">
+      <div class="adm-card-head"><b class="cl-toggle" data-act="togglepkg" data-pi="${pi}"><span class="cl-arrow">▾</span> 📦 ${esc(p.name)||'باقة'} <small>${esc(p.price)} ج • ${p.tasks.length} مهمة</small></b><button class="mini danger" data-act="delpkg" data-pi="${pi}" type="button">🗑 حذف الباقة</button></div>
+      <div class="cl-body">
       <div class="adm-grid">
         <div><label>اسم الباقة</label><input data-pi="${pi}" data-f="name" value="${esc(p.name)}"></div>
         <div><label>السعر (جنيه)</label><input type="number" inputmode="numeric" data-pi="${pi}" data-f="price" value="${esc(p.price)}"></div>
@@ -1875,6 +1887,7 @@ function renderPkgAdmin(){
           </div>
         </div>`).join('')}
       <button class="add-item-btn" data-act="addtask" data-pi="${pi}" type="button">➕ إضافة مهمة</button>
+      </div>
     </div>`).join('') + `
     <button class="add-item-btn" data-act="addpkg" type="button" style="margin-bottom:18px;">➕ إضافة باقة جديدة</button>
     <div class="adm-card">
@@ -1915,7 +1928,8 @@ $('admPkgs').addEventListener('click', e=>{
   const el = e.target.closest('[data-act]'); if(!el) return;
   const act = el.dataset.act, pi = +el.dataset.pi, ti = +el.dataset.ti, ai = +el.dataset.ai;
   if(act === 'addpkg'){
-    DRAFT.packages.push({id:Date.now(), name:'باقة جديدة', price:0, highlight:false, range:'', tasks:[mkTask('إعلان ممول على الفيس بوك', 1, true)]});
+    const np = {id:Date.now(), name:'باقة جديدة', price:0, highlight:false, range:'', tasks:[mkTask('إعلان ممول على الفيس بوك', 1, true)]};
+    DRAFT.packages.push(np); PKG_OPEN.add(np.id);
     renderPkgAdmin();
   } else if(act === 'delpkg'){
     if(DRAFT.packages.length <= 1){ alert('لازم تفضل باقة واحدة على الأقل'); return; }
@@ -1932,6 +1946,13 @@ $('admPkgs').addEventListener('click', e=>{
     const arr = DRAFT.packages[pi].tasks, j = act === 'up' ? ti-1 : ti+1;
     if(j < 0 || j >= arr.length) return;
     [arr[ti], arr[j]] = [arr[j], arr[ti]];
+    renderPkgAdmin();
+  } else if(act === 'togglepkg'){
+    const card = el.closest('.adm-card'), id = DRAFT.packages[pi].id;
+    const o = card.classList.toggle('open');
+    if(o) PKG_OPEN.add(id); else PKG_OPEN.delete(id);
+  } else if(act === 'pkgexpand' || act === 'pkgcollapse'){
+    DRAFT.packages.forEach(p=>{ if(act === 'pkgexpand') PKG_OPEN.add(p.id); else PKG_OPEN.delete(p.id); });
     renderPkgAdmin();
   } else if(act === 'pkgup' || act === 'pkgdown'){
     const arr = DRAFT.packages, j = act === 'pkgup' ? pi-1 : pi+1;
@@ -3059,8 +3080,9 @@ function renderWebAdmin(){
       <label style="margin-top:12px;">وصف القسم</label><textarea data-wf="sub" rows="2">${esc(w.sub)}</textarea>
       <p class="adm-hint" style="margin:10px 0 0;">📸 لقطات الموقع بترفعها من تبويب 🖼️ الوسائط ← "لقطات مواقع المعارض".</p></div>` +
     w.products.map((p,i)=>`
-    <div class="adm-card">
-      <div class="adm-card-head"><b>🛒 ${esc(p.name) || 'منتج'}</b><button class="mini danger" data-wa="del" data-i="${i}" type="button">🗑 حذف</button></div>
+    <div class="adm-card collapsible${WEB_OPEN.has(p.id) ? ' open' : ''}">
+      <div class="adm-card-head"><b class="cl-toggle" data-wa="toggle" data-i="${i}"><span class="cl-arrow">▾</span> 🛒 ${esc(p.name) || 'منتج'} <small>${p.price > 0 ? esc(p.price) + ' ج' : 'حسب الطلب'}</small></b><button class="mini danger" data-wa="del" data-i="${i}" type="button">🗑 حذف</button></div>
+      <div class="cl-body">
       <label>اسم المنتج</label><input data-wp="${i}" data-f="name" value="${esc(p.name)}">
       <div class="adm-grid" style="margin-top:10px;">
         <div><label>السعر (جنيه) — 0 = حسب المتطلبات</label><input type="number" inputmode="numeric" data-wp="${i}" data-f="price" value="${esc(p.price)}"></div>
@@ -3076,6 +3098,7 @@ function renderWebAdmin(){
       <label style="margin-top:10px;">طريقة المعاينة</label>
       <select data-wp="${i}" data-f="previewMode"><option value="tab" ${p.previewMode !== 'frame' ? 'selected' : ''}>تبويب جديد (شغالة مع أي موقع)</option><option value="frame" ${p.previewMode === 'frame' ? 'selected' : ''}>داخل الصفحة (لو موقعك بيسمح)</option></select>
       <label class="chk" style="margin-top:12px;"><input type="checkbox" data-wp="${i}" data-f="highlight" ${p.highlight ? 'checked' : ''}> شارة "الأكثر طلباً"</label>
+      </div>
     </div>`).join('') + `
     <button class="add-item-btn" data-wa="add" type="button" style="margin-bottom:18px;">➕ إضافة منتج</button>
     <div class="save-bar"><button class="save-btn" data-wa="save" type="button">💾 حفظ قسم المواقع</button></div>`;
@@ -3103,8 +3126,12 @@ $('admWeb').addEventListener('change', onWebInput);
 $('admWeb').addEventListener('click', e=>{
   const b = e.target.closest('[data-wa]'); if(!b || !WDRAFT) return;
   const act = b.dataset.wa;
-  if(act === 'add'){
-    WDRAFT.products.push({id: Date.now(), name: 'منتج جديد', price: 0, highlight: false, desc: '', features: [],
+  if(act === 'toggle'){
+    const o = b.closest('.adm-card').classList.toggle('open'), id = WDRAFT.products[+b.dataset.i].id;
+    if(o) WEB_OPEN.add(id); else WEB_OPEN.delete(id);
+  } else if(act === 'add'){
+    const nid = Date.now(); WEB_OPEN.add(nid);
+    WDRAFT.products.push({id: nid, name: 'منتج جديد', price: 0, highlight: false, desc: '', features: [],
       steps: ['استلام بيانات المعرض', 'تصميم الموقع', 'المراجعة والتعديلات', 'الربط والتسليم'], demoUrl: '', previewMode: 'tab', refPct: 10, discPct: 0});
     renderWebAdmin();
   } else if(act === 'del'){
