@@ -550,6 +550,24 @@
   #webSec{margin-top:26px;padding:0 14px 26px;border-radius:28px;border:1px solid rgba(226,32,31,.3);background:linear-gradient(180deg,rgba(226,32,31,.11),rgba(10,8,12,.6) 40%);box-shadow:0 24px 60px rgba(0,0,0,.35);position:relative;}
   #webSec h2.section-title{margin-top:40px;}
   .web-tag{position:absolute;top:-15px;left:50%;transform:translateX(-50%);padding:6px 18px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;font-size:12.5px;font-weight:800;white-space:nowrap;box-shadow:0 6px 18px rgba(226,32,31,.4);}
+
+  /* ===== عرض الإضافات + ترتيب الباقات ===== */
+  .addons-badge{display:block;width:max-content;margin:44px auto 0;padding:6px 18px;border-radius:999px;border:1px solid rgba(226,32,31,.5);background:#1a1114;color:#ffb4b0;font-size:12.5px;font-weight:800;}
+  #addonsSec .addon-cards{grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px;}
+  #addonsSec .addon-card{display:flex;align-items:center;gap:12px;text-align:right;padding:14px 16px;border-radius:16px;}
+  #addonsSec .addon-card .aicon{flex:0 0 44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:21px;background:rgba(226,32,31,.14);border:1px solid rgba(226,32,31,.35);}
+  #addonsSec .addon-card .abody{flex:1;min-width:0;}
+  #addonsSec .addon-card .aname-t{font-size:14.5px;font-weight:700;line-height:1.6;}
+  #addonsSec .addon-card .aprice{margin:0;padding:6px 14px;border-radius:999px;background:rgba(226,32,31,.12);border:1px solid rgba(226,32,31,.4);font-size:14px;white-space:nowrap;}
+  .addons-cta{text-align:center;color:var(--muted);font-size:13px;margin:16px 0 0;}
+  .ord-row{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px dashed var(--border);}
+  .ord-row:last-child{border-bottom:0;}
+  .ord-n{flex:0 0 26px;height:26px;border-radius:50%;background:rgba(226,32,31,.18);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;}
+  .ord-name{flex:1;font-weight:700;font-size:14px;}
+  .ord-name small{color:var(--muted);font-weight:600;margin-right:6px;}
+  .addon-edit{grid-template-columns:1fr auto;padding-bottom:12px;margin-bottom:12px;border-bottom:1px dashed var(--border);}
+  .addon-edit input[data-f=aname]{grid-column:1 / -1;}
+  .ae-btns{display:flex;gap:6px;}
 </style>
 <script type="application/ld+json" id="ldMain">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://lam7-service2.pages.dev/#org","name":"لمح","alternateName":["Lam7","Lam7 Service","لمح لتسويق السيارات"],"url":"https://lam7-service2.pages.dev/","logo":{"@type":"ImageObject","url":"https://lam7-service2.pages.dev/images/icon-512.png","width":512,"height":512},"image":"https://lam7-service2.pages.dev/images/og-logo.jpg","description":"خدمة تسويق سيارات مستعملة في مصر: كتابة إعلان احترافي، إعلان ممول على فيسبوك، ونشر على مجموعات واتساب وفيسبوك وتيليجرام ويوتيوب وتيك توك.","areaServed":{"@type":"Country","name":"مصر"},"knowsLanguage":"ar","contactPoint":[{"@type":"ContactPoint","telephone":"+201015726786","contactType":"customer service","availableLanguage":["ar"],"areaServed":"EG"}]},{"@type":"WebSite","@id":"https://lam7-service2.pages.dev/#website","url":"https://lam7-service2.pages.dev/","name":"لمح","inLanguage":"ar","publisher":{"@id":"https://lam7-service2.pages.dev/#org"}},{"@type":"WebPage","@id":"https://lam7-service2.pages.dev/#webpage","url":"https://lam7-service2.pages.dev/","name":"لمح | تسويق سيارتك للبيع في مصر بإعلان ممول ونشر في كل مكان","inLanguage":"ar","isPartOf":{"@id":"https://lam7-service2.pages.dev/#website"},"about":{"@id":"https://lam7-service2.pages.dev/#org"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://lam7-service2.pages.dev/images/og-logo.jpg"}},{"@type":"Service","@id":"https://lam7-service2.pages.dev/#service","name":"تسويق السيارات المستعملة","serviceType":"تسويق وبيع السيارات","provider":{"@id":"https://lam7-service2.pages.dev/#org"},"areaServed":{"@type":"Country","name":"مصر"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"باقات تسويق السيارات","itemListElement":[{"@type":"Offer","name":"الباقة الأساسية","price":"250","priceCurrency":"EGP","description":"إعلان ممول على الفيس بوك، النشر في مجموعتين واتساب، نشر العربية على مجموعة التليجرام، النشر مرة واحدة على ماركت بليس","url":"https://lam7-service2.pages.dev/#packages"},{"@type":"Offer","name":"الباقة المميزة","price":"490","priceCurrency":"EGP","description":"النشر على 5 مجموعات واتساب (مرتين)، إعلان ممول على الفيس بوك، النشر على أكبر قناة واتساب للسيارات في مصر (مرتين)، نشر العربية على مجموعة التليجرام، النشر على 10 مجموعات فيس بوك، النشر على اليوتيوب، النشر على التيك توك، النشر على صفحة ومجموعات لمح على الفيس بوك (مرتين)","url":"https://lam7-service2.pages.dev/#packages"},{"@type":"Offer","name":"الباقة الشاملة","price":"750","priceCurrency":"EGP","description":"النشر على 5 مجموعات واتساب (مرتين)، إعلان ممول على الفيس بوك، النشر على أكبر قناة واتساب للسيارات في مصر (مرتين)، نشر العربية على مجموعة التليجرام، النشر على 10 مجموعات فيس بوك، النشر على اليوتيوب، النشر على التيك توك، النشر على صفحة ومجموعات لمح على الفيس بوك (مرتين)، تصوير احترافي للسيارة، متابعة يومية حتى تمام البيع","url":"https://lam7-service2.pages.dev/#packages"},{"@type":"Offer","name":"باقة القيادة الملكية","price":"1500","priceCurrency":"EGP","description":"النشر على 5 مجموعات واتساب (مرتين)، إعلان ممول على الفيس بوك، النشر على أكبر قناة واتساب للسيارات في مصر (مرتين)، نشر العربية على مجموعة التليجرام، النشر على 10 مجموعات فيس بوك، النشر على اليوتيوب، النشر على التيك توك، النشر على صفحة ومجموعات لمح على الفيس بوك (مرتين)، تصوير احترافي للسيارة، النشر في مجموعات كبار عشاق السيارات الفاخرة، تصوير سينمائي وفيديو ترويجي احترافي، عرض مميز لمدة أطول في نتائج البحث، متابعة يومية مخصصة مع مدير حساب شخصي","url":"https://lam7-service2.pages.dev/#packages"}]}},{"@type":"FAQPage","@id":"https://lam7-service2.pages.dev/#faq","mainEntity":[{"@type":"Question","name":"إيه هي خدمة لمح؟","acceptedAnswer":{"@type":"Answer","text":"لمح خدمة تسويق سيارات في مصر: بنكتب إعلان احترافي لسيارتك وننشره على مجموعات واتساب وفيسبوك وتيليجرام، وعلى يوتيوب وتيك توك حسب الباقة، ومعاه إعلان ممول على فيسبوك عشان إعلانك يوصل لأكبر عدد من المشترين الجادين."}},{"@type":"Question","name":"إزاي أطلب الخدمة؟","acceptedAnswer":{"@type":"Answer","text":"اختار الباقة المناسبة لسعر سيارتك، واملأ بيانات السيارة، وابعت الطلب على واتساب. فريق لمح بيكتبلك الإعلان وبعد كده يبدأ النشر."}},{"@type":"Question","name":"أدفع إمتى؟","acceptedAnswer":{"@type":"Answer","text":"الدفع بعد كتابة الإعلان، يعني بتشوف شغلنا الأول، وبعد ما يعجبك بتدفع قيمة الباقة وبنبدأ النشر."}},{"@type":"Question","name":"كام سعر باقات تسويق السيارات؟","acceptedAnswer":{"@type":"Answer","text":"الباقات بتبدأ من 250 جنيه وبتوصل لـ 1500 جنيه، حسب سعر السيارة وعدد المنصات ومرات النشر. تقدر تقارن كل الباقات ومهامها في قسم \"اختر باقتك\"."}},{"@type":"Question","name":"إيه هو الإعلان الممول؟","acceptedAnswer":{"@type":"Answer","text":"الإعلان الممول هو إعلان مدفوع على فيسبوك بيظهر لناس مهتمين بشراء السيارات، وهو مشمول في باقات لمح كجزء أساسي مش إضافة اختيارية."}},{"@type":"Question","name":"فين بتنشروا إعلان سيارتي؟","acceptedAnswer":{"@type":"Answer","text":"على مجموعات واتساب، وأكبر قناة واتساب للسيارات في مصر، ومجموعات فيسبوك وصفحة لمح، ومجموعات تيليجرام، ويوتيوب وتيك توك. المنصات بتختلف حسب الباقة اللي تختارها."}},{"@type":"Question","name":"هل في ضمان لسرعة بيع السيارة؟","acceptedAnswer":{"@type":"Answer","text":"لا، سرعة البيع مش رقم ثابت، وبتختلف حسب سعر السيارة ومدى انتشار الموديل في السوق المصري وحجم الطلب عليه. اللي بنقدر نعمله إننا نزود فرصتك في الوصول لأكبر عدد من المشترين الجادين بأسرع وقت ممكن."}},{"@type":"Question","name":"إزاي أكسب من التسويق بالعمولة مع لمح؟","acceptedAnswer":{"@type":"Answer","text":"سجّل دخولك بجوجل وفعّل كود ورابط الإحالة الخاص بيك ببيانات محفظتك أو إنستا باي، وشاركه مع أي حد عايز يبيع سيارته. عن كل عميل يطلب باقة بكودك ويدفع بتاخد مكافأة محوّلة على بياناتك، والعميل نفسه بياخد خصم على باقته. مش لازم يكون عندك سيارة للبيع."}},{"@type":"Question","name":"هل الخدمة مناسبة للسيارات النادرة؟","acceptedAnswer":{"@type":"Answer","text":"الباقات والأسعار معمولة لسيارات السوق المصري ذات الطلب العادي. السيارات النادرة أو قليلة الطلب بتحتاج خطة تسويق مختلفة، فتواصل معنا على واتساب لعرض خاص."}}]}]}</script>
 </head>
@@ -644,9 +662,11 @@
   </div>
 
   <div id="addonsSec">
-  <h2 class="section-title reveal toggle-title" id="addonsToggleTitle" style="margin-top:44px;">إضافات اختيارية <span class="toggle-arrow">▾</span></h2>
-  <p class="section-sub reveal">زوّد فرص بيع سيارتك بإضافات تقدر تختارها —<br>دوس على العنوان لعرضها</p>
-  <div class="addon-cards reveal" id="addonsShowcase" style="display:none;"><div class="addon-card"><div>20 منشور إضافي على فيسبوك</div><div class="aprice">+150 جنيه</div></div><div class="addon-card"><div>30 منشور إضافي على فيسبوك</div><div class="aprice">+200 جنيه</div></div><div class="addon-card"><div>50 منشور إضافي على فيسبوك</div><div class="aprice">+250 جنيه</div></div></div>
+  <div class="addons-badge">🧩 زوّد فرصك</div>
+  <h2 class="section-title reveal" id="addonsToggleTitle" style="margin-top:14px;">إضافات تزوّد فرص بيع سيارتك</h2>
+  <p class="section-sub reveal">تتضاف على أي باقة وانت بتطلب، وتتحسب في إجمالي طلبك</p>
+  <div class="addon-cards reveal" id="addonsShowcase"><div class="addon-card"><span class="aicon">📘</span><div class="abody"><div class="aname-t">20 منشور إضافي على فيسبوك</div></div><div class="aprice">+150 جنيه</div></div><div class="addon-card"><span class="aicon">📘</span><div class="abody"><div class="aname-t">30 منشور إضافي على فيسبوك</div></div><div class="aprice">+200 جنيه</div></div><div class="addon-card"><span class="aicon">📘</span><div class="abody"><div class="aname-t">50 منشور إضافي على فيسبوك</div></div><div class="aprice">+250 جنيه</div></div></div>
+  <p class="addons-cta">اختار باقتك من فوق، وهتلاقي الإضافات جوه الطلب 👆</p>
   </div>
 
   <div id="formSection">
@@ -783,7 +803,7 @@
       </div>
     </div>
     <div class="adm-tabs">
-      <button data-tab="site" type="button">🌐 الموقع</button>
+      <button data-tab="site" type="button">⚙️ الموقع</button>
       <button data-tab="packages" type="button">📦 الباقات</button>
       <button data-tab="web" type="button">🌐 المواقع</button>
       <button data-tab="members" type="button" class="active">👥 الأعضاء</button>
@@ -1054,6 +1074,12 @@ function updateSeoData(){
   }catch(e){}
 }
 
+function addonIcon(n){
+  n = String(n || '');
+  const m = [['فيس','📘'],['واتساب','💬'],['تليجرام','✈️'],['تيليجرام','✈️'],['يوتيوب','▶️'],['تيك','🎵'],['فيديو','🎬'],['تصوير','📸'],['صور','📸'],['ممول','🚀'],['إعلان','📢'],['منشور','📣'],['نشر','📣'],['بوست','📣']];
+  for(const [k,v] of m) if(n.includes(k)) return v;
+  return '✨';
+}
 function renderAddonsShowcase(){
   const c = $('addonsShowcase');
   if(!c) return;
@@ -1065,7 +1091,7 @@ function renderAddonsShowcase(){
   STATE.addons.forEach(a=>{
     const div = document.createElement('div');
     div.className = 'addon-card';
-    div.innerHTML = `<div>${esc(a.name)}</div><div class="aprice">+${esc(a.price)} جنيه</div>`;
+    div.innerHTML = `<span class="aicon">${addonIcon(a.name)}</span><div class="abody"><div class="aname-t">${esc(a.name)}</div></div><div class="aprice">+${esc(a.price)} جنيه</div>`;
     c.appendChild(div);
   });
 }
@@ -1332,12 +1358,6 @@ ${discLine}💵 الإجمالي: ${total} جنيه
   window.open(url, '_blank');
 });
 
-$('addonsToggleTitle').addEventListener('click', ()=>{
-  const box = $('addonsShowcase');
-  const isOpen = box.style.display !== 'none';
-  box.style.display = isOpen ? 'none' : 'grid';
-  $('addonsToggleTitle').classList.toggle('open', !isOpen);
-});
 $('addonsToggleLabel').addEventListener('click', ()=>{
   const box = $('addonsList');
   const isOpen = box.style.display !== 'none';
@@ -1820,9 +1840,15 @@ $('admSite').addEventListener('click', e=>{
 });
 
 // ---------- 2) لوحة الباقات ----------
+function pkgOrderHTML(){
+  const n = DRAFT.packages.length;
+  return `<div class="adm-card"><div class="adm-sub">↕️ ترتيب ظهور الباقات في الصفحة</div>
+    <p class="adm-hint">حرّك الباقة بالأسهم، والترتيب بيتطبق بعد "حفظ الباقات".</p>` +
+    DRAFT.packages.map((p,i)=>`<div class="ord-row"><span class="ord-n">${i+1}</span><span class="ord-name">${esc(p.name) || 'باقة'} <small>${esc(p.price)} ج</small></span><button class="mini" data-act="pkgup" data-pi="${i}" type="button" ${i === 0 ? 'disabled' : ''}>↑</button><button class="mini" data-act="pkgdown" data-pi="${i}" type="button" ${i === n-1 ? 'disabled' : ''}>↓</button></div>`).join('') + `</div>`;
+}
 function renderPkgAdmin(){
   const box = $('admPkgs');
-  box.innerHTML = DRAFT.packages.map((p,pi)=>`
+  box.innerHTML = pkgOrderHTML() + DRAFT.packages.map((p,pi)=>`
     <div class="adm-card">
       <div class="adm-card-head"><b>📦 ${esc(p.name)||'باقة'}</b><button class="mini danger" data-act="delpkg" data-pi="${pi}" type="button">🗑 حذف الباقة</button></div>
       <div class="adm-grid">
@@ -1857,7 +1883,7 @@ function renderPkgAdmin(){
         <div class="addon-edit">
           <input data-ai="${ai}" data-f="aname" value="${esc(a.name)}" placeholder="اسم الإضافة">
           <input type="number" inputmode="numeric" data-ai="${ai}" data-f="aprice" value="${esc(a.price)}">
-          <button class="mini danger" data-act="deladdon" data-ai="${ai}" type="button">✕</button>
+          <div class="ae-btns"><button class="mini" data-act="addonup" data-ai="${ai}" type="button" ${ai === 0 ? 'disabled' : ''}>↑</button><button class="mini" data-act="addondown" data-ai="${ai}" type="button" ${ai === DRAFT.addons.length-1 ? 'disabled' : ''}>↓</button><button class="mini danger" data-act="deladdon" data-ai="${ai}" type="button">✕</button></div>
         </div>`).join('')}
       <button class="add-item-btn" data-act="addaddon" type="button">➕ إضافة عنصر</button>
     </div>
@@ -1898,7 +1924,7 @@ $('admPkgs').addEventListener('click', e=>{
     DRAFT.packages[pi].tasks.push(mkTask('', 1));
     renderPkgAdmin();
     const cards = $('admPkgs').querySelectorAll('.adm-card');
-    const ins = cards[pi].querySelectorAll('[data-f="tname"]');
+    const ins = cards[pi+1].querySelectorAll('[data-f="tname"]');
     if(ins.length) ins[ins.length-1].focus();
   } else if(act === 'deltask'){
     DRAFT.packages[pi].tasks.splice(ti,1); renderPkgAdmin();
@@ -1906,6 +1932,16 @@ $('admPkgs').addEventListener('click', e=>{
     const arr = DRAFT.packages[pi].tasks, j = act === 'up' ? ti-1 : ti+1;
     if(j < 0 || j >= arr.length) return;
     [arr[ti], arr[j]] = [arr[j], arr[ti]];
+    renderPkgAdmin();
+  } else if(act === 'pkgup' || act === 'pkgdown'){
+    const arr = DRAFT.packages, j = act === 'pkgup' ? pi-1 : pi+1;
+    if(j < 0 || j >= arr.length) return;
+    [arr[pi], arr[j]] = [arr[j], arr[pi]];
+    renderPkgAdmin();
+  } else if(act === 'addonup' || act === 'addondown'){
+    const arr = DRAFT.addons, j = act === 'addonup' ? ai-1 : ai+1;
+    if(j < 0 || j >= arr.length) return;
+    [arr[ai], arr[j]] = [arr[j], arr[ai]];
     renderPkgAdmin();
   } else if(act === 'addaddon'){
     DRAFT.addons.push({id:Date.now(), name:'', price:0}); renderPkgAdmin();
