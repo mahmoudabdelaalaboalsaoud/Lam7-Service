@@ -1030,6 +1030,12 @@ const DEFAULT_SITE = {
   models: ['كودياك', 'سبورتاج', 'توسان', 'كورولا', 'شانجان CS55 بلس', 'ساوايست S07', 'إلنترا CN7'],
   promoText: '🚗 عايز تبيع عربيتك بسرعة وبشكل احترافي؟\nخدمة لمح بتكتبلك إعلان احترافي وتنشره على مجموعات واتساب وفيسبوك وتليجرام ويوتيوب وتيك توك، ومعاه إعلان ممول 🚀\n\n✅ الدفع بعد كتابة الإعلان\n🎁 استخدم كودي {code} واحصل على خصم {discount}% على باقتك\n\nاطلب من هنا 👇\n{link}',
   promoShort: 'عايز تبيع عربيتك؟ 🚗 لمح بتنشرها في كل مكان بإعلان ممول 🚀\nخصم {discount}% بكودي {code} 👇\n{link}',
+  affTitle: '🤝 اكسب معانا بالتسويق بالعمولة',
+  affSub: 'مش لازم يكون عندك سيارة للبيع — رشّح لمح لأصحابك واكسب',
+  affSteps: ['سجّل دخولك بجوجل وفعّل كودك ورابطك الخاص ببياناتك', 'شارك الرابط مع أي حد عايز يبيع عربيته', 'لما العميل يطلب باقة ويدفع، بتستلم {reward} جنيه على محفظتك أو إنستا باي'],
+  affNote: 'والعميل اللي يدخل من رابطك ياخد خصم {discount}% على باقته 🎁',
+  affWebLead: '💻 وعلى مواقع المعارض عمولتك:',
+  affBtn: '🤝 ابدأ كمسوّق بالعمولة',
   promoWebText: '🌐 عندك معرض سيارات ومحتاج موقع احترافي؟\nلمح بتصمم لمعرضك موقع كامل باسمك وهويتك، بيعرض سياراتك بصورها وأسعارها ويوصّل العملاء بواتساب بضغطة، وشغّال على الموبايل والكمبيوتر 🚀\n\n👁️ شوف نماذج من شغلنا وجرّب المعاينة الحية، واطلب الخدمة من هنا 👇\n{link}\n\nكودي: {code}',
   promoWebShort: 'عندك معرض سيارات؟ 🌐 لمح بتعملك موقع احترافي باسم معرضك 🚀\nشوف النماذج واطلب من هنا 👇\n{link}',
   promoImages: ''
@@ -1065,8 +1071,17 @@ function applySite(){
   syncTesti();
   $('addonsSec').style.display = SITE.showAddons ? '' : 'none';
   $('affSec').style.display = SITE.refEnabled ? '' : 'none';
-  $('affReward').textContent = num(SITE.refReward);
-  $('affDisc').textContent = num(SITE.refDiscount);
+  applyAff();
+}
+function applyAff(){
+  const em = t => esc(t).replace(/\{reward\}/g, '<em id="affReward">' + num(SITE.refReward) + '</em>').replace(/\{discount\}/g, '<em id="affDisc">' + num(SITE.refDiscount) + '</em>');
+  document.querySelector('#affSec h2.section-title').textContent = SITE.affTitle || '';
+  document.querySelector('#affSec p.section-sub').textContent = SITE.affSub || '';
+  const st = SITE.affSteps || [];
+  document.querySelectorAll('#affSec .aff-step span').forEach((sp,i)=>{ sp.innerHTML = em(st[i] || ''); sp.parentElement.style.display = String(st[i] || '').trim() ? '' : 'none'; });
+  const n = document.querySelector('#affSec .aff-note:not(#affWebNote)');
+  n.innerHTML = em(SITE.affNote || ''); n.style.display = String(SITE.affNote || '').trim() ? '' : 'none';
+  $('affCta').textContent = SITE.affBtn || '';
 }
 
 // ---------- public site: packages ----------
@@ -1409,6 +1424,7 @@ function loadConfig(){
     SITE.steps = DEFAULT_SITE.steps.map((s,i)=> Object.assign({}, s, (x.steps||[])[i] || {}));
     if(!Array.isArray(SITE.trust)) SITE.trust = deepCopy(DEFAULT_SITE.trust);
     if(!Array.isArray(SITE.models)) SITE.models = deepCopy(DEFAULT_SITE.models);
+    if(!Array.isArray(SITE.affSteps)) SITE.affSteps = deepCopy(DEFAULT_SITE.affSteps);
     applySite();
   }).catch(err=> console.warn('تعذر تحميل إعدادات الموقع:', err));
   db.collection('config').doc('packages').get().then(d=>{
@@ -1861,12 +1877,33 @@ function renderSiteAdmin(){
       <label>مكافأة المُحيل (جنيه) عن كل عميل يدفع</label>
       <input type="number" inputmode="numeric" min="0" data-s="refReward" value="${esc(s.refReward)}">
     </div>
+    <div class="adm-card">
+      <div class="adm-sub">🤝 قسم "اكسب بالعمولة" في الصفحة الرئيسية</div>
+      <p class="adm-hint">استخدم <b dir="ltr">{reward}</b> مكان مبلغ المكافأة و<b dir="ltr">{discount}</b> مكان نسبة الخصم.</p>
+      <label>العنوان</label>
+      <input data-s="affTitle" value="${esc(s.affTitle)}">
+      <label>الوصف تحت العنوان</label>
+      <input data-s="affSub" value="${esc(s.affSub)}">
+      <label>الخطوة 1</label>
+      <textarea data-s="affstep_0" rows="2">${esc((s.affSteps || [])[0] || '')}</textarea>
+      <label>الخطوة 2</label>
+      <textarea data-s="affstep_1" rows="2">${esc((s.affSteps || [])[1] || '')}</textarea>
+      <label>الخطوة 3 (سيبها فاضية لو عايز تخفيها)</label>
+      <textarea data-s="affstep_2" rows="2">${esc((s.affSteps || [])[2] || '')}</textarea>
+      <label>جملة خصم العميل (تحت الخطوات)</label>
+      <input data-s="affNote" value="${esc(s.affNote)}">
+      <label>بداية جملة عمولة المواقع <small>(بتظهر لو قسم المواقع مفعّل)</small></label>
+      <input data-s="affWebLead" value="${esc(s.affWebLead)}">
+      <label>نص الزر</label>
+      <input data-s="affBtn" value="${esc(s.affBtn)}">
+    </div>
     <div class="save-bar"><button class="save-btn" id="saveSite">💾 حفظ إعدادات الموقع</button></div>`;
 }
 function onSiteInput(e){
   const el = e.target, f = el.dataset.s;
   if(!f) return;
   if(f === 'trust' || f === 'models') SDRAFT[f] = el.value.split('\n').map(x=>x.trim()).filter(Boolean);
+  else if(f.startsWith('affstep_')){ SDRAFT.affSteps = (SDRAFT.affSteps || []).slice(); SDRAFT.affSteps[+f.split('_')[1]] = el.value; }
   else if(f.startsWith('st_')){ const p = f.split('_'); SDRAFT.steps[+p[2]][p[1]] = el.value; }
   else if(el.type === 'checkbox') SDRAFT[f] = el.checked;
   else if(el.type === 'number') SDRAFT[f] = num(el.value);
@@ -3016,7 +3053,7 @@ function renderWeb(){
   if(wn){
     const cm = WEB.products.filter(p=> p.refPct > 0);
     wn.style.display = (cm.length && SITE.refEnabled) ? '' : 'none';
-    wn.innerHTML = '💻 وعلى مواقع المعارض عمولتك: ' + cm.map(p=> esc(p.name) + ' ← <b>' + esc(p.refPct) + '%</b> من السعر').join(' • ');
+    wn.innerHTML = esc(SITE.affWebLead || '') + ' ' + cm.map(p=> esc(p.name) + ' ← <b>' + esc(p.refPct) + '%</b> من السعر').join(' • ');
   }
   updateWebSeo();
 }
