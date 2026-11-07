@@ -1,6 +1,6 @@
 {
  "v": 1,
- "updated": "2026-11-07T16:12:38.102Z",
+ "updated": "2026-11-07T16:16:59.663Z",
  "testimonials": [
   {
    "src": "images/testimonial-1.jpg",
@@ -49,12 +49,7 @@
    "src": "images/promo/p-1792697867035-4.jpg"
   }
  ],
- "web": [
-  {
-   "src": "images/web/w-1794066688951-1.jpg",
-   "caption": ""
-  }
- ],
+ "web": [],
  "promoweb": [
   {
    "src": "images/promoweb/pw-1794067945765-0.jpg"
