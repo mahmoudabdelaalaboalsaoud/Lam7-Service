@@ -1,6 +1,6 @@
 {
  "v": 1,
- "updated": "2026-10-22T19:38:00.455Z",
+ "updated": "2026-11-07T15:54:47.304Z",
  "testimonials": [
   {
    "src": "images/testimonial-1.jpg",
@@ -56,6 +56,16 @@
   },
   {
    "src": "images/promo/p-1792697867035-6.jpg"
+  }
+ ],
+ "web": [
+  {
+   "src": "images/web/w-1794066688951-0.jpg",
+   "caption": ""
+  },
+  {
+   "src": "images/web/w-1794066688951-1.jpg",
+   "caption": ""
   }
  ]
 }
