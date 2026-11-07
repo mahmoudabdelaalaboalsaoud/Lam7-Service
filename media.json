@@ -1,6 +1,6 @@
 {
  "v": 1,
- "updated": "2026-11-07T15:54:47.304Z",
+ "updated": "2026-11-07T15:55:53.548Z",
  "testimonials": [
   {
    "src": "images/testimonial-1.jpg",
@@ -37,9 +37,6 @@
  ],
  "promo": [
   {
-   "src": "images/promo/p-1792697867035-0.jpg"
-  },
-  {
    "src": "images/promo/p-1792697867035-1.jpg"
   },
   {
@@ -50,12 +47,6 @@
   },
   {
    "src": "images/promo/p-1792697867035-4.jpg"
-  },
-  {
-   "src": "images/promo/p-1792697867035-5.jpg"
-  },
-  {
-   "src": "images/promo/p-1792697867035-6.jpg"
   }
  ],
  "web": [
