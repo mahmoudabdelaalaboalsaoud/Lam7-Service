@@ -577,6 +577,26 @@
   .cl-arrow{display:inline-block;transition:transform .25s;color:var(--accent);}
   .adm-card.collapsible:not(.open) .cl-arrow{transform:rotate(90deg);}
   .ord-tools{display:flex;gap:8px;margin:0 0 6px;}
+
+  /* ===== الأسئلة الشائعة المطوية + تبويبات المسوّق ===== */
+  .faq details.faq-main{background:transparent;border:0;border-radius:0;margin:0;overflow:visible;}
+  .faq details.faq-main[open]{border:0;}
+  .faq details.faq-main > summary{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 14px;border:1px solid rgba(226,32,31,.35);border-radius:18px;background:linear-gradient(180deg,rgba(226,32,31,.10),rgba(18,14,19,.7));text-align:center;}
+  .faq details.faq-main > summary::after{content:"▾";color:var(--accent);font-size:16px;font-weight:900;transition:transform .25s;}
+  .faq details.faq-main[open] > summary::after{content:"▾";transform:rotate(180deg);}
+  .faq .fm-title{font-size:24px;font-weight:800;}
+  .faq .fm-sub{font-size:13px;font-weight:600;color:var(--muted);}
+  .faq .faq-list{margin-top:14px;}
+  details.promo-block{background:#14101a;border:1px solid var(--border);border-radius:14px;padding:0 12px 12px;margin-bottom:12px;}
+  details.promo-block > summary{cursor:pointer;list-style:none;padding:12px 0;margin:0;display:flex;justify-content:space-between;align-items:center;}
+  details.promo-block > summary::-webkit-details-marker{display:none;}
+  details.promo-block > summary::after{content:"▾";color:var(--accent);transition:transform .25s;}
+  details.promo-block[open] > summary::after{transform:rotate(180deg);}
+  .ptabs{display:flex;gap:8px;margin:0 0 14px;}
+  .ptab{flex:1;padding:11px 8px;border-radius:12px;border:1px solid var(--border);background:#0e1424;color:var(--muted);font-weight:800;font-size:13px;cursor:pointer;font-family:inherit;}
+  .ptab.active{background:linear-gradient(90deg,var(--accent),var(--accent2));border-color:transparent;color:#fff;}
+  .web-comm{margin:8px 0 0;padding:0 18px 0 0;line-height:2;font-size:13.5px;}
+  .web-comm b{color:#7ee2a3;}
 </style>
 <script type="application/ld+json" id="ldMain">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://lam7-service2.pages.dev/#org","name":"لمح","alternateName":["Lam7","Lam7 Service","لمح لتسويق السيارات"],"url":"https://lam7-service2.pages.dev/","logo":{"@type":"ImageObject","url":"https://lam7-service2.pages.dev/images/icon-512.png","width":512,"height":512},"image":"https://lam7-service2.pages.dev/images/og-logo.jpg","description":"خدمة تسويق سيارات مستعملة في مصر: كتابة إعلان احترافي، إعلان ممول على فيسبوك، ونشر على مجموعات واتساب وفيسبوك وتيليجرام ويوتيوب وتيك توك.","areaServed":{"@type":"Country","name":"مصر"},"knowsLanguage":"ar","contactPoint":[{"@type":"ContactPoint","telephone":"+201015726786","contactType":"customer service","availableLanguage":["ar"],"areaServed":"EG"}]},{"@type":"WebSite","@id":"https://lam7-service2.pages.dev/#website","url":"https://lam7-service2.pages.dev/","name":"لمح","inLanguage":"ar","publisher":{"@id":"https://lam7-service2.pages.dev/#org"}},{"@type":"WebPage","@id":"https://lam7-service2.pages.dev/#webpage","url":"https://lam7-service2.pages.dev/","name":"لمح | تسويق سيارتك للبيع في مصر بإعلان ممول ونشر في كل مكان","inLanguage":"ar","isPartOf":{"@id":"https://lam7-service2.pages.dev/#website"},"about":{"@id":"https://lam7-service2.pages.dev/#org"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://lam7-service2.pages.dev/images/og-logo.jpg"}},{"@type":"Service","@id":"https://lam7-service2.pages.dev/#service","name":"تسويق السيارات المستعملة","serviceType":"تسويق وبيع السيارات","provider":{"@id":"https://lam7-service2.pages.dev/#org"},"areaServed":{"@type":"Country","name":"مصر"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"باقات تسويق السيارات","itemListElement":[{"@type":"Offer","name":"الباقة الأساسية","price":"250","priceCurrency":"EGP","description":"إعلان ممول على الفيس بوك، النشر في مجموعتين واتساب، نشر العربية على مجموعة التليجرام، النشر مرة واحدة على ماركت بليس","url":"https://lam7-service2.pages.dev/#packages"},{"@type":"Offer","name":"الباقة المميزة","price":"490","priceCurrency":"EGP","description":"النشر على 5 مجموعات واتساب (مرتين)، إعلان ممول على الفيس بوك، النشر على أكبر قناة واتساب للسيارات في مصر (مرتين)، نشر العربية على مجموعة التليجرام، النشر على 10 مجموعات فيس بوك، النشر على اليوتيوب، النشر على التيك توك، النشر على صفحة ومجموعات لمح على الفيس بوك (مرتين)","url":"https://lam7-service2.pages.dev/#packages"},{"@type":"Offer","name":"الباقة الشاملة","price":"750","priceCurrency":"EGP","description":"النشر على 5 مجموعات واتساب (مرتين)، إعلان ممول على الفيس بوك، النشر على أكبر قناة واتساب للسيارات في مصر (مرتين)، نشر العربية على مجموعة التليجرام، النشر على 10 مجموعات فيس بوك، النشر على اليوتيوب، النشر على التيك توك، النشر على صفحة ومجموعات لمح على الفيس بوك (مرتين)، تصوير احترافي للسيارة، متابعة يومية حتى تمام البيع","url":"https://lam7-service2.pages.dev/#packages"},{"@type":"Offer","name":"باقة القيادة الملكية","price":"1500","priceCurrency":"EGP","description":"النشر على 5 مجموعات واتساب (مرتين)، إعلان ممول على الفيس بوك، النشر على أكبر قناة واتساب للسيارات في مصر (مرتين)، نشر العربية على مجموعة التليجرام، النشر على 10 مجموعات فيس بوك، النشر على اليوتيوب، النشر على التيك توك، النشر على صفحة ومجموعات لمح على الفيس بوك (مرتين)، تصوير احترافي للسيارة، النشر في مجموعات كبار عشاق السيارات الفاخرة، تصوير سينمائي وفيديو ترويجي احترافي، عرض مميز لمدة أطول في نتائج البحث، متابعة يومية مخصصة مع مدير حساب شخصي","url":"https://lam7-service2.pages.dev/#packages"}]}},{"@type":"FAQPage","@id":"https://lam7-service2.pages.dev/#faq","mainEntity":[{"@type":"Question","name":"إيه هي خدمة لمح؟","acceptedAnswer":{"@type":"Answer","text":"لمح خدمة تسويق سيارات في مصر: بنكتب إعلان احترافي لسيارتك وننشره على مجموعات واتساب وفيسبوك وتيليجرام، وعلى يوتيوب وتيك توك حسب الباقة، ومعاه إعلان ممول على فيسبوك عشان إعلانك يوصل لأكبر عدد من المشترين الجادين."}},{"@type":"Question","name":"إزاي أطلب الخدمة؟","acceptedAnswer":{"@type":"Answer","text":"اختار الباقة المناسبة لسعر سيارتك، واملأ بيانات السيارة، وابعت الطلب على واتساب. فريق لمح بيكتبلك الإعلان وبعد كده يبدأ النشر."}},{"@type":"Question","name":"أدفع إمتى؟","acceptedAnswer":{"@type":"Answer","text":"الدفع بعد كتابة الإعلان، يعني بتشوف شغلنا الأول، وبعد ما يعجبك بتدفع قيمة الباقة وبنبدأ النشر."}},{"@type":"Question","name":"كام سعر باقات تسويق السيارات؟","acceptedAnswer":{"@type":"Answer","text":"الباقات بتبدأ من 250 جنيه وبتوصل لـ 1500 جنيه، حسب سعر السيارة وعدد المنصات ومرات النشر. تقدر تقارن كل الباقات ومهامها في قسم \"اختر باقتك\"."}},{"@type":"Question","name":"إيه هو الإعلان الممول؟","acceptedAnswer":{"@type":"Answer","text":"الإعلان الممول هو إعلان مدفوع على فيسبوك بيظهر لناس مهتمين بشراء السيارات، وهو مشمول في باقات لمح كجزء أساسي مش إضافة اختيارية."}},{"@type":"Question","name":"فين بتنشروا إعلان سيارتي؟","acceptedAnswer":{"@type":"Answer","text":"على مجموعات واتساب، وأكبر قناة واتساب للسيارات في مصر، ومجموعات فيسبوك وصفحة لمح، ومجموعات تيليجرام، ويوتيوب وتيك توك. المنصات بتختلف حسب الباقة اللي تختارها."}},{"@type":"Question","name":"هل في ضمان لسرعة بيع السيارة؟","acceptedAnswer":{"@type":"Answer","text":"لا، سرعة البيع مش رقم ثابت، وبتختلف حسب سعر السيارة ومدى انتشار الموديل في السوق المصري وحجم الطلب عليه. اللي بنقدر نعمله إننا نزود فرصتك في الوصول لأكبر عدد من المشترين الجادين بأسرع وقت ممكن."}},{"@type":"Question","name":"إزاي أكسب من التسويق بالعمولة مع لمح؟","acceptedAnswer":{"@type":"Answer","text":"سجّل دخولك بجوجل وفعّل كود ورابط الإحالة الخاص بيك ببيانات محفظتك أو إنستا باي، وشاركه مع أي حد عايز يبيع سيارته. عن كل عميل يطلب باقة بكودك ويدفع بتاخد مكافأة محوّلة على بياناتك، والعميل نفسه بياخد خصم على باقته. مش لازم يكون عندك سيارة للبيع."}},{"@type":"Question","name":"هل الخدمة مناسبة للسيارات النادرة؟","acceptedAnswer":{"@type":"Answer","text":"الباقات والأسعار معمولة لسيارات السوق المصري ذات الطلب العادي. السيارات النادرة أو قليلة الطلب بتحتاج خطة تسويق مختلفة، فتواصل معنا على واتساب لعرض خاص."}}]}]}</script>
 </head>
@@ -766,8 +786,9 @@
   </section>
 
   <section class="faq reveal" id="faq">
-    <h2 class="section-title" style="margin-top:0;">أسئلة شائعة</h2>
-    <p class="section-sub">كل اللي محتاج تعرفه قبل ما تبدأ</p>
+    <details class="faq-main" id="faqMain">
+      <summary><span class="fm-title">❓ أسئلة شائعة</span><span class="fm-sub">كل اللي محتاج تعرفه قبل ما تبدأ — دوس لعرضها</span></summary>
+      <div class="faq-list">
     <details><summary>إيه هي خدمة لمح؟</summary><p>لمح خدمة تسويق سيارات في مصر: بنكتب إعلان احترافي لسيارتك وننشره على مجموعات واتساب وفيسبوك وتيليجرام، وعلى يوتيوب وتيك توك حسب الباقة، ومعاه إعلان ممول على فيسبوك عشان إعلانك يوصل لأكبر عدد من المشترين الجادين.</p></details>
     <details><summary>إزاي أطلب الخدمة؟</summary><p>اختار الباقة المناسبة لسعر سيارتك، واملأ بيانات السيارة، وابعت الطلب على واتساب. فريق لمح بيكتبلك الإعلان وبعد كده يبدأ النشر.</p></details>
     <details><summary>أدفع إمتى؟</summary><p>الدفع بعد كتابة الإعلان، يعني بتشوف شغلنا الأول، وبعد ما يعجبك بتدفع قيمة الباقة وبنبدأ النشر.</p></details>
@@ -777,6 +798,8 @@
     <details><summary>هل في ضمان لسرعة بيع السيارة؟</summary><p>لا، سرعة البيع مش رقم ثابت، وبتختلف حسب سعر السيارة ومدى انتشار الموديل في السوق المصري وحجم الطلب عليه. اللي بنقدر نعمله إننا نزود فرصتك في الوصول لأكبر عدد من المشترين الجادين بأسرع وقت ممكن.</p></details>
     <details><summary>إزاي أكسب من التسويق بالعمولة مع لمح؟</summary><p>سجّل دخولك بجوجل وفعّل كود ورابط الإحالة الخاص بيك ببيانات محفظتك أو إنستا باي، وشاركه مع أي حد عايز يبيع سيارته. عن كل عميل يطلب باقة بكودك ويدفع بتاخد مكافأة محوّلة على بياناتك، والعميل نفسه بياخد خصم على باقته. مش لازم يكون عندك سيارة للبيع.</p></details>
     <details><summary>هل الخدمة مناسبة للسيارات النادرة؟</summary><p>الباقات والأسعار معمولة لسيارات السوق المصري ذات الطلب العادي. السيارات النادرة أو قليلة الطلب بتحتاج خطة تسويق مختلفة، فتواصل معنا على واتساب لعرض خاص.</p></details>
+      </div>
+    </details>
   </section>
 
   <footer>
@@ -1007,6 +1030,8 @@ const DEFAULT_SITE = {
   models: ['كودياك', 'سبورتاج', 'توسان', 'كورولا', 'شانجان CS55 بلس', 'ساوايست S07', 'إلنترا CN7'],
   promoText: '🚗 عايز تبيع عربيتك بسرعة وبشكل احترافي؟\nخدمة لمح بتكتبلك إعلان احترافي وتنشره على مجموعات واتساب وفيسبوك وتليجرام ويوتيوب وتيك توك، ومعاه إعلان ممول 🚀\n\n✅ الدفع بعد كتابة الإعلان\n🎁 استخدم كودي {code} واحصل على خصم {discount}% على باقتك\n\nاطلب من هنا 👇\n{link}',
   promoShort: 'عايز تبيع عربيتك؟ 🚗 لمح بتنشرها في كل مكان بإعلان ممول 🚀\nخصم {discount}% بكودي {code} 👇\n{link}',
+  promoWebText: '🌐 عندك معرض سيارات ومحتاج موقع احترافي؟\nلمح بتصمم لمعرضك موقع كامل باسمك وهويتك، بيعرض سياراتك بصورها وأسعارها ويوصّل العملاء بواتساب بضغطة، وشغّال على الموبايل والكمبيوتر 🚀\n\n👁️ شوف نماذج من شغلنا وجرّب المعاينة الحية، واطلب الخدمة من هنا 👇\n{link}\n\nكودي: {code}',
+  promoWebShort: 'عندك معرض سيارات؟ 🌐 لمح بتعملك موقع احترافي باسم معرضك 🚀\nشوف النماذج واطلب من هنا 👇\n{link}',
   promoImages: ''
 };
 let STATE = DEFAULT_STATE();
@@ -1693,7 +1718,7 @@ function renderMy(){
       : '<div class="empty">لسه معندكش طلبات على حسابك.<br>اختار باقة وابعت طلبك وهتلاقيه هنا بتفاصيل التنفيذ.<br><button class="mini" id="myToPk" type="button">شوف الباقات</button></div>';
   }
   $('myBody').innerHTML = h;
-  if(myView === 'affiliate' && isRefComplete(myReferral) && !refEditing) fillPromoGrid();
+  if(myView === 'affiliate' && isRefComplete(myReferral) && !refEditing){ fillPromoGrid(); fillPromoWebGrid(); }
 }
 $('myClose').addEventListener('click', closeMy);
 $('myBody').addEventListener('change', e=>{ if(e.target.id === 'rf_same' && e.target.checked) $('rf_number').value = $('rf_wa').value; });
@@ -1716,6 +1741,13 @@ $('myBody').addEventListener('click', e=>{
   const b = e.target.closest('button'); if(!b) return;
   if(b.dataset.promo) copyText(promoText(b.dataset.promo));
   else if(b.dataset.shareImg !== undefined) sharePromoImage(+b.dataset.shareImg);
+  else if(b.dataset.shareWebimg !== undefined) sharePromoImage(+b.dataset.shareWebimg, true);
+  else if(b.dataset.ptab){
+    promoTab = b.dataset.ptab;
+    if($('promoCar')) $('promoCar').hidden = promoTab !== 'car';
+    if($('promoWeb')) $('promoWeb').hidden = promoTab !== 'web';
+    document.querySelectorAll('.ptab').forEach(x=> x.classList.toggle('active', x.dataset.ptab === promoTab));
+  }
   else if(b.id === 'copyRefCode' || b.id === 'copyRefLink') copyText(b.dataset.v);
   else if(b.id === 'refSave') submitRefProfile(b);
   else if(b.id === 'rf_same'){}
@@ -1814,6 +1846,11 @@ function renderSiteAdmin(){
       <textarea data-s="promoText" style="min-height:170px;">${esc(s.promoText)}</textarea>
       <label>الرسالة القصيرة (للستوري والتعليقات)</label>
       <textarea data-s="promoShort">${esc(s.promoShort)}</textarea>
+      <label>🌐 رسالة مواقع المعارض — الكاملة</label>
+      <textarea data-s="promoWebText" style="min-height:150px;">${esc(s.promoWebText)}</textarea>
+      <label>🌐 رسالة مواقع المعارض — القصيرة</label>
+      <textarea data-s="promoWebShort">${esc(s.promoWebShort)}</textarea>
+      <p class="adm-hint" style="margin:6px 0 0;">في رسائل المواقع الرابط بيفتح على قسم المواقع، و<b dir="ltr">{discount}</b> هنا = أعلى خصم لمنتجات المواقع.</p>
       <p class="adm-hint" style="margin:10px 0 0;">🖼️ الصور الدعائية وصور آراء العملاء بترفعها من تبويب <b>الوسائط</b>.</p>
     </div>
     <div class="adm-card">
@@ -2577,25 +2614,55 @@ $('paySaveWa').addEventListener('click', ()=> savePayout(true));
 // =====================================================================
 function promoText(kind){
   const r = myReferral || {};
-  const tpl = kind === 'short' ? SITE.promoShort : SITE.promoText;
-  return String(tpl || '').replace(/\{code\}/g, r.code || '').replace(/\{link\}/g, r.code ? refLink(r.code) : SITE_URL).replace(/\{discount\}/g, num(SITE.refDiscount));
+  const web = kind === 'weblong' || kind === 'webshort';
+  const tpl = kind === 'short' ? SITE.promoShort : (kind === 'webshort' ? SITE.promoWebShort : (kind === 'weblong' ? SITE.promoWebText : SITE.promoText));
+  const link = (r.code ? refLink(r.code) : SITE_URL) + (web ? '#webSec' : '');
+  const disc = web ? Math.max(0, ...WEB.products.map(p=> num(p.discPct))) : num(SITE.refDiscount);
+  return String(tpl || '').replace(/\{code\}/g, r.code || '').replace(/\{link\}/g, link).replace(/\{discount\}/g, disc);
 }
+let promoTab = 'car';
 function promoCardsHTML(){
-  const box = (title, kind)=> `<div class="promo-block">
-      <div class="pb-title">${title}</div>
+  const webOn = !!(WEB.enabled && WEB.products.length);
+  const box = (title, kind, open)=> `<details class="promo-block"${open ? ' open' : ''}>
+      <summary class="pb-title">${title}</summary>
       <div class="promo-text">${esc(promoText(kind))}</div>
       <div class="mem-actions" style="margin:10px 0 0;">
         <button class="act-btn" data-promo="${kind}" type="button">📋 نسخ النص</button>
         <a class="act-btn wa" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(promoText(kind))}">💬 مشاركة</a>
-      </div></div>`;
-  return `<div class="adm-card"><div class="adm-sub">✍️ رسائل جاهزة للنشر</div>
+      </div></details>`;
+  const car = `<div class="adm-card"><div class="adm-sub">✍️ رسائل جاهزة للنشر</div>
       <p class="adm-hint">انسخ الرسالة وانشرها في جروبات وصفحات وستوري — فيها كودك ورابطك جاهزين.</p>
-      ${box('الرسالة الكاملة', 'long')}${box('الرسالة القصيرة', 'short')}</div>
+      ${box('الرسالة الكاملة', 'long', false)}${box('الرسالة القصيرة', 'short', true)}</div>
     <div class="adm-card"><div class="adm-sub">🖼️ صور دعائية</div>
       <p class="adm-hint">نزّل الصور وانشرها مع الرسالة، أو اضغط مشاركة عشان تبعتها مع نصك مباشرة.</p>
       <div id="promoGrid" class="promo-grid"><div class="empty small" style="grid-column:1/-1;">جارِ تحميل الصور...</div></div></div>`;
+  if(!webOn) return car;
+  const comm = WEB.products.filter(p=> p.refPct > 0).map(p=> `<li>${esc(p.name)}: عمولتك <b>${esc(p.refPct)}%</b>${p.price > 0 ? ' (≈ ' + Math.round(p.price * p.refPct / 100) + ' جنيه)' : ' من السعر'}</li>`).join('');
+  const web = `<div class="adm-card"><div class="adm-sub">🌐 التسويق لخدمة مواقع المعارض</div>
+      <p class="adm-hint">لو تعرف صاحب معرض سيارات، رشّحله خدمة تصميم موقع لمعرضه واكسب عمولة نسبة من سعر الخدمة.</p>
+      ${comm ? `<ul class="web-comm">${comm}</ul>` : ''}
+      <p class="adm-hint" style="margin:8px 0 0;">العمولة بتتضاف بعد ما صاحب المعرض يدفع.</p></div>
+    <div class="adm-card"><div class="adm-sub">✍️ رسائل جاهزة (مواقع المعارض)</div>
+      <p class="adm-hint">الرابط بيفتح على قسم المواقع مباشرة وفيه كودك.</p>
+      ${box('الرسالة الكاملة', 'weblong', false)}${box('الرسالة القصيرة', 'webshort', true)}</div>
+    <div class="adm-card"><div class="adm-sub">🖼️ صور دعائية (مواقع المعارض)</div>
+      <p class="adm-hint">نزّل الصور وانشرها مع الرسالة، أو اضغط مشاركة.</p>
+      <div id="promoWebGrid" class="promo-grid"><div class="empty small" style="grid-column:1/-1;">جارِ تحميل الصور...</div></div></div>`;
+  return `<div class="ptabs"><button type="button" class="ptab${promoTab === 'car' ? ' active' : ''}" data-ptab="car">🚗 تسويق السيارات</button><button type="button" class="ptab${promoTab === 'web' ? ' active' : ''}" data-ptab="web">🌐 مواقع المعارض</button></div>
+    <div id="promoCar"${promoTab === 'car' ? '' : ' hidden'}>${car}</div><div id="promoWeb"${promoTab === 'web' ? '' : ' hidden'}>${web}</div>`;
 }
-let PROMO_LIST = null;
+let PROMO_LIST = null, PROMO_WEB_LIST = null;
+async function fillPromoWebGrid(){
+  const grid = $('promoWebGrid'); if(!grid) return;
+  if(PROMO_WEB_LIST === null) PROMO_WEB_LIST = (MEDIA.promoweb || []).map(x=> x.src);
+  if(!PROMO_WEB_LIST.length){ grid.innerHTML = '<div class="empty small" style="grid-column:1/-1;">الصور الدعائية لخدمة المواقع هتتضاف هنا قريبًا 🙌</div>'; return; }
+  grid.innerHTML = PROMO_WEB_LIST.map((u,i)=>{
+    const ext = (u.split('?')[0].split('.').pop() || 'jpg').toLowerCase().slice(0,4);
+    return `<div class="promo-item"><img src="${esc(u)}" alt="صورة دعائية لخدمة المواقع ${i+1}" loading="lazy" decoding="async">
+      <div class="pi-btns"><a class="mini" href="${esc(u)}" download="lam7-web-${i+1}.${esc(ext)}">⬇️ تنزيل</a>
+      <button class="mini" data-share-webimg="${i}" type="button">📤 مشاركة</button></div></div>`;
+  }).join('');
+}
 const probeImg = url => new Promise(res=>{ const i = new Image(); i.onload = ()=> res(true); i.onerror = ()=> res(false); i.src = url; });
 async function getPromoList(){
   if(MEDIA.promo.length) return MEDIA.promo.map(x=>x.src);
@@ -2617,15 +2684,15 @@ async function fillPromoGrid(){
       <button class="mini" data-share-img="${i}" type="button">📤 مشاركة</button></div></div>`;
   }).join('');
 }
-async function sharePromoImage(i){
-  const url = (PROMO_LIST || [])[i]; if(!url) return;
-  const text = promoText('short');
+async function sharePromoImage(i, web){
+  const url = ((web ? PROMO_WEB_LIST : PROMO_LIST) || [])[i]; if(!url) return;
+  const text = promoText(web ? 'webshort' : 'short');
   try{
     const res = await fetch(url); const blob = await res.blob();
     const file = new File([blob], 'lam7-promo-' + (i+1) + '.' + ((blob.type.split('/')[1] || 'jpg').replace('jpeg','jpg')), {type: blob.type});
     if(navigator.canShare && navigator.canShare({files:[file]})){ await navigator.share({files:[file], text}); return; }
   }catch(e){ if(e && e.name === 'AbortError') return; }
-  if(navigator.share){ try{ await navigator.share({text, url: refLink((myReferral||{}).code || '')}); return; }catch(e){ if(e && e.name === 'AbortError') return; } }
+  if(navigator.share){ try{ await navigator.share({text, url: refLink((myReferral||{}).code || '') + (web ? '#webSec' : '')}); return; }catch(e){ if(e && e.name === 'AbortError') return; } }
   copyText(text); toast('اتنسخ النص — نزّل الصورة وابعتها معاه');
 }
 
@@ -2639,13 +2706,13 @@ const DEFAULT_MEDIA = () => ({
     ['عميل راضٍ عن الخدمة'], ['تم البيع بنجاح'], ['شكر وتقدير'], ['نتيجة سريعة'],
     ['تجربة ممتازة'], ['عميل سعيد بالنتيجة'], ['توصية بالخدمة'], ['بيع في وقت قياسي']
   ].map((c,i)=>({src: 'images/testimonial-' + (i+1) + '.jpg', caption: c[0]})),
-  promo: [], web: []
+  promo: [], web: [], promoweb: []
 });
 let MEDIA = DEFAULT_MEDIA();
 function normMedia(m){
   const ok = /^images\/[\w\-./]+\.(jpe?g|png|webp|gif)$/i;
   const cl = a => (Array.isArray(a) ? a : []).filter(x=> x && typeof x.src === 'string' && ok.test(x.src)).map(x=>({src: x.src, caption: String(x.caption || '')}));
-  return {testimonials: Array.isArray(m.testimonials) ? cl(m.testimonials) : DEFAULT_MEDIA().testimonials, promo: cl(m.promo), web: cl(m.web)};
+  return {testimonials: Array.isArray(m.testimonials) ? cl(m.testimonials) : DEFAULT_MEDIA().testimonials, promo: cl(m.promo), web: cl(m.web), promoweb: cl(m.promoweb)};
 }
 function syncTesti(){
   const w = $('testiWrap'); if(!w) return;
@@ -2660,7 +2727,7 @@ function renderTestimonials(){
 function loadMedia(){
   fetch('media.json', {cache: 'no-cache'}).then(r=> r.ok ? r.json() : null).then(m=>{
     if(!m) return;
-    MEDIA = normMedia(m); PROMO_LIST = null;
+    MEDIA = normMedia(m); PROMO_LIST = null; PROMO_WEB_LIST = null;
     renderTestimonials();
     renderWeb();
   }).catch(()=>{});
@@ -2669,7 +2736,7 @@ function loadMedia(){
 // ---------- لوحة الوسائط (الأدمن) ----------
 let MDRAFT = null, MDEL = [], mediaDirty = false, mediaBusy = false, mediaKind = 'testimonials', mediaStatus = '';
 const ghToken = () => { try{ return localStorage.getItem('lam7_gh') || ''; }catch(e){ return ''; } };
-const MEDIA_OK_DEL = /^images\/(testimonial-\d+\.jpg|testimonials\/[\w\-.]+|promo\/[\w\-.]+|web\/[\w\-.]+)$/;
+const MEDIA_OK_DEL = /^images\/(testimonial-\d+\.jpg|testimonials\/[\w\-.]+|promo\/[\w\-.]+|web\/[\w\-.]+|promoweb\/[\w\-.]+)$/;
 function compressImage(file, maxSide){
   return new Promise((resolve, reject)=>{
     const url = URL.createObjectURL(file), img = new Image();
@@ -2725,6 +2792,9 @@ function renderMedia(){
     <div class="adm-card"><div class="adm-sub">🖼️ الصور الدعائية للمسوّقين</div>
       ${mediaListHTML('promo')}
       <button class="add-item-btn" data-m="add" data-k="promo" type="button">➕ رفع صور</button></div>
+    <div class="adm-card"><div class="adm-sub">🖼️ صور دعائية للمسوّقين — خدمة مواقع المعارض</div>
+      ${mediaListHTML('promoweb')}
+      <button class="add-item-btn" data-m="add" data-k="promoweb" type="button">➕ رفع صور</button></div>
     <div class="adm-card"><div class="adm-sub">🌐 لقطات مواقع المعارض (بتظهر في قسم تصميم المواقع)</div>
       ${mediaListHTML('web')}
       <button class="add-item-btn" data-m="add" data-k="web" type="button">➕ رفع صور</button></div>
@@ -2765,11 +2835,12 @@ async function publishMedia(){
   if(!mediaDirty){ toast('مفيش تغييرات للنشر'); return; }
   mediaBusy = true; setMediaStatus('جارِ الرفع... متقفلش الصفحة'); renderMedia();
   const files = [];
-  ['testimonials', 'promo', 'web'].forEach(k=> MDRAFT[k].forEach(e=>{ if(e.isNew && e.b64) files.push({path: e.src, base64: e.b64}); }));
+  ['testimonials', 'promo', 'web', 'promoweb'].forEach(k=> MDRAFT[k].forEach(e=>{ if(e.isNew && e.b64) files.push({path: e.src, base64: e.b64}); }));
   const manifest = {v: 1, updated: new Date().toISOString(),
     testimonials: MDRAFT.testimonials.map(e=>({src: e.src, caption: e.caption || ''})),
     promo: MDRAFT.promo.map(e=>({src: e.src})),
-    web: MDRAFT.web.map(e=>({src: e.src, caption: e.caption || ''}))};
+    web: MDRAFT.web.map(e=>({src: e.src, caption: e.caption || ''})),
+    promoweb: MDRAFT.promoweb.map(e=>({src: e.src}))};
   files.push({path: 'media.json', text: JSON.stringify(manifest, null, 1)});
   const msg = 'media update from dashboard';
   try{
@@ -2778,7 +2849,7 @@ async function publishMedia(){
       if(MDEL.length && (err.status === 422 || err.status === 409)) await ghCommit(files, [], msg);   // الحذف فشل: نكمل بدونه
       else throw err;
     }
-    ['testimonials', 'promo', 'web'].forEach(k=> MDRAFT[k].forEach(e=>{ e.isNew = false; delete e.b64; }));
+    ['testimonials', 'promo', 'web', 'promoweb'].forEach(k=> MDRAFT[k].forEach(e=>{ e.isNew = false; delete e.b64; }));
     MDEL = []; mediaDirty = false; MEDIA = normMedia(manifest); renderWeb();
     mediaStatus = '✅ اتنشر على GitHub. التغييرات هتظهر للزوار بعد حوالي دقيقة (لما الاستضافة تخلّص).';
     toast('تم الرفع ✅');
@@ -2795,13 +2866,13 @@ $('mediaBox').addEventListener('change', async e=>{
   if(e.target.id !== 'mediaFile') return;
   const files = [...e.target.files]; e.target.value = '';
   if(!files.length) return;
-  const k = mediaKind, max = k === 'promo' ? 1600 : 1400, ts = Date.now();
+  const k = mediaKind, max = (k === 'promo' || k === 'promoweb') ? 1600 : 1400, ts = Date.now();
   setMediaStatus('جارِ تجهيز ' + files.length + ' صورة...');
   let ok = 0, bad = 0;
   for(let i = 0; i < files.length; i++){
     try{
       const data = await compressImage(files[i], max);
-      const dir = k === 'promo' ? 'images/promo/p-' : (k === 'web' ? 'images/web/w-' : 'images/testimonials/t-');
+      const dir = k === 'promo' ? 'images/promo/p-' : (k === 'promoweb' ? 'images/promoweb/pw-' : (k === 'web' ? 'images/web/w-' : 'images/testimonials/t-'));
       MDRAFT[k].push({src: dir + ts + '-' + i + '.jpg', caption: '', isNew: true, b64: data.split(',')[1], preview: data});
       ok++;
     }catch(err){ bad++; }
@@ -2927,6 +2998,7 @@ function renderWeb(){
   const wn = $('affWebNote');
   if(!on){ if(wn) wn.style.display = 'none'; updateWebSeo(); return; }
   $('webTitle').textContent = WEB.title;
+  if(!window.__webHash && location.hash === '#webSec'){ window.__webHash = true; setTimeout(()=> sec.scrollIntoView({behavior: 'smooth', block: 'start'}), 250); }
   $('webSub').innerHTML = nl2br(WEB.sub);
   const shots = MEDIA.web || [];
   $('webShots').innerHTML = shots.length ? '<div class="ws-scroll">' + shots.map((x,i)=>
@@ -3148,7 +3220,12 @@ $('admWeb').addEventListener('click', e=>{
   }
 });
 
+function openFaqFromHash(){
+  if(location.hash === '#faq' && $('faqMain')){ $('faqMain').open = true; setTimeout(()=> $('faq').scrollIntoView({behavior: 'smooth'}), 60); }
+}
+window.addEventListener('hashchange', openFaqFromHash);
 // ---------- start ----------
+openFaqFromHash();
 applySite();
 renderCards();
 renderAddonsShowcase();
